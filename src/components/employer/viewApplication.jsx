@@ -50,7 +50,7 @@ const JobApplication = () => {
     {displayedApplicants.map((applicant, index) => (
       <div
         key={index}
-        className="bg-white shadow-md rounded-lg p-4 border flex flex-col transition hover:bg-blue-100"
+        className="bg-white shadow-md rounded-lg p-4 border flex flex-col transition hover:bg-blue-200"
       >
         <img
           src={applicant.image}

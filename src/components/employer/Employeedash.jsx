@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
-// import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 import Navbar from './employeenav';
 
 const Dashboard = () => {
@@ -48,8 +47,8 @@ const Dashboard = () => {
         <div className="table-responsive">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', backgroundColor: '#D9D9D9', padding: '10px', textAlign: 'center', fontSize: '16px', fontWeight: 'bold' }}>
             <div>JOBS</div>
-            <div>STATUS</div>
-            <div>APPLICATION</div>
+            <div className="d-none d-md-block">STATUS</div> 
+            <div className="d-none d-md-block">APPLICATION</div> 
             <div>ACTIONS</div>
           </div>
           <br />
@@ -73,7 +72,7 @@ const Dashboard = () => {
                 <br />
                 Full Time
               </div>
-              <div style={{ textAlign: 'center' }}>
+              <div className="d-none d-md-block" style={{ textAlign: 'center' }}> 
                 <div
                   style={{
                     width: '85px',
@@ -92,12 +91,13 @@ const Dashboard = () => {
                   Active
                 </div>
               </div>
-              <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <div className="d-none d-md-block" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}> 
                 <FontAwesomeIcon icon={faUser} />
                 789 Applications
               </div>
               <div style={{ textAlign: 'center' }}>
-                <Link to="/viewapplication"
+                <Link
+                  to="/viewapplication"
                   className="btn"
                   style={{
                     backgroundColor: clickedIndex === index ? '#1E3A8A' : 'white',

@@ -9,6 +9,8 @@ import JobDescriptionPage from './components/jobDetails';
 import CDashBoard from "./components/candidate/cDashBoard"
 import EmployeesDash from "./components/employer/Employeedash"
 import ViewApplication from "./components/employer/viewApplication"
+import CreateJobForm from './components/employer/CreateJobForm';
+import ProfileDashboard from './components/profileDash';
 // import EmployersPage from "./components/EmployersPage"; // Create Employers Page
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
       <Route path="/jobapplication" element = {<JobApplicationForm/>} />
       <Route path="/jobdescription" element = {<JobDescriptionPage/>} />
       <Route path="/viewapplication" element = {<ViewApplication/>} />
+      <Route path="/createjobform" element = {<CreateJobForm/>} />
+      <Route path="/profiledashboard" element = {<ProfileDashboard />} />
     </Routes>
   );
 };
