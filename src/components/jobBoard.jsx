@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "./App.css";
 import jobBoardImage from "../assets/laptop.jpg";
 
 const JobBoard = () => {
@@ -27,10 +25,9 @@ const JobBoard = () => {
       </Button>
 
       <Row>
-        {/* Sidebar */}
-        <Col md={3} className={`p-4 text-center ${sidebarOpen ? "d-block" : "d-none d-md-block"}`}>
+        <Col md={3} className={`sidebar p-4 text-center ${sidebarOpen ? "d-block" : "d-none d-md-block"}`}>
           <h2 className="mb-3">JOB BOARD</h2>
-          <img src={jobBoardImage} alt="Job Board" className="img-fluid mb-3" />
+          <img src={jobBoardImage} alt="Job Board" className="img-fluid mb-3"/>
           <ul className="list-unstyled">
             <li className="sidebar-item">&gt; Dashboard</li>
             <li className="sidebar-item">&gt; Job board</li>
@@ -38,9 +35,7 @@ const JobBoard = () => {
           </ul>
         </Col>
 
-        {/* Job Listings Section */}
         <Col md={9} className="p-4">
-          {/* Search and Filters */}
           <Row className="mb-3">
             <Col md={8}>
               <Form.Control type="text" placeholder="Search by Title / company / keywords" className="search-input" />
@@ -76,10 +71,9 @@ const JobBoard = () => {
             </Col>
           </Row>
 
-          {/* Job Listings */}
           <div className="mt-4">
             {jobListings.map((job, index) => (
-              <Card key={index} className="mb-3 p-3">
+              <Card key={index} className="mb-3 p-3" style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.2)" }}>
                 <Row>
                   <Col xs={2} className="text-center fs-2">{job.icon}</Col>
                   <Col xs={7}>

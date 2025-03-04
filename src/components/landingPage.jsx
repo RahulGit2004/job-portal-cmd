@@ -207,7 +207,6 @@ const LandingPage = () => {
             background-color: #8a90f2;
             font-weight: bold;
           }
-
           @media (max-width: 991.98px) {
             .navbar-collapse {
               background-color: #FFFFFF;
