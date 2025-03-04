@@ -71,7 +71,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Trending Jobs */}
       <section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
         <h2 className="fw-bold">Trending Jobs</h2>
         <div className="row mt-4">
@@ -80,32 +79,35 @@ const LandingPage = () => {
               <div
                 className="card p-4 shadow-sm transition"
                 style={{
-                  backgroundColor: "#D9D9D9",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "12px",
+                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "scale(1.05)";
-                  e.currentTarget.style.boxShadow = "0px 10px 20px rgba(0, 0, 0, 0.2)";
+                  e.currentTarget.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.15)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.1)";
+                  e.currentTarget.style.boxShadow = "0px 4px 12px rgba(0, 0, 0, 0.1)";
                 }}
               >
-                <div className="bg-primary text-white rounded-circle mx-auto d-flex justify-content-center align-items-center" style={{ width: "40px", height: "40px" }}>
-                  Logo
+                <div className="bg-[#1E3A8A] text-white rounded-circle mx-auto d-flex justify-content-center align-items-center" style={{ width: "50px", height: "50px", fontSize: "1.2rem", fontWeight: "bold" }}>
+                  Job
                 </div>
-                <h3 className="mt-3">JOB TITLE</h3>
-                <p className="text-muted">Job Description</p>
-                <div className="d-flex justify-content-between">
-                  <button className="btn" style={{ borderColor: "#1E3A8A", color: "#1E3A8A" }}>View details</button>
-                  <button className="btn text-white" style={{ backgroundColor: "#1E3A8A" }}>Apply now</button>
+                <h4 className="mt-3 fw-semibold">Job Title</h4>
+                <p className="text-muted">Short job description goes here.</p>
+                <div className="d-flex justify-content-between mt-3">
+                  <Link to="/jobdescription" className="btn border-primary text-primary" style={{ borderRadius: "8px" }}>View details</Link>
+                  <Link to="/jobapplication" className="btn text-white" style={{ backgroundColor: "#1E3A8A", borderRadius: "8px" }}>Apply now</Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </section>
+
 
       {/* Top Companies */}
       <section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
@@ -203,7 +205,6 @@ const LandingPage = () => {
 
           .how-it-works-item:hover {
             background-color: #8a90f2;
-            transform: scale(1.05);
             font-weight: bold;
           }
 
