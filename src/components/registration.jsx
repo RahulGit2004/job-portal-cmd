@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="h-12 bg-gray-300 shadow-md md:shadow-none p-4 flex justify-between items-center relative">
+    <nav className="h-12 bg-white shadow-md md:shadow-none p-4 flex justify-between items-center relative">
       <img src={einfratechLogo} alt="Logo" className="h-10 w-15" />
 
       <div className="flex items-center md:space-x-6 h-10">
@@ -25,28 +25,28 @@ const Navbar = () => {
 
         {/* Navbar Links */}
         <div
-          className={`absolute md:static top-full right-0 w-full bg-gray-300 md:flex md:items-center md:space-x-6 md:p-0 shadow-md md:shadow-none transition-all ${
+          className={`absolute md:static top-full right-0 w-full bg-white md:flex md:items-center md:space-x-6 md:p-0 shadow-md md:shadow-none transition-all ${
             isOpen ? "block" : "hidden"
           } z-50`}
         >
-          <a
+          <Link to={"/"}
             href="#"
             className="block md:inline text-gray-700 hover:text-blue-600 p-2"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link to={"/jobs"}
             href="#"
             className="block md:inline text-gray-700 hover:text-blue-600 p-2"
           >
             Jobs
-          </a>
-          <a
+          </Link>
+          <Link to={"/signin"}
             href="#"
             className="block md:inline text-gray-700 hover:text-blue-600 p-2"
           >
             Employers
-          </a>
+          </Link>
           <Link to={"/signin"}
             href="#"
             className="block md:inline bg-blue-900 text-white px-4 rounded hover:bg-blue-600 p-2"

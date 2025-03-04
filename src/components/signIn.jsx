@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md flex justify-between items-center w-full relative">
+    <nav className="h-12 bg-white shadow-md md:shadow-none p-4 flex justify-between items-center relative">
       <a href="#">
         <img src={einfratechLogo} alt="Company Logo" className="h-10" />
       </a>
@@ -24,11 +24,11 @@ const Navbar = () => {
       <div
         className={`${
           menuOpen ? "flex" : "hidden"
-        } md:flex flex-col md:flex-row items-center md:space-x-4 absolute md:static top-16 left-0 w-full bg-white md:w-auto p-4 md:p-0 shadow-md md:shadow-none text-center z-50`}
+        } md:flex flex-col md:flex-row items-center md:space-x-4 absolute md:static top-16 left-0 w-full bg-white md:w-auto  md:p-0 shadow-md md:shadow-none text-center z-50`}
       >
-        <a href="#" className="block text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Home</b></a>
-        <a href="#" className="block  text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Jobs</b></a>
-        <a href="#" className="block text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Employers</b></a>
+        <Link to={"/"} href="#" className="block text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Home</b></Link>
+        <Link to={"/jobs"} href="#" className="block  text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Jobs</b></Link>
+        <Link to={"/signin"} href="#" className="block text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Employers</b></Link>
         <Link to={"/signup"} href="#" className="block border border-blue-900 px-4 rounded text-blue-900 hover:bg-blue-900 hover:text-white transition-all" onClick={toggleMenu}>Sign Up</Link>
       </div>
     </nav>
