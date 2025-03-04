@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FaBriefcase, FaHeart } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -19,43 +20,46 @@ const JobDescriptionPage = () => {
   return (
     <div className="max-w-[1440px] mx-auto p-4">
       {/* Navbar */}
-      <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-        <a href="#" className="text-xl font-bold text-blue-900">LOGO</a>
+      <nav className="bg-white shadow-md p-2 flex justify-between items-center">
+  <a href="#" className="text-lg font-bold text-blue-900">LOGO</a>
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <FiMenu className="text-2xl text-gray-700" />
-        </button>
+  {/* Mobile Menu Button */}
+  <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+    <FiMenu className="text-xl text-gray-700" />
+  </button>
 
-        {/* Navbar Links */}
-        <div className={`md:flex space-x-6 ${isMenuOpen ? "block" : "hidden"} absolute md:static top-16 left-0 w-full md:w-auto bg-white shadow-md md:shadow-none p-4 md:p-0`}>
-          <button
-            className={`text-gray-700 font-semibold hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
-              !showAppliedJobs ? "font-bold" : ""
-            }`}
-            onClick={() => setShowAppliedJobs(false)}
-          >
-            Dashboard
-          </button>
-          <button
-            className={`text-gray-700 hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
-              showAppliedJobs ? "font-bold" : ""
-            }`}
-            onClick={() => setShowAppliedJobs(true)}
-          >
-            Applied Jobs
-          </button>
-        </div>
+  {/* Navbar Links */}
+  <div
+    className={`md:flex space-x-4 ${isMenuOpen ? "block" : "hidden"} absolute md:static top-14 left-0 w-full md:w-auto bg-white shadow-md md:shadow-none p-3 md:p-0`}
+  >
+    <button
+      className={`text-gray-700 font-semibold hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
+        !showAppliedJobs ? "font-bold" : ""
+      }`}
+      onClick={() => setShowAppliedJobs(false)}
+    >
+      Dashboard
+    </button>
+    <button
+      className={`text-gray-700 hover:text-blue-900 block w-full md:w-auto text-left ml md:text-center ${
+        showAppliedJobs ? "font-bold" : ""
+      }`}
+      onClick={() => setShowAppliedJobs(true)}
+    >
+      Applied Jobs
+    </button>
+  </div>
 
-        {/* Profile Image */}
-        <button className="border-0 bg-transparent">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="Profile"
-            className="w-10 h-10 rounded-full"
-          />
-        </button>
-      </nav>
+  {/* Profile Image */}
+  <button className="border-0 bg-transparent">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+      alt="Profile"
+      className="w-8 h-8 rounded-full"
+    />
+  </button>
+</nav>
+
 
       {/* Show Full Dashboard on Page Load */}
       {!showAppliedJobs && (
@@ -108,36 +112,56 @@ const JobDescriptionPage = () => {
 {/* Recently Applied (Now also on Dashboard) */}
 <div className="mt-8 px-4 md:px-12">
 <h3 className="text-lg font-semibold">Recently Applied</h3>
-<div className="mt-3 bg-gray-100 p-3 rounded-md shadow-sm">
+<div className="mt-3 p-3 rounded-md">
   {jobStatus.map((job, index) => (
-    <div key={index} className="flex flex-col md:flex-row justify-between items-center py-3 border-b">
-      <div className="flex items-center space-x-3">
+    <div
+      key={index}
+      className="flex flex-col md:flex-row justify-between items-center bg-white p-4 rounded-lg shadow-[0_4px_4px_0_rgba(0,0,0,0.1)] mb-3"
+    >
+      {/* Company Info */}
+      <div className="flex items-center space-x-3 w-full md:w-auto">
         <img
           src="https://play-lh.googleusercontent.com/XHAMg2tievEEjzTo91f7bCtBjjX6svmgDcPYFKCd3iHSqzG3wd3BajNZftOyjfMg4g"
           alt="Company Logo"
-          className="w-8 h-8"
+          className="w-10 h-10"
         />
         <div>
           <p className="font-semibold text-sm">
-            UPStock <span className="bg-gray-300 text-gray-700 px-2 rounded text-xs">Remote</span>
+            UPStock{" "}
+            <span className="bg-gray-300 text-gray-700 px-2 rounded text-xs">
+              Remote
+            </span>
           </p>
-          <p className="text-gray-500 text-xs">{job.location} - {job.salary}</p>
+          <p className="text-gray-500 text-xs">
+            {job.location} - {job.salary}
+          </p>
         </div>
       </div>
-      <p className="text-gray-600 text-sm">{job.status === "Active" ? "29 Feb 2025" : "29 Feb 2025"}</p>
+
+      {/* Job Date */}
+      <p className="text-gray-600 text-sm w-full md:w-auto text-center md:text-left">
+        {job.status === "Active" ? "29 Feb 2025" : "29 Feb 2025"}
+      </p>
+
+      {/* Job Status */}
       <span
-        className={`px-2 py-1 text-xs font-semibold rounded-full ${
-          job.status === "Active" ? "bg-green-200 text-green-700" : "bg-red-200 text-red-700"
+        className={`px-3 py-1 text-xs font-semibold rounded-full w-full md:w-auto text-center md:text-left ${
+          job.status === "Active"
+            ? "bg-green-200 text-green-700"
+            : "bg-red-200 text-red-700"
         }`}
       >
         {job.status}
       </span>
-      <button className="border border-blue-700 text-blue-700 px-3 py-1 text-xs rounded-md hover:bg-blue-700 hover:text-white">
-        View
-      </button>
+
+      {/* View Button */}
+      <Link to="/jobdescription" className="border border-blue-700 text-blue-700 px-6 py-2 text-sm rounded-md hover:bg-blue-900 hover:text-white w-full md:w-auto text-center">
+  View
+</Link>
     </div>
   ))}
 </div>
+
 </div>
         </>
       )}
@@ -160,34 +184,51 @@ const JobDescriptionPage = () => {
             </div>
             {jobStatus.map((job, index) => (
               <div
-                key={index}
-                className="grid grid-cols-1 md:grid-cols-4 items-center py-3 border-b gap-4 text-center"
-              >
-                <div className="flex items-center space-x-3 justify-center md:justify-start">
-                  <img
-                    src="https://play-lh.googleusercontent.com/XHAMg2tievEEjzTo91f7bCtBjjX6svmgDcPYFKCd3iHSqzG3wd3BajNZftOyjfMg4g"
-                    alt="Company Logo"
-                    className="w-8 h-8"
-                  />
-                  <div>
-                    <p className="font-semibold text-sm">
-                      UPStock <span className="bg-gray-300 text-gray-700 px-2 rounded text-xs">Remote</span>
-                    </p>
-                    <p className="text-gray-500 text-xs">{job.location} - {job.salary}</p>
-                  </div>
+              key={index}
+              className="flex flex-col md:flex-row justify-between items-center bg-white p-4 rounded-lg shadow-[0_4px_4px_0_rgba(0,0,0,0.1)] mb-3"
+            >
+              {/* Company Info */}
+              <div className="flex items-center space-x-3 w-full md:w-auto">
+                <img
+                  src="https://play-lh.googleusercontent.com/XHAMg2tievEEjzTo91f7bCtBjjX6svmgDcPYFKCd3iHSqzG3wd3BajNZftOyjfMg4g"
+                  alt="Company Logo"
+                  className="w-10 h-10"
+                />
+                <div>
+                  <p className="font-semibold text-sm">
+                    UPStock{" "}
+                    <span className="bg-gray-300 text-gray-700 px-2 rounded text-xs">
+                      Remote
+                    </span>
+                  </p>
+                  <p className="text-gray-500 text-xs">
+                    {job.location} - {job.salary}
+                  </p>
                 </div>
-                <p className="text-gray-600 text-sm">{job.status === "Active" ? "29 Feb 2025" : "29 Feb 2025"}</p>
-                <span
-                  className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                    job.status === "Active" ? "bg-green-200 text-green-700" : "bg-red-200 text-red-700"
-                  }`}
-                >
-                  {job.status}
-                </span>
-                <button className="border border-blue-700 text-blue-700 px-3 py-1 text-xs rounded-md hover:bg-blue-700 hover:text-white">
-                  View
-                </button>
               </div>
+        
+              {/* Job Date */}
+              <p className="text-gray-600 text-sm w-full md:w-auto text-center md:text-left">
+                {job.status === "Active" ? "29 Feb 2025" : "29 Feb 2025"}
+              </p>
+        
+              {/* Job Status */}
+              <span
+                className={`px-3 py-1 text-xs font-semibold rounded-full w-full md:w-auto text-center md:text-left ${
+                  job.status === "Active"
+                    ? "bg-green-200 text-green-700"
+                    : "bg-red-200 text-red-700"
+                }`}
+              >
+                {job.status}
+              </span>
+        
+              {/* View Button */}
+              <Link to="/jobdescription" className="border border-blue-700 text-blue-700 px-6 py-2 text-sm rounded-md hover:bg-blue-900 hover:text-white w-full md:w-auto text-center">
+  View
+</Link>
+
+            </div>
             ))}
           </div>
         </div>
