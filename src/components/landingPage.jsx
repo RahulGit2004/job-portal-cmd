@@ -37,11 +37,11 @@ const LandingPage = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse.show navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto me-3">
               <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/jobs">Jobs</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/employers">Employers</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/signin">Employers</Link></li>
             </ul>
             <div className="d-flex">
               <Link to="/signup" className="btn" style={{ borderColor: "#1E3A8A", color: "#1E3A8A" }}>Sign Up</Link>
@@ -196,6 +196,9 @@ const LandingPage = () => {
       {/* Custom Styles */}
       <style>
         {`
+        .nav-link {
+  color: #1E3A8A !important; /* Ensure the color is visible */
+}
           .how-it-works-item {
             background-color: #B3B5F4;
             color: #000;

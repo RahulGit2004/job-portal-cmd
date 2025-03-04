@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import linkedIn from "../assets/linkedIn.jpg";
+import googleLogo from "../assets/google2.jpg"
+import einfratechLogo from "../assets/Einfratech.png";
+import facebook from "../assets/facebook.jpg"
+import hidden from "../assets/hidden.jpg"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,9 +14,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md p-4 flex justify-between items-center w-full relative">
+    <nav className="bg-white shadow-md flex justify-between items-center w-full relative">
       <a href="#">
-        <img src="../assets/Einfratech.png" alt="Company Logo" className="h-10" />
+        <img src={einfratechLogo} alt="Company Logo" className="h-10" />
       </a>
       <button className="md:hidden text-2xl" onClick={toggleMenu}>
         {menuOpen ? "✖" : "☰"}
@@ -20,11 +26,10 @@ const Navbar = () => {
           menuOpen ? "flex" : "hidden"
         } md:flex flex-col md:flex-row items-center md:space-x-4 absolute md:static top-16 left-0 w-full bg-white md:w-auto p-4 md:p-0 shadow-md md:shadow-none text-center z-50`}
       >
-        <a href="#" className="block py-2 text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Home</b></a>
-        <a href="#" className="block py-2 text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Jobs</b></a>
-        <a href="#" className="block py-2 text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Employers</b></a>
-        <a href="#" className="block py-2 border border-blue-900 px-4 rounded text-blue-900 hover:bg-blue-900 hover:text-white transition-all" onClick={toggleMenu}>Sign Up</a>
-        <a href="#" className="block py-2 bg-blue-900 text-white px-4 rounded hover:bg-blue-600 transition-all" onClick={toggleMenu}>Sign In</a>
+        <a href="#" className="block text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Home</b></a>
+        <a href="#" className="block  text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Jobs</b></a>
+        <a href="#" className="block text-gray-700 hover:text-blue-900 transition-all" onClick={toggleMenu}><b>Employers</b></a>
+        <Link to={"/signup"} href="#" className="block border border-blue-900 px-4 rounded text-blue-900 hover:bg-blue-900 hover:text-white transition-all" onClick={toggleMenu}>Sign Up</Link>
       </div>
     </nav>
   );
@@ -49,7 +54,7 @@ const SignIn = () => {
               <div className="relative">
                 <input type={showPassword ? "text" : "password"} placeholder="Enter password" className="w-full p-3 pr-10 border rounded focus:ring-2 focus:ring-blue-400" required />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <img src={showPassword ? "/blind.png" : "/blind.png"} alt="Toggle Password" className="w-5 h-5" />
+                  <img src={showPassword ? {hidden} : {hidden}} alt="Toggle Password" className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -65,18 +70,18 @@ const SignIn = () => {
               <p className="text-sm">or login with</p>
               <div className="flex justify-center space-x-4 mt-2">
                 <button className="p-2 border rounded-full hover:border-blue-900">
-                  <img src="/google.png" alt="Google" className="w-6" />
+                  <img src={googleLogo} alt="Google" className="w-6" />
                 </button>
                 <button className="p-2 border rounded-full hover:border-blue-900">
-                  <img src="/facebook.png" alt="Facebook" className="w-6" />
+                  <img src={facebook} alt="Facebook" className="w-6" />
                 </button>
                 <button className="p-2 border rounded-full hover:border-blue-900">
-                  <img src="/linkedin.png" alt="LinkedIn" className="w-6" />
+                  <img src={linkedIn} alt="LinkedIn" className="w-6" />
                 </button>
               </div>
             </div>
             <p className="text-sm text-center mt-4">
-              Do not have an account? <a href="http://localhost:5175/" className="text-blue-600 font-medium hover:underline">Register</a>
+              Do not have an account? <Link to="/signup" className="text-blue-600 font-medium hover:underline">Register</Link>
             </p>
           </form>
         </div>
