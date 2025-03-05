@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBriefcase, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import Navbar from './employeenav';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBriefcase, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import Navbar from "./employeenav";
 
 const Dashboard = () => {
   const [clickedIndex, setClickedIndex] = useState(null);
@@ -11,111 +10,86 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <div className="container mt-8" style={{ marginTop: '100px' }}>
-        <h2 style={{ fontFamily: 'Roboto, sans-serif', fontWeight: '500' }}>Hello, Owner Name</h2>
-        <p>Here is your daily activity and applications.</p>
+      <div className="container mx-auto mt-24 px-4">
+        <h2 className="text-2xl font-semibold">Hello, Owner Name</h2>
+        <p className="text-gray-600">Here is your daily activity and applications.</p>
 
         {/* Cards for Open Jobs and Saved Candidates */}
-        <div className="row">
-          <div className="col-12 col-md-6 mb-3">
-            <div style={{ width: '100%', height: '94px', backgroundColor: '#C9C9EC', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 16px', boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.1)' }}>
-              <div>
-                <h5 style={{ margin: 0, fontSize: '24px', fontWeight: 'bold' }}>600</h5>
-                <p style={{ margin: 0, fontSize: '14px' }}>Open Jobs</p>
-              </div>
-              <FontAwesomeIcon icon={faBriefcase} size="2x" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+          <div className="flex justify-between items-center bg-[#FFF6E6] p-4 rounded-lg shadow-md">
+            <div>
+              <h5 className="text-xl font-bold">600</h5>
+              <p className="text-sm">Open Jobs</p>
             </div>
+            <FontAwesomeIcon icon={faBriefcase} size="2x" />
           </div>
-          <div className="col-12 col-md-6 mb-3">
-            <div style={{ width: '100%', height: '94px', backgroundColor: '#FFF6E6', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 16px', boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.1)' }}>
-              <div>
-                <h5 style={{ margin: 0, fontSize: '24px', fontWeight: 'bold' }}>550</h5>
-                <p style={{ margin: 0, fontSize: '14px' }}>Saved Candidates</p>
-              </div>
-              <FontAwesomeIcon icon={faBriefcase} size="2x" />
+
+          <div className="flex justify-between items-center bg-[#C9C9EC] p-4 rounded-lg shadow-md">
+            <div>
+              <h5 className="text-xl font-bold">550</h5>
+              <p className="text-sm">Saved Candidates</p>
             </div>
+            <FontAwesomeIcon icon={faBriefcase} size="2x" />
           </div>
         </div>
 
         {/* Recently Posted Job Section */}
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h3 style={{ fontSize: '16px', fontWeight: 700 }}>Recently Posted Job</h3>
-          <span style={{ fontSize: '16px', fontWeight: 700 }}>View All</span>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-bold">Recently Posted Job</h3>
+          <span className="text-blue-700 font-semibold cursor-pointer">View All</span>
         </div>
 
         {/* Table Layout for Job Entries */}
-        <div className="table-responsive">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', backgroundColor: '#D9D9D9', padding: '10px', textAlign: 'center', fontSize: '16px', fontWeight: 'bold' }}>
-            <div>JOBS</div>
-            <div className="d-none d-md-block">STATUS</div> 
-            <div className="d-none d-md-block">APPLICATION</div> 
-            <div>ACTIONS</div>
-          </div>
-          <br />
-          {[...Array(4)].map((_, index) => (
-            <div
-              key={index}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                alignItems: 'center',
-                padding: '20px',
-                borderBottom: '1px solid #ddd',
-                backgroundColor: '#fff',
-                boxShadow: '0 4px 4px rgba(0, 0, 0, 0.1)',
-                marginBottom: '8px',
-                borderRadius: '8px',
-              }}
-            >
-              <div style={{ textAlign: 'center' }}>
-                <strong>UI / UX Designer</strong>
-                <br />
-                Full Time
-              </div>
-              <div className="d-none d-md-block" style={{ textAlign: 'center' }}> 
-                <div
-                  style={{
-                    width: '85px',
-                    height: '31px',
-                    backgroundColor: '#5BBF71',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '4px',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    margin: 'auto',
-                  }}
-                >
-                  Active
-                </div>
-              </div>
-              <div className="d-none d-md-block" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}> 
-                <FontAwesomeIcon icon={faUser} />
-                789 Applications
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <Link
-                  to="/viewapplication"
-                  className="btn"
-                  style={{
-                    backgroundColor: clickedIndex === index ? '#1E3A8A' : 'white',
-                    color: clickedIndex === index ? 'white' : '#1E3A8A',
-                    border: '1px solid black',
-                    padding: '8px 12px',
-                    fontWeight: 'bold',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onClick={() => setClickedIndex(index)}
-                >
-                  View Application
-                </Link>
-              </div>
-            </div>
-          ))}
+        <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-gray-200 text-gray-800">
+                <th className="py-3 px-4 text-left">JOBS</th>
+                <th className="py-3 px-4 text-left">STATUS</th>
+                <th className="py-3 px-4 text-left hidden md:table-cell">APPLICATION</th> {/* Hidden on small screens */}
+                <th className="py-3 px-4 text-left">ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...Array(4)].map((_, index) => (
+                <tr key={index} className="border-b border-gray-300">
+                  {/* Jobs Column */}
+                  <td className="py-4 px-4">
+                    <span className="font-semibold">UI / UX Designer</span>
+                    <br />
+                    <span className="text-sm text-gray-600">Full Time</span>
+                  </td>
+
+                  {/* Status Column */}
+                  <td className="py-4 px-4">
+                    <div className="bg-green-500 text-white px-3 py-1 rounded-md text-sm font-semibold w-max">
+                      Active
+                    </div>
+                  </td>
+
+                  {/* Applications Column - Hidden on Small Screens */}
+                  <td className="py-4 px-4 hidden md:table-cell">
+                    <FontAwesomeIcon icon={faUser} className="mr-2" /> 789 Applications
+                  </td>
+
+                  {/* Actions Column */}
+                  <td className="py-4 px-4">
+                  <Link
+  to="/viewapplication"
+  className="px-4 py-2 border rounded-md font-semibold transition-all 
+             bg-[#1E3A8A] text-white border-[#1E3A8A] 
+             hover:bg-[#1E3A8A] 
+             "
+>
+  View
+</Link>
+
+
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

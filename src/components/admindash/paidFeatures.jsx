@@ -128,51 +128,51 @@ const PaidFeatures = () => {
 </nav>
 
 <div className="container mt-4">
-        {/* Stats Section */}
-        <div className="row text-center">
-          <div className="col-md-3">
-            <div className="p-3 border rounded bg-white shadow-sm ">
-              <FaMoneyBillWave size={30} className="text-warning" />
-              
-              <div className="d-flex justify-content-center align-items-center text-center gap-2 mt-4">
-              <FaSackDollar className="text-warning" />
-              <h5 className="mt-2" style={{ fontFamily: "Poppins, sans-serif" }}>80,0000.125</h5>
-              </div>
-              <p>Total Revenue</p>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <div className="p-3 border rounded bg-white shadow-sm">
-              <FaCircleUser size={30}  />
-             <div  className="d-flex justify-content-center align-items-center text-center gap-2 mt-4">
-             <BiSolidGroup />
-             <h5 className="mt-2" style={{ fontFamily: "Poppins, sans-serif" }}>15999</h5>
-             </div>
-              <p>Premium Users</p>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <div className="p-3 border rounded bg-white shadow-sm">
-            <FaUserTie  size={30} />
-              <div  className="d-flex justify-content-center align-items-center text-center gap-2 mt-4">
-              <BiSolidGroup />
-              <h5 className="mt-2" style={{ fontFamily: "Poppins, sans-serif" }}>12999</h5>
-              </div>
-              <p>Premium Employers</p>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <div className="p-3 border rounded bg-white shadow-sm">
-            <FaExclamationCircle  size={30} className="text-danger"/>
-            <div  className="d-flex justify-content-center align-items-center text-center gap-2 mt-4">
-            <GiSandsOfTime />
-            <h5 className="mt-2">80,0000.125</h5>
-            </div>
-              <p>Pending Refunds</p>
-            </div>
-          </div>
+  {/* Stats Section */}
+  <div className="row text-center">
+    <div className="col-md-3">
+      <div className="p-3 border rounded bg-white shadow-sm d-flex flex-column align-items-center">
+        <FaMoneyBillWave size={40} className="text-warning mb-3" />
+        <div className="d-flex justify-content-center align-items-center gap-2">
+          <FaSackDollar className="text-warning" />
+          <h5 style={{ fontFamily: "Poppins, sans-serif" }}>80,0000.125</h5>
         </div>
+        <p className="mt-2">Total Revenue</p>
+      </div>
+    </div>
+    <div className="col-md-3">
+      <div className="p-3 border rounded bg-white shadow-sm d-flex flex-column align-items-center">
+        <FaCircleUser size={40} className="mb-3" />
+        <div className="d-flex justify-content-center align-items-center gap-2">
+          <BiSolidGroup />
+          <h5 style={{ fontFamily: "Poppins, sans-serif" }}>15999</h5>
         </div>
+        <p className="mt-2">Premium Users</p>
+      </div>
+    </div>
+    <div className="col-md-3">
+      <div className="p-3 border rounded bg-white shadow-sm d-flex flex-column align-items-center">
+        <FaUserTie size={40} className="mb-3" />
+        <div className="d-flex justify-content-center align-items-center gap-2">
+          <BiSolidGroup />
+          <h5 style={{ fontFamily: "Poppins, sans-serif" }}>12999</h5>
+        </div>
+        <p className="mt-2">Premium Employers</p>
+      </div>
+    </div>
+    <div className="col-md-3">
+      <div className="p-3 border rounded bg-white shadow-sm d-flex flex-column align-items-center">
+        <FaExclamationCircle size={40} className="text-danger mb-3" />
+        <div className="d-flex justify-content-center align-items-center gap-2">
+          <GiSandsOfTime />
+          <h5>80,0000.125</h5>
+        </div>
+        <p className="mt-2">Pending Refunds</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
             
         <div className="container mt-4">

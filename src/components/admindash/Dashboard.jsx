@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCheckCircle, faTimesCircle, faBars } from "@fortawesome/free-solid-svg-icons";
-import Navbar from "./adminnavbar";
-import humanIcon from "../admin/human.png";
+import Navbar from "../admindash/adminnavbar";
+import humanIcon from "../admindash/human.png";
 
 // Import images
-import imageIcon from "../admin/image1.png";
-import graphIcon from "../admin/graph.png";
-import bagIcon from "../admin/bag.png";
+import imageIcon from "../admindash/image1.png";
+import graphIcon from "../admindash/graph.png";
+import bagIcon from "../admindash/bag.png";
 
 const Dashboard = () => {
   const [approvedUsers, setApprovedUsers] = useState([]);
+  const [rejectedUsers, setRejectedUsers] = useState([]);
   const [filter, setFilter] = useState("All");
 
   const users = [
@@ -23,7 +24,15 @@ const Dashboard = () => {
     { id: 4, name: "Admin User", email: "admin@example.com", status: "Active", type: "Admin" },
   ];
 
-  const handleApprove = (id) => setApprovedUsers([...approvedUsers, id]);
+  const handleApprove = (id) => {
+    setApprovedUsers([...approvedUsers, id]);
+    setRejectedUsers(rejectedUsers.filter((userId) => userId !== id));
+  };
+
+  const handleReject = (id) => {
+    setRejectedUsers([...rejectedUsers, id]);
+    setApprovedUsers(approvedUsers.filter((userId) => userId !== id));
+  };
 
   const filteredUsers = filter === "All" ? users : users.filter(user => user.type === filter);
 
@@ -102,16 +111,20 @@ const Dashboard = () => {
                   </td>
                   <td className="d-none d-md-table-cell">{user.type}</td>
                   <td className="d-none d-md-table-cell">
-                    {approvedUsers.includes(user.id) ? (
+                  {approvedUsers.includes(user.id) ? (
                       <button className="btn btn-success btn-sm">
                         <FontAwesomeIcon icon={faCheckCircle} /> Approved
+                      </button>
+                    ) : rejectedUsers.includes(user.id) ? (
+                      <button className="btn btn-danger btn-sm">
+                        <FontAwesomeIcon icon={faTimesCircle} /> Rejected
                       </button>
                     ) : (
                       <>
                         <button className="btn btn-outline-success btn-sm me-2" onClick={() => handleApprove(user.id)}>
                           <FontAwesomeIcon icon={faCheckCircle} /> Approve
                         </button>
-                        <button className="btn btn-outline-danger btn-sm">
+                        <button className="btn btn-outline-danger btn-sm" onClick={() => handleReject(user.id)}>
                           <FontAwesomeIcon icon={faTimesCircle} /> Reject
                         </button>
                       </>
@@ -136,12 +149,24 @@ const Dashboard = () => {
                             <button className="dropdown-item" disabled>
                               <FontAwesomeIcon icon={faCheckCircle} /> Approved
                             </button>
+                            
                           ) : (
                             <>
                               <button className="dropdown-item" onClick={() => handleApprove(user.id)}>
                                 <FontAwesomeIcon icon={faCheckCircle} /> Approve
                               </button>
-                              <button className="dropdown-item">
+                             
+                            </>
+                          )}
+                          {rejectedUsers.includes(user.id) ? (
+                            <button className="dropdown-item" disabled>
+                              <FontAwesomeIcon icon={faCheckCircle} /> Rejected
+                            </button>
+                            
+                          ) : (
+                            <>
+                            
+                              <button className="dropdown-item" onClick={() => handleReject(user.id)}>
                                 <FontAwesomeIcon icon={faTimesCircle} /> Reject
                               </button>
                             </>

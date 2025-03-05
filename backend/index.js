@@ -12,20 +12,27 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+// ✅ Middleware
+app.use(cors({
+    origin: "http://localhost:5173", // ✅ Replace with frontend URL
+    credentials: true,  // ✅ Allows cookies to be sent
+}));
+app.use(cookieParser());  // ✅ Enables cookie parsing
 
-const corsOptions = {
-    origin: "http://localhost:5173",
-    credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(express.json()); // ✅ Parse JSON bodies
+
+app.use(express.urlencoded({ extended: true }));
+
+// const corsOptions = {
+//     origin: "http://localhost:5173",
+//     credentials: true,
+// };
+// app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 8080;
 
 // API Routes
-app.use("/api/v1/user", userRoute);
+app.use("/api/users", userRoute);  /// changed here
 app.use("/api/v1/subscription", subscriptionRoute);
 app.use("/api/v1/job", jobRoute);
 

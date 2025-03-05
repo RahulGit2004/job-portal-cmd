@@ -1,13 +1,14 @@
 import jwt from "jsonwebtoken";  
 import dotenv from "dotenv";
 import User from "../models/user.js";  
+import cookieParser from "cookie-parser";
 
 dotenv.config(); // Load environment variables
 
 // ✅ Middleware: Authenticate User using Token
 const authenticateUser = async (req, res, next) => {
     try {
-        const token = req.cookies?.token; // ✅ Prevents undefined cookie errors
+        const token = req.cookies?.token || req.headers.authorization?.split(" ")[1]; // Support both cookie & header token
 
         if (!token) {
             return res.status(401).json({ message: "Not authorized, no token provided" });

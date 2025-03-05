@@ -47,7 +47,7 @@ export const registerUser = async (req, res) => {
     }
 };
 
-// Login User
+// login user
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -68,14 +68,20 @@ export const loginUser = async (req, res) => {
             { expiresIn: "1d" }
         );
 
+        // Enable this only if using cookies
         res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
-            maxAge: 24 * 60 * 60 * 1000,
+            httpOnly: false, // Prevents client-side JS access (better security)
+            secure: process.env.NODE_ENV === "production", // Enable in production
+            sameSite: "None", // Required for cross-origin cookies
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
         });
 
-        res.status(200).json({ message: "Login successful", user });
+        res.status(200).json({ 
+            message: "Login successful", 
+            user, 
+            token // Send token in response for local storage
+        });
+
     } catch (error) {
         res.status(500).json({ message: "Server error", error });
     }

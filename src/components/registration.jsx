@@ -1,209 +1,171 @@
 import React, { useState } from "react";
 import linkedIn from "../assets/linkedIn.jpg";
-import googleLogo from "../assets/google2.jpg"
+import googleLogo from "../assets/google2.jpg";
 import einfratechLogo from "../assets/Einfratech.png";
-import facebook from "../assets/facebook.jpg"
-import { Link } from "react-router-dom";
-
-
-
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <nav className="h-12 bg-white shadow-md md:shadow-none p-4 flex justify-between items-center relative">
-      <img src={einfratechLogo} alt="Logo" className="h-10 w-15" />
-
-      <div className="flex items-center md:space-x-6 h-10">
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-700 focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          ☰
-        </button>
-
-        {/* Navbar Links */}
-        <div
-          className={`absolute md:static top-full right-0 w-full bg-white md:flex md:items-center md:space-x-6 md:p-0 shadow-md md:shadow-none transition-all ${
-            isOpen ? "block" : "hidden"
-          } z-50`}
-        >
-          <Link to={"/"}
-            href="#"
-            className="block md:inline text-gray-700 hover:text-blue-600 p-2"
-          >
-            Home
-          </Link>
-          <Link to={"/jobs"}
-            href="#"
-            className="block md:inline text-gray-700 hover:text-blue-600 p-2"
-          >
-            Jobs
-          </Link>
-          <Link to={"/signin"}
-            href="#"
-            className="block md:inline text-gray-700 hover:text-blue-600 p-2"
-          >
-            Employers
-          </Link>
-          <Link to={"/signin"}
-            href="#"
-            className="block md:inline bg-blue-900 text-white px-4 rounded hover:bg-blue-600 p-2"
-          >
-            Log In
-          </Link>
-        </div>
-      </div>
-    </nav>
-  );
-};
+import facebook from "../assets/facebook.jpg";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    mobileNumber: "",
+    role: "Student", // Default value
+  });
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const navigate = useNavigate(); // For redirecting after signup
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess("Registration successful! Redirecting to login...");
+        setTimeout(() => navigate("/signin"), 2000); // Redirect after 2s
+      } else {
+        setError(data.message || "Something went wrong");
+      }
+    } catch (error) {
+      setError("Failed to connect to the server");
+    }
+  };
+
   return (
     <div>
-      <Navbar />
-
       <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
           <h2 className="text-2xl font-semibold mb-6">Sign Up</h2>
 
-          <form>
+          {/* Show success or error messages */}
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
+
+          <form onSubmit={handleSubmit}>
+            {/* Full Name */}
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
                 Full name<span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
                 className="w-full p-2 border rounded"
                 placeholder="Enter your full name"
                 required
               />
             </div>
 
+            {/* Email */}
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
                 Email ID<span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full p-2 border rounded"
-                placeholder="Enter your email id"
+                placeholder="Enter your email"
                 required
               />
-              <p className="text-xs text-gray-500">
-                Job notifications will be sent to this email id
-              </p>
             </div>
 
+            {/* Password */}
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
                 Password<span className="text-red-500">*</span>
               </label>
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 className="w-full p-2 border rounded"
-                placeholder="(Minimum 6 characters)"
+                placeholder="Minimum 6 characters"
                 required
               />
-              <p className="text-xs text-gray-500">Remember your password</p>
             </div>
 
+            {/* Mobile Number */}
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
                 Mobile number<span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
+                name="mobileNumber"
+                value={formData.mobileNumber}
+                onChange={handleChange}
                 className="w-full p-2 border rounded"
                 placeholder="Enter your mobile number"
                 required
               />
-              <p className="text-xs text-gray-500">
-                Recruiters will contact you on this number
-              </p>
             </div>
 
+            {/* User Role Selection */}
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
                 You are registering as:<span className="text-red-500">*</span>
               </label>
               <div className="grid grid-cols-2 gap-4 md:flex md:space-x-4">
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="userType"
-                    value="student"
-                    defaultChecked
-                    className="form-radio"
-                    required
-                  />
-                  <span>Student</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="userType"
-                    value="employer"
-                    className="form-radio"
-                    required
-                  />
-                  <span>Employer</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="userType"
-                    value="admin"
-                    className="form-radio"
-                    required
-                  />
-                  <span>Admin</span>
-                </label>
+                {["Student", "Employer", "Admin"].map((role) => (
+                  <label key={role} className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="role"
+                      value={role}
+                      checked={formData.role === role}
+                      onChange={handleChange}
+                      className="form-radio"
+                      required
+                    />
+                    <span>{role}</span>
+                  </label>
+                ))}
               </div>
             </div>
 
-            <div className="flex items-center mb-4">
-              <input type="checkbox" className="mr-2" />
-              <label className="text-sm">
-                Send me important updates & promotions via SMS, email, and
-                WhatsApp
-              </label>
-            </div>
-
-            <button className="w-full bg-[#1E3A8A] text-white p-2 rounded hover:bg-blue-700">
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-[#1E3A8A] text-white p-2 rounded hover:bg-blue-700"
+            >
               Register now
             </button>
-            <p className="text-xs text-center mt-4">
-              By clicking Register, you agree to the{" "}
-              <span className="text-blue-600">Terms and Conditions</span> &{" "}
-              <span className="text-blue-600">Privacy Policy</span> of
-              AlwaysApply.com
-            </p>
           </form>
 
-          <div className="text-center mt-6">
-            <p className="text-sm">or signup with</p>
-            <div className="flex justify-center space-x-4 mt-2">
-              <button className="p-2 border rounded-full">
-                <img src={googleLogo} alt="Google" className="w-6" />
-              </button>
-              <button className="p-2 border rounded-full">
-                <img
-                  src={facebook}
-                  alt="Facebook"
-                  className="w-6"
-                />
-              </button>
-              <button className="p-2 border rounded-full">
-                <img
-                  src={linkedIn}
-                  alt="LinkedIn"
-                  className="w-6"
-                />
-              </button>
-            </div>
-          </div>
+          {/* Already have an account? */}
+          <p className="text-sm text-center mt-4">
+            Already have an account?{" "}
+            <Link to="/signin" className="text-blue-600">Log in</Link>
+          </p>
         </div>
       </div>
     </div>

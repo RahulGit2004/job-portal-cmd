@@ -20,45 +20,54 @@ const JobDescriptionPage = () => {
   return (
     <div className="max-w-[1440px] mx-auto p-4">
       {/* Navbar */}
-      <nav className="bg-white shadow-md p-2 flex justify-between items-center">
-  <a href="#" className="text-lg font-bold text-blue-900">LOGO</a>
+      <nav className="bg-white shadow-md flex justify-between items-center">
+      {/* Logo */}
+      <img className="w-22 h-12" src={einfratechLogo} alt="Logo"/>
 
-  {/* Mobile Menu Button */}
-  <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-    <FiMenu className="text-xl text-gray-700" />
-  </button>
+      {/* Navbar Links (Hidden on small screens, always visible on large screens) */}
+      <div className={`md:flex items-center space-x-6 ${isMenuOpen ? "block" : "hidden"} absolute md:static top-14 left-0 w-full md:w-auto bg-white shadow-md md:shadow-none p-4 md:p-0`}>
+        <button
+          className={`text-gray-700 font-semibold hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
+            !showAppliedJobs ? "font-bold" : ""
+          }`}
+          onClick={() => setShowAppliedJobs(false)}
+        >
+          Dashboard
+        </button>
+        <button
+          className={`text-gray-700 hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
+            showAppliedJobs ? "font-bold" : ""
+          }`}
+          onClick={() => setShowAppliedJobs(true)}
+        >
+          Applied Jobs
+        </button>
 
-  {/* Navbar Links */}
-  <div
-    className={`md:flex space-x-4 ${isMenuOpen ? "block" : "hidden"} absolute md:static top-14 left-0 w-full md:w-auto bg-white shadow-md md:shadow-none p-3 md:p-0`}
-  >
-    <button
-      className={`text-gray-700 font-semibold hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
-        !showAppliedJobs ? "font-bold" : ""
-      }`}
-      onClick={() => setShowAppliedJobs(false)}
-    >
-      Dashboard
-    </button>
-    <button
-      className={`text-gray-700 hover:text-blue-900 block w-full md:w-auto text-left ml md:text-center ${
-        showAppliedJobs ? "font-bold" : ""
-      }`}
-      onClick={() => setShowAppliedJobs(true)}
-    >
-      Applied Jobs
-    </button>
-  </div>
+        {/* Profile (Only moves inside menu on small screens) */}
+        <div className="flex items-center space-x-2 mt-4 md:hidden">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="Profile"
+            className="w-8 h-8 rounded-full border border-gray-300"
+          />
+          <span className="text-gray-700 font-semibold">Profile</span>
+        </div>
+      </div>
 
-  {/* Profile Image */}
-  <button className="border-0 bg-transparent">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-      alt="Profile"
-      className="w-8 h-8 rounded-full"
-    />
-  </button>
-</nav>
+      {/* Mobile Menu Button (Moves to the right only for small screens) */}
+      <button className="md:hidden ml-auto" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <FiMenu className="text-2xl text-gray-700" />
+      </button>
+
+      {/* Profile stays outside for large screens */}
+      <div className="hidden md:block">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+          alt="Profile"
+          className="w-8 h-8 rounded-full border border-gray-300"
+        />
+      </div>
+    </nav>
 
 
       {/* Show Full Dashboard on Page Load */}
