@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import humanIcon from "../employer/profile.png";
@@ -57,4 +57,48 @@ const Navbar = () => {
   );
 };
 
+
+// const Navbar = () => {
+  
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+//   return (
+//     <nav className="shadow-sm fixed top-0 left-0 w-full bg-white z-50">
+//       <div className="container-fluid flex justify-between items-center p-4 max-w-[1125px] mx-auto">
+//         {/* Logo */}
+//         <a href="#">
+//           <img src={EinfratechLogo} alt="Einfratech Logo" className="h-10" />
+//         </a>
+
+//         {/* Mobile Menu Button */}
+//         <button
+//           className="md:hidden text-gray-700 focus:outline-none"
+//           onClick={() => setIsMenuOpen(!isMenuOpen)}
+//         >
+//           ☰
+//         </button>
+
+//         {/* Navbar Links & Buttons */}
+//         <div className={`absolute md:static top-16 left-0 w-full md:w-auto md:flex items-center bg-white shadow-md md:shadow-none transition-all duration-300 ease-in-out ${isMenuOpen ? "block" : "hidden"}`}>
+//           <ul className="md:flex md:space-x-6 text-center md:text-left">
+//             <li><Link className="block py-2 px-4 hover:text-blue-700" to="/">Home</Link></li>
+//             <li><Link className="block py-2 px-4 hover:text-blue-700" to="/jobs">Jobs</Link></li>
+//             <li><Link className="block py-2 px-4 hover:text-blue-700" to="/signin">Employers</Link></li>
+//           </ul>
+
+//           {/* Buttons - Stack on mobile, inline on desktop */}
+//           <div className="md:flex md:space-x-3 text-center mt-2 md:mt-0">
+//             <Link to="/signup" className="block md:inline-block border border-blue-900 text-blue-900 px-4 py-2 rounded-md hover:bg-blue-100">Sign Up</Link>
+//             <Link to="/signin" className="block md:inline-block bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-700">Sign In</Link>
+//           </div>
+//         </div>
+
+        
+
+
+
+//       </div>
+//     </nav>
+//   );
+// };
 export default Navbar;
