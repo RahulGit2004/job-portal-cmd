@@ -11,12 +11,16 @@ import EmployeesDash from "./components/employer/Employeedash"
 import ViewApplication from "./components/employer/viewApplication"
 import CreateJobForm from './components/employer/CreateJobForm';
 import ProfileDashboard from './components/profileDash';
+import Admindashboard from './components/admindash/Dashboard';
+import Postedjobs from './components/admindash/dash21';
+
 // import EmployersPage from "./components/EmployersPage"; // Create Employers Page
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<EmployeesDash/>}/>
+      <Route path="/" element={<Admindashboard/>}/>
+
       {/* <Route path="/" element={<CDashBoard />} />    */}
        <Route path="/jobs" element={<JobsPage />} />
       <Route path="/signin" element={<SigninForm />} />
@@ -26,6 +30,7 @@ const App = () => {
       <Route path="/viewapplication" element = {<ViewApplication/>} />
       <Route path="/createjobform" element = {<CreateJobForm/>} />
       <Route path="/profiledashboard" element = {<ProfileDashboard />} />
+      <Route path="/postedjobs" element = {<Postedjobs/>} />
     </Routes>
   );
 };
