@@ -11,7 +11,7 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <div className="container mt-5" style={{ marginTop: '100px' }}>
+      <div className="container mt-8" style={{ marginTop: '100px' }}>
         <h2 style={{ fontFamily: 'Roboto, sans-serif', fontWeight: '500' }}>Hello, Owner Name</h2>
         <p>Here is your daily activity and applications.</p>
 
