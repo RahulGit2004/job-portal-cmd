@@ -61,10 +61,9 @@ const PostedJobs = () => {
         
         <img className="w-15 h-12" src={Einfratech}/>
         <nav className="hidden md:flex space-x-8 text-gray-700 font-semibold">
-          <a href="#" className="hover:text-blue-500 transition-all">Job list</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Posted Jobs</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Job status</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Approved status</a>
+          <a href="#" className="hover:text-blue-500 transition-all "><b>Posted Jobs</b></a>
+          <Link to="/" href="#" className="hover:text-blue-500 transition-all">Paid Features</Link>
+          <a href="#" className="hover:text-blue-500 transition-all">Certification</a>
          <Link to= "/profiledashboard" className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center"><img src={Human}/></Link>
         </nav>
         <button className="md:hidden text-gray-700 text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
@@ -73,10 +72,9 @@ const PostedJobs = () => {
       </header>
       {menuOpen && (
         <nav className="md:hidden flex flex-col space-y-4 text-gray-700 font-semibold p-4 bg-gray-100 rounded-lg shadow-md">
-          <a href="#" className="hover:text-blue-500 transition-all">Job list</a>
           <a href="#" className="hover:text-blue-500 transition-all">Posted Jobs</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Job status</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Approved status</a>
+          <a href="#" className="hover:text-blue-500 transition-all">Paid Features</a>
+          <a href="#" className="hover:text-blue-500 transition-all">Certification</a>
         </nav>
       )}
       <div className="max-w-5xl mx-auto">

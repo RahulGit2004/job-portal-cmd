@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCheckCircle, faTimesCircle, faBars } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./adminnavbar";
-import humanIcon from "../admindash/human.png";
+import humanIcon from "../admin/human.png";
 
 // Import images
-import imageIcon from "../admindash/image1.png";
-import graphIcon from "../admindash/graph.png";
-import bagIcon from "../admindash/bag.png";
+import imageIcon from "../admin/image1.png";
+import graphIcon from "../admin/graph.png";
+import bagIcon from "../admin/bag.png";
 
 const Dashboard = () => {
   const [approvedUsers, setApprovedUsers] = useState([]);
@@ -26,10 +28,11 @@ const Dashboard = () => {
   const filteredUsers = filter === "All" ? users : users.filter(user => user.type === filter);
 
   const cards = [
-    { value: "999", label: "Users", color: "#C9EEC9", image: imageIcon },
-    { value: "159", label: "Employers", color: "#E0D9F6", image: graphIcon },
-    { value: "159", label: "Posted Jobs", color: "#D6C7E8", image: bagIcon },
+    { value: "999", label: "Users", color: "#C9EEC9", image: imageIcon, link: "/" },
+    { value: "159", label: "Employers", color: "#E0D9F6", image: graphIcon, link: "/" },
+    { value: "159", label: "Posted Jobs", color: "#D6C7E8", image: bagIcon, link: "/postedjobs" },
   ];
+  
 
   return (
     <div>
@@ -37,23 +40,24 @@ const Dashboard = () => {
 
       {/* Summary Cards */}
       <div className="container mt-4">
-        <div className="row text-center">
-          {cards.map((card, index) => (
-            <div key={index} className="col-12 col-md-6 col-lg-4 mb-3">
-              <div className="card shadow-sm p-3 rounded text-center" style={{ backgroundColor: card.color }}>
-                <div className="mx-auto rounded-circle bg-white p-3 shadow-sm" style={{ width: "70px", height: "70px" }}>
-                  <img src={card.image} alt="icon" className="w-100 h-100" />
-                </div>
-                <h4 className="fw-bold">{card.value}</h4>
-                <p>{card.label}</p>
-                <button className="btn btn-light mt-2">
-                  View Details <FontAwesomeIcon icon={faEye} />
-                </button>
+      <div className="row text-center">
+        {cards.map((card, index) => (
+          <div key={index} className="col-12 col-md-6 col-lg-4 mb-3">
+            <div className="card shadow-sm p-3 rounded text-center" style={{ backgroundColor: card.color }}>
+              <div className="mx-auto rounded-circle bg-white p-3 shadow-sm" style={{ width: "70px", height: "70px" }}>
+                <img src={card.image} alt="icon" className="w-100 h-100" />
               </div>
+              <h4 className="fw-bold">{card.value}</h4>
+              <p>{card.label}</p>
+              <Link to={card.link}
+               className="btn btn-light mt-2">
+                View Details <FontAwesomeIcon icon={faEye} />
+              </Link>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+    </div>
 
       {/* Users Section */}
       <h3 className="mt-4 text-center fw-bold">Users</h3>
