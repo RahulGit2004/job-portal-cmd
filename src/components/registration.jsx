@@ -33,7 +33,7 @@ const SignupForm = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://localhost:8000/api/users/register", {
+      const response = await fetch("http://localhost:8000/api/v1/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

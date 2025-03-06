@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoMdWallet } from "react-icons/io";
@@ -34,12 +35,12 @@ const JobDescriptionPage = () => {
                 Job Position
               </p>
               <div className="d-flex justify-center">
-  <img
-    src="https://img.freepik.com/premium-vector/career-concept-illustration-idea-job-progress-wealth_277904-445.jpg?semt=ais_hybrid"
-    alt="Career"
-    className="img-fluid w-50 rounded h-50 my-3"
-  />
-</div>
+                <img
+                  src="https://img.freepik.com/premium-vector/career-concept-illustration-idea-job-progress-wealth_277904-445.jpg?semt=ais_hybrid"
+                  alt="Career"
+                  className="img-fluid w-50 rounded h-50 my-3"
+                />
+              </div>
 
               <p className="text-start">
                 A "job details page" typically includes information like the job
@@ -64,7 +65,7 @@ const JobDescriptionPage = () => {
           <div className="col-lg-3 pb-4">
             <div className="card p-4 shadow-sm text-center d-flex flex-column align-items-center bg-light">
               <h4 className="fw-bold">Website Name</h4>
-              <a href="https://www.example.com" style={{ color: "#1E3A8A" }}>
+              <a href="#" style={{ color: "#1E3A8A" }}>
                 www.example.com
               </a>
 
@@ -155,12 +156,12 @@ const JobDescriptionPage = () => {
                 </div>
               </div>
 
-              <button
+              <Link to="/jobapplication" 
                 className="btn rounded-3 w-50"
                 style={{ background: "#1E3A8A", color: "white" }}
               >
                 Apply Now
-              </button>
+              </Link>
             </div>
           </div>
         </div>

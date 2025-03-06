@@ -6,20 +6,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
-// const express = require("express");
-// const cors = require("cors");
-
-// const app = express();
-
-// Enable CORS for all routes
-// app.use(cors({
-//     origin: "http://localhost:5000", // Allow frontend requests (change to your frontend URL)
-//     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-//     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-//     credentials: true // Allow sending cookies if using authentication
-// }));
-
-// Register User
 export const registerUser = async (req, res) => {
     try {
         const { fullName, email, password, mobileNumber, role } = req.body;
@@ -68,13 +54,13 @@ export const loginUser = async (req, res) => {
             { expiresIn: "1d" }
         );
 
-        // Enable this only if using cookies
         res.cookie("token", token, {
-            httpOnly: false, 
-            secure: process.env.NODE_ENV === "production", // Enable in production
-            sameSite: "None", 
-            maxAge: 24 * 60 * 60 * 1000,
+            httpOnly: true,  // 🔒 Prevents JavaScript access (XSS protection)
+            secure: false,   // 🔒 Set to `true` in production with HTTPS
+            sameSite: "Lax", // 🔒 Adjust for cross-origin requests if needed
+            maxAge: 24 * 60 * 60 * 1000, // 🔒 Expires in 1 day
         });
+
 
         res.status(200).json({ 
             message: "Login successful", 

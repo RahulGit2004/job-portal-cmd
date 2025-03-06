@@ -1,7 +1,7 @@
-
 import { Schema, model } from "mongoose";
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -11,6 +11,9 @@ const userSchema = new Schema({
     location: { type: String, default: "" },        // User's location
     isVerified: { type: Boolean, default: false },  // Email verification status
     bio: { type: String, default: "" },             // Short bio
-}, { timestamps: true });
+  },
+  { timestamps: true }
+);
 
-export default model("user", userSchema);
+// Use "User" with a capital "U" to match Mongoose conventions
+export default model("User", userSchema);

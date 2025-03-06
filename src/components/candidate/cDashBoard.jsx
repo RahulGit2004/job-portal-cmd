@@ -60,13 +60,13 @@ const JobDescriptionPage = () => {
       </button>
 
       {/* Profile stays outside for large screens */}
-      <div className="hidden md:block">
+      <Link to="/profiledashboard" className="hidden md:block">
         <img
           src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
           alt="Profile"
           className="w-8 h-8 rounded-full border border-gray-300"
         />
-      </div>
+      </Link>
     </nav>
 
 

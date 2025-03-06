@@ -13,10 +13,10 @@ const jobSchema = new mongoose.Schema(
       country: { type: String, required: true },
       city: { type: String, required: true },
     },
-    created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    applications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Application" }]
+    created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Employer who created the job
+    applications: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobApplication" }], // Linking job applications
   },
   { timestamps: true }
 );
 
-export const Job = mongoose.model("Job", jobSchema); // ✅ Named export
+export const Job = mongoose.model("Job", jobSchema); 
