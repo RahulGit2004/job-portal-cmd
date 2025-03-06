@@ -44,12 +44,12 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // For navigation after login
+  const navigate = useNavigate(); 
 
 
   const handleLogin = async (e) => {
       e.preventDefault();
-      setError(""); // Reset errors
+      setError(""); 
   
       try {
           const response = await fetch("http://localhost:8000/api/users/login", {
@@ -58,7 +58,7 @@ const SignIn = () => {
                   "Content-Type": "application/json",
               },
               body: JSON.stringify({ email, password }),
-              credentials: "include", // ✅ Ensure cookies are sent and received
+              credentials: "include",
           });
   
           const data = await response.json();
@@ -67,22 +67,24 @@ const SignIn = () => {
               throw new Error(data.message || "Invalid credentials");
           }
   
-          console.log("Login Successful:", data);
+          // console.log("Login Successful:", data);
   
           // ✅ Fetch and store the cookie
-          const authCookie = Cookies.get("token"); // Fetch cookie using js-cookie
+          const authCookie = Cookies.get("token");
   
-          if (authCookie) {
-              console.log("Auth Cookie:", authCookie); // ✅ Print cookie in console
-              localStorage.setItem("authToken", authCookie); // ✅ Store in local storage
-          } else {
-              console.warn("Auth cookie not found in frontend. Check if it's HTTP-only.");
-          }
+          // if (authCookie) {
+          //     console.log("Auth Cookie:", authCookie);
+          //     localStorage.setItem("authToken", authCookie); 
+          // } else {
+          //     console.warn("Auth cookie not found in frontend. Check if it's HTTP-only.");
+          // }
   
-          // ✅ Store user role in localStorage for easy access
+          //  Store user role in localStorage for easy access
           localStorage.setItem("userRole", data.user.role);
+          localStorage.setItem("token : ", data.token)
+          console.log("token : ", data.token)
   
-          // ✅ Role-based navigation
+          //  Role-based navigation
           switch (data.user.role) {
               case "Admin":
                   navigate("/admindashboard");
@@ -94,15 +96,13 @@ const SignIn = () => {
                   navigate("/employeedash");
                   break;
               default:
-                  navigate("/"); // Default fallback
+                  navigate("/");
           }
       } catch (err) {
           console.error("Login Error:", err.message);
           setError(err.message);
       }
   };
-  
-
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">

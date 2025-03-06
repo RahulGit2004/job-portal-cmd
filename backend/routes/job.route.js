@@ -5,7 +5,7 @@ import { getAdminJobs, getAllJobs, getJobById, postJob } from "../controllers/jo
 const router = express.Router();
 
 // ✅ Only authenticated users can post jobs
-router.route("/post").post(authenticateUser, postJob);
+router.route("/post").post(authenticateUser, authorizeRoles("Employer"), postJob);
 
 // ✅ All users can get jobs, but authentication is required
 router.route("/get").get(authenticateUser, getAllJobs);

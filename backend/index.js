@@ -31,6 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 8080;
 
+
+app.use((req, res, next) => {
+    console.log("🔹 Incoming Cookies:", req.cookies);
+    next();
+});
+
+
 // API Routes
 app.use("/api/users", userRoute);  /// changed here
 app.use("/api/v1/subscription", subscriptionRoute);

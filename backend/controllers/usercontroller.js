@@ -70,10 +70,10 @@ export const loginUser = async (req, res) => {
 
         // Enable this only if using cookies
         res.cookie("token", token, {
-            httpOnly: false, // Prevents client-side JS access (better security)
+            httpOnly: false, 
             secure: process.env.NODE_ENV === "production", // Enable in production
-            sameSite: "None", // Required for cross-origin cookies
-            maxAge: 24 * 60 * 60 * 1000, // 1 day
+            sameSite: "None", 
+            maxAge: 24 * 60 * 60 * 1000,
         });
 
         res.status(200).json({ 
@@ -101,15 +101,23 @@ export const logoutUser = (req, res) => {
 // Get User Profile
 export const getUserProfile = async (req, res) => {
     try {
+        if (!req.user || !req.user.id) {
+            return res.status(400).json({ message: "Invalid request, user ID missing" });
+        }
+
         const user = await User.findById(req.user.id).select("-password");
+
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
+
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ message: "Server error", error });
+        console.error("Error fetching user profile:", error.message);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
 
 // Update User Profile
 export const updateUserProfile = async (req, res) => {

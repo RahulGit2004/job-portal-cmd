@@ -7,22 +7,16 @@ export const postJob = async (req, res) => {
             title, tags, jobRole, minSalary, maxSalary,
             vacancies, endDate, location
         } = req.body;
-        const userId = req.id;  // Extract user ID
+        const userId = req.user?._id;  // Ensure this is received from middleware
 
-        // Validate if userId is present
+        console.log("User ID:", userId); // Debugging
+
         if (!userId) {
-            return res.status(401).json({
-                message: "Unauthorized: User ID is missing.",
-                success: false
-            });
+            return res.status(401).json({ message: "Unauthorized: User ID is missing.", success: false });
         }
 
-        // Validate required fields
         if (!title || !jobRole || !minSalary || !maxSalary || !vacancies || !endDate || !location?.country || !location?.city) {
-            return res.status(400).json({
-                message: "Missing required fields.",
-                success: false
-            });
+            return res.status(400).json({ message: "Missing required fields.", success: false });
         }
 
         const job = await Job.create({
@@ -34,20 +28,17 @@ export const postJob = async (req, res) => {
             vacancies: Number(vacancies),
             endDate,
             location,
-            created_by: userId  // Ensure user ID is passed correctly
+            created_by: userId // Ensure user ID is correctly stored
         });
 
-        return res.status(201).json({
-            message: "New job created successfully.",
-            job,
-            success: true
-        });
+        return res.status(201).json({ message: "New job created successfully.", job, success: true });
 
     } catch (error) {
         console.error("Error creating job:", error);
         res.status(500).json({ message: "Server error.", success: false });
     }
 };
+
 
 
 
