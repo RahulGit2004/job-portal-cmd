@@ -195,6 +195,54 @@ const JobApplicationForm = () => {
           </div>
         </div>
 
+        <div className="row g-4 mb-4">
+          <div className="col-md-6">
+            <label className="form-label">Education Level</label>
+            <select
+              className="form-select"
+              name="education"
+              value={formData.education}
+              onChange={handleChange}
+            >
+              <option>Select Education</option>
+              <option>High School</option>
+              <option>Bachelor's Degree</option>
+              <option>Master's Degree</option>
+              <option>PhD</option>
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label className="form-label">Applying for</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter job title"
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        {/* Employment Status */}
+        <div className="mb-4">
+          <label className="form-label">Employment Status</label>
+          <div className="d-flex flex-wrap gap-3">
+            {["Employed", "Self-Employed", "Unemployed", "Student"].map((status, index) => (
+              <div key={index} className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value={status}
+                  checked={formData.employmentStatus === status}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label">{status}</label>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Resume Upload */}
         <div className="mb-4">
           <label className="form-label">Upload Resume</label>

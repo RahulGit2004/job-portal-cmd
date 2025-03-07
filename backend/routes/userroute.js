@@ -4,7 +4,7 @@ import {
     loginUser, 
     logoutUser, 
     getUserProfileById, 
-    updateUserProfile 
+    updateUserProfileById 
 } from "../controllers/usercontroller.js";
 
 import { authenticateUser } from "../middlewares/isauthenticated.js";
@@ -19,8 +19,7 @@ router.post("/logout", logoutUser);
 // ✅ Profile Routes (Requires Authentication)
 router.get("/profile/:id", authenticateUser, getUserProfileById);
 
-router.put("/update-profile", authenticateUser, updateUserProfile);
-
+router.put("/update-profile/:id", authenticateUser, updateUserProfileById);
 // ✅ Debug Route (Check Cookies)
 router.get("/get-cookie", (req, res) => {
     console.log("Cookies Sent to Client:", req.cookies);

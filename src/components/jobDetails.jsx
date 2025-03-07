@@ -158,7 +158,7 @@ const JobDetails = () => {
 
     {/* Apply Now Button */}
     <Link
-      to="/jobapplication"
+      to={`/jobapplication/${job._id}`}
       className="btn w-100 rounded-3 text-white"
       style={{ background: "#1E3A8A" }}
     >

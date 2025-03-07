@@ -29,7 +29,7 @@ const App = () => {
        <Route path="/jobs" element={<JobsPage />} />
       <Route path="/signin" element={<SigninForm />} />
       <Route path="/signup" element={<SignupForm />} />
-      <Route path="/jobapplication" element = {<JobApplicationForm/>} />
+      <Route path="/jobapplication/:jobId" element = {<JobApplicationForm/>} />
       <Route path="/job/:id" element={<JobDetails />} />
       <Route path="/viewapplication/:jobId" element={<ViewApplication />} />
       <Route path="/createjobform" element = {<CreateJobForm/>} />

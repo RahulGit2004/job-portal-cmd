@@ -108,30 +108,31 @@ export const getUserProfileById = async (req, res) => {
 
 
 // Update User Profile
-export const updateUserProfile = async (req, res) => {
+export const updateUserProfileById = async (req, res) => {
     try {
-        const { fullName, email, password, mobileNumber, location, role } = req.body;
+        const { id } = req.params;
+        const updates = req.body; // Only provided fields will be updated
 
-        const user = await User.findById(req.user.id);
+        // Ensure that required fields are not removed or set to undefined
+        if (updates.role && !["Student", "Employer", "College", "Admin"].includes(updates.role)) {
+            return res.status(400).json({ message: "Invalid role provided" });
+        }
+
+        if (updates.password) {
+            const salt = await genSalt(10);
+            updates.password = await hash(updates.password, salt);
+        }
+
+        const user = await User.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
+
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        if (fullName) user.fullName = fullName;
-        if (email) user.email = email;
-        if (mobileNumber) user.mobileNumber = mobileNumber;
-        if (location) user.location = location;
-        if (role) user.role = role;
-
-        if (password) {
-            const salt = await genSalt(10);
-            user.password = await hash(password, salt);
-        }
-
-        await user.save();
         res.status(200).json({ message: "Profile updated successfully", user });
     } catch (error) {
-        res.status(500).json({ message: "Server error", error });
+        console.error("Error updating user profile:", error.message);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 };
 
