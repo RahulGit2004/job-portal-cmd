@@ -5,7 +5,7 @@ import SignupForm from "./components/registration";
 import SigninForm from "./components/signIn"; 
 import JobsPage from "./components/jobBoard"; 
 import JobApplicationForm from "./components/jobApplication";
-import JobDescriptionPage from './components/jobDetails';
+import JobDetails from './components/jobDetails';
 import CDashBoard from "./components/candidate/cDashBoard"
 import EmployeesDash from "./components/employer/Employeedash"
 import ViewApplication from "./components/employer/viewApplication"
@@ -30,7 +30,7 @@ const App = () => {
       <Route path="/signin" element={<SigninForm />} />
       <Route path="/signup" element={<SignupForm />} />
       <Route path="/jobapplication" element = {<JobApplicationForm/>} />
-      <Route path="/jobdescription" element = {<JobDescriptionPage/>} />
+      <Route path="/job/:id" element={<JobDetails />} />
       <Route path="/viewapplication/:jobId" element={<ViewApplication />} />
       <Route path="/createjobform" element = {<CreateJobForm/>} />
       <Route path="/profiledashboard" element = {<ProfileDashboard />} />

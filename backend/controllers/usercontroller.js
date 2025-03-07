@@ -85,13 +85,15 @@ export const logoutUser = (req, res) => {
 };
 
 // Get User Profile
-export const getUserProfile = async (req, res) => {
+export const getUserProfileById = async (req, res) => {
     try {
-        if (!req.user || !req.user.id) {
-            return res.status(400).json({ message: "Invalid request, user ID missing" });
+        const userId = req.params.id; // Get user ID from request params
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
         }
 
-        const user = await User.findById(req.user.id).select("-password");
+        const user = await User.findById(userId).select("-password"); // Exclude password field
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });

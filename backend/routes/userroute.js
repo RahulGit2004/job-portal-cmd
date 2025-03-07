@@ -3,7 +3,7 @@ import {
     registerUser, 
     loginUser, 
     logoutUser, 
-    getUserProfile, 
+    getUserProfileById, 
     updateUserProfile 
 } from "../controllers/usercontroller.js";
 
@@ -17,7 +17,8 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 
 // ✅ Profile Routes (Requires Authentication)
-router.get("/profile", authenticateUser, getUserProfile);
+router.get("/profile/:id", authenticateUser, getUserProfileById);
+
 router.put("/update-profile", authenticateUser, updateUserProfile);
 
 // ✅ Debug Route (Check Cookies)

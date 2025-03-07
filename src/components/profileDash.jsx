@@ -5,6 +5,11 @@ import humanIcon from "../assets/profile.png";
 import profiledash from "../assets/profileDash.png";
 
 const ProfileDashboard = () => {
+
+    const localName = localStorage.getItem("fullName");
+    const localEmail = localStorage.getItem("email");
+
+
   const [activeSection, setActiveSection] = useState(null);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [profile, setProfile] = useState({
@@ -31,8 +36,8 @@ const ProfileDashboard = () => {
             <div className="w-20 h-20 bg-gray-300 rounded-full mb-4 overflow-hidden">
               <img src= {humanIcon} alt="Profile" className="w-full h-full object-cover" />
             </div>
-            <h2 className="text-lg font-semibold">{profile.name}</h2>
-            <p className="text-gray-500">{profile.email}</p>
+            <h2 className="text-lg font-semibold">{localName}</h2>
+            <p className="text-gray-500">{localEmail}</p>
           </div>
           <div className="mt-6 space-y-3 w-full">
             <button onClick={() => setActiveSection("profile")} className="flex items-center w-full p-3 hover:bg-gray-100 rounded">

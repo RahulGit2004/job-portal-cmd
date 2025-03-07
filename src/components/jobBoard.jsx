@@ -156,7 +156,7 @@ const JobBoard = () => {
                   <div className="w-12 h-12 bg-gray-200 rounded-full">
                     <img src={JobIcon} className="w-full h-full rounded-full" alt="Job Icon" />
                   </div>
-                  <Link to="/jobdescription"> 
+                  <Link to={`/job/${job._id}`}> 
                     <div className="flex-1">
                       <h2 className="font-bold text-lg">{job.title}</h2>
                       <p className="text-gray-600">{job.jobRole}</p>
