@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -9,6 +9,7 @@ import { FaSackDollar } from "react-icons/fa6";
 import { FaCircleUser } from "react-icons/fa6";
 import { BiSolidGroup } from "react-icons/bi";
 import { GiSandsOfTime } from "react-icons/gi";
+import axios from "axios";  // Import axios
 
 const PaidFeatures = () => {
     const [plans, setPlans] = useState([
@@ -32,6 +33,11 @@ const PaidFeatures = () => {
             console.error("Error fetching plans:", error);
         }
     };
+
+     // Call fetchPlans when the component loads
+     useEffect(() => {
+        fetchPlans();
+    }, []);
 
 
     const [showModal, setShowModal] = useState(false);
@@ -230,9 +236,9 @@ const PaidFeatures = () => {
                 ))}
             </div>
             <div className="text-center mt-3 pb-3">
-                <button className="btn px-4 text-white"style={{ backgroundColor: "#1E3A8A" }} onClick={handleCreateNewPlan}>
+                <Link to="/create-subscription" className="btn px-4 text-white"style={{ backgroundColor: "#1E3A8A" }} onClick={handleCreateNewPlan}>
                     Create New Plan
-                </button>
+                </Link>
             </div>
 
             {/* Modal for Editing & Creating Plans */}

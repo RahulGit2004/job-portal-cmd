@@ -43,6 +43,17 @@ const JobDescriptionPage = () => {
           Applied Jobs
         </button>
 
+
+        <Link to="/jobs"
+          className={`text-gray-700 hover:text-blue-900 block w-full md:w-auto text-left md:text-center ${
+            showAppliedJobs ? "font-bold" : ""
+          }`}
+          onClick={() => setShowAppliedJobs(true)}
+        >
+          Jobs
+        </Link>
+
+
         {/* Profile (Only moves inside menu on small screens) */}
         <div className="flex items-center space-x-2 mt-4 md:hidden">
           <img

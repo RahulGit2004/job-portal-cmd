@@ -18,6 +18,6 @@ router.get("/get-all", getAllSubscriptions);
 router.get("/:id", getSubscriptionById);
 
 // Update a subscription
-router.put("/:id", updateSubscription);
+router.put("/update:id", updateSubscription);
 
 export default router;

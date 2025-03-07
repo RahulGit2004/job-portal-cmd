@@ -1,14 +1,7 @@
 import { useState } from "react";
+import Einfralogo from "../assets/Einfratech.png"
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-
-import linkedIn from "../assets/linkedIn.jpg";
-import googleLogo from "../assets/google2.jpg";
-import einfratechLogo from "../assets/Einfratech.png";
-
-import facebook from "../assets/facebook.jpg";
-import hidden from "../assets/hidden.jpg";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,50 +11,20 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="h-12 bg-white shadow-md md:shadow-none p-4 flex justify-between items-center relative">
+    <nav className="bg-white shadow-md p-2 flex justify-between items-center w-full relative">
       <a href="#">
-        <img src={einfratechLogo} alt="Company Logo" className="h-10" />
+        <img src={Einfralogo} alt="Company Logo" className="h-10" />
       </a>
-      <button className="md:hidden text-2xl" onClick={toggleMenu}>
+      <button className="md:hidden text-3xl" onClick={toggleMenu}>
         {menuOpen ? "✖" : "☰"}
       </button>
       <div
-        className={`${
-          menuOpen ? "flex" : "hidden"
-        } md:flex flex-col md:flex-row items-center md:space-x-4 absolute md:static top-16 left-0 w-full bg-white md:w-auto  md:p-0 shadow-md md:shadow-none text-center z-50`}
+        className={`${menuOpen ? "flex" : "hidden"} md:flex flex-col md:flex-row items-center md:space-x-6 absolute md:static top-16 left-0 w-full bg-white md:w-auto p-4 md:p-0 shadow-md md:shadow-none text-center z-50 text-lg md:text-base`}
       >
-        <Link
-          to={"/"}
-          href="#"
-          className="block text-gray-700 hover:text-blue-900 transition-all"
-          onClick={toggleMenu}
-        >
-          <b>Home</b>
-        </Link>
-        <Link
-          to={"/jobs"}
-          href="#"
-          className="block  text-gray-700 hover:text-blue-900 transition-all"
-          onClick={toggleMenu}
-        >
-          <b>Jobs</b>
-        </Link>
-        <Link
-          to={"/signin"}
-          href="#"
-          className="block text-gray-700 hover:text-blue-900 transition-all"
-          onClick={toggleMenu}
-        >
-          <b>Employers</b>
-        </Link>
-        <Link
-          to={"/signup"}
-          href="#"
-          className="block border border-blue-900 px-4 rounded text-blue-900 hover:bg-blue-900 hover:text-white transition-all"
-          onClick={toggleMenu}
-        >
-          Sign Up
-        </Link>
+        <Link to="/" className="block py-2 text-gray-700 hover:text-blue-900 transition-all text-xl md:text-lg" onClick={toggleMenu}><b>Home</b></Link>
+        <Link to="/jobs" className="block py-2 text-gray-700 hover:text-blue-900 transition-all text-xl md:text-lg" onClick={toggleMenu}><b>Jobs</b></Link>
+        <Link to="/signin" className="block py-2 text-gray-700 hover:text-blue-900 transition-all text-xl md:text-lg" onClick={toggleMenu}><b>Employers</b></Link>
+        <Link to="/signup" className="block py-2 border border-blue-900 px-6 rounded text-blue-900 hover:bg-blue-900 hover:text-white transition-all text-lg md:text-base" onClick={toggleMenu}>Sign Up</Link>
       </div>
     </nav>
   );
@@ -180,6 +143,10 @@ const SignIn = () => {
             >
               Login
             </button>
+
+            <p className="text-lg md:text-sm text-center mt-4">
+              Do not have an account? <Link to="/signup" className="text-blue-600 font-medium hover:underline">Register</Link>
+            </p>
           </form>
         </div>
       </div>

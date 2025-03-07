@@ -66,12 +66,18 @@ const CreateSubscription = () => {
   
 
 
-
+  
   
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4 overflow-auto">
-      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-3xl">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4 overflow-auto shadow-lg rounded-lg">
+      <div className="container mt-5 p-5"
+    style={{
+      maxWidth: "800px",
+      backgroundColor: "#f8f9fa",
+      padding: "30px",
+      borderRadius: "12px",
+      boxShadow: "0 0 15px rgba(0, 0, 0, 0.15)", }}>
         <h2 className="text-3xl font-bold text-center text-blue-800">
           Create Subscription
         </h2>
@@ -161,7 +167,7 @@ const CreateSubscription = () => {
                 <button
                   type="button"
                   onClick={addFeature}
-                  className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                  className="p-3 bg-[#1E3A8A] text-white rounded-lg hover:bg-blue-700 transition"
                 >
                   +
                 </button>
@@ -195,13 +201,13 @@ const CreateSubscription = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center mt-4">
-            <button
-              type="submit"
-              className="w-3/4 md:w-1/2 p-2 bg-blue-800 text-white rounded-lg font-bold text-sm hover:bg-blue-900 transition shadow-md"
-            >
-              Save Subscription
-            </button>
+          <div className="text-center">
+          <button
+  type="submit"
+  className="bg-blue-900 hover:bg-blue-700 text-white font-medium text-lg px-10 py-3 rounded-md transition-all duration-300"
+>
+  Save Subscription
+</button>
           </div>
         </form>
       </div>

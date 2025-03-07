@@ -1,33 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Card, Spinner, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import jobBoardImage from "../assets/laptop.jpg";
+import Jobimg from "../assets/jobboard.png";
+import JobIcon from "../assets/job-icon.jpg";
+import { Link } from "react-router-dom";
 
 const JobBoard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [jobListings, setJobListings] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); // ✅ Added state for search input
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
+    applyFilters();
     const fetchJobs = async () => {
       setLoading(true);
       setError(null);
-
       try {
         const response = await fetch("http://localhost:8000/api/v1/job/jobs");
         const data = await response.json();
-
-        console.log("API Response:", data);
-
         if (Array.isArray(data)) {
           setJobListings(data);
           setFilteredJobs(data);
@@ -38,138 +30,134 @@ const JobBoard = () => {
           throw new Error("Unexpected response format");
         }
       } catch (error) {
-        console.error("Error fetching jobs:", error);
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchJobs();
-  }, []);
+  },  [selectedLocation, selectedRole, searchQuery]);
 
-  // Function to filter jobs based on search and selected criteria
-  const applyFilters = () => {
-    let filtered = jobListings;
+ // Function to filter jobs based on search and selected criteria
+ const applyFilters = () => {
+  let filtered = jobListings.filter(job => {
+    const jobCity = job?.location?.city ? job.location.city.toLowerCase().trim() : "";
+    const selectedCity = selectedLocation.toLowerCase().trim();
+    const jobRole = job?.jobRole ? job.jobRole.toLowerCase().trim() : "";
+    const selectedJobRole = selectedRole.toLowerCase().trim();
+    const query = searchQuery.toLowerCase().trim();
 
-    if (selectedLocation) {
-      filtered = filtered.filter(job => job.location.city.toLowerCase() === selectedLocation.toLowerCase());
-    }
+    // Match location if selected
+    const locationMatch = selectedLocation ? jobCity === selectedCity : true;
 
-    if (selectedRole) {
-      filtered = filtered.filter(job => job.jobRole.toLowerCase() === selectedRole.toLowerCase());
-    }
+    // Match job role if selected
+    const roleMatch = selectedRole ? jobRole === selectedJobRole : true;
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        job =>
-          job.title.toLowerCase().includes(query) ||
-          job.jobRole.toLowerCase().includes(query) ||
-          (job.tags && job.tags.some(tag => tag.toLowerCase().includes(query)))
-      );
-    }
+    // Match search query if entered
+    const searchMatch = query
+      ? job.title.toLowerCase().includes(query) ||
+        job.jobRole.toLowerCase().includes(query) ||
+        (job.tags && job.tags.some(tag => tag.toLowerCase().includes(query)))
+      : true;
 
-    setFilteredJobs(filtered);
-  };
+    return locationMatch && roleMatch && searchMatch;
+  });
 
+  setFilteredJobs(filtered);
+};
+
+
+    
   return (
-    <Container fluid className="p-4">
-      <Button className="d-md-none mb-3" onClick={toggleSidebar}>
-        {sidebarOpen ? "✖" : "☰"}
-      </Button>
-
-      <Row>
-        <Col md={3} className={`sidebar p-4 text-center ${sidebarOpen ? "d-block" : "d-none d-md-block"}`}>
-          <h2 className="mb-3">JOB BOARD</h2>
-          <img src={jobBoardImage} alt="Job Board" className="img-fluid mb-3" />
-          <ul className="list-unstyled">
-            <li className="sidebar-item">&gt; Dashboard</li>
-            <li className="sidebar-item">&gt; Job board</li>
-            <li className="sidebar-item">&gt; Home</li>
+    <div className="flex flex-col md:flex-row h-screen">
+      {/* Sidebar */}
+      <div className="w-full md:w-1/4 bg-gray-100 p-4 flex flex-col items-center md:h-full">
+        <h2 className="text-2xl font-bold">JOB BOARD</h2>
+        <div className="w-24 h-24 bg-gray-300 rounded-full my-4">
+          <img src={Jobimg} alt="Job Board Logo" className="w-full h-full rounded-full" />
+        </div>
+        <nav className="w-full text-center">
+          <ul className="space-y-2">
+           <Link to="/candidatedash" ><li className="hover:underline cursor-pointer">Dashboard</li> </Link>
+           <Link to="/landingPage" > <li className="hover:underline cursor-pointer">Home</li></Link>
+            <li className="hover:underline cursor-pointer font-bold">Job Board</li>
           </ul>
-        </Col>
+        </nav>
+      </div>
 
-        <Col md={9} className="p-4">
-          <Row className="mb-3">
-            <Col md={8}>
-              <Form.Control
-                type="text"
-                placeholder="Search by Title / Company / Keywords"
-                className="search-input"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </Col>
-            <Col md={2}>
-              <Button variant="primary" className="w-100 search-button" onClick={applyFilters}>
-                Search
-              </Button>
-            </Col>
-          </Row>
+      {/* Main Content */}
+      <div className="w-full md:w-3/4 p-4">
+        {/* Search and Filters */}
+        <div className="flex flex-col md:flex-row gap-4 mb-4 items-center">
+          <input
+            type="text"
+            placeholder="Search by Title / Company"
+            className="border p-2 rounded flex-1 w-full"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="bg-blue-900 text-white px-4 py-2 rounded w-full md:w-auto" onClick={applyFilters}>
+            Search
+          </button>
+        </div>
 
-          <Row>
-            <Col md={5}>
-              <h5 className="size">Location</h5>
-              <Form.Select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
-                <option value="">Select Location</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Bangalore">Bangalore</option>
-                <option value="Gurgaon">Gurgaon</option>
-                <option value="Noida">Noida</option>
-              </Form.Select>
-            </Col>
+        {/* Filters (Location & Role) */}
+        <div className="flex flex-wrap gap-4 justify-between mb-4">
+        <select
+    className="border p-2 rounded w-full md:w-1/3"
+    value={selectedLocation}
+    onChange={(e) => setSelectedLocation(e.target.value)}
+  >
+    <option value="">Select Location</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Bangalore">Bangalore</option>
+    <option value="Hyderabad">Hyderabad</option>
+  </select>
 
-            <Col md={5}>
-              <h5 className="size">Filter</h5>
-              <Form.Select value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
-                <option value="">Select Filter</option>
-                <option value="Cyber Security">Cyber Security</option>
-                <option value="Software Engineer">Software Engineer</option>
-                <option value="Web Developer">Web Developer</option>
-                <option value="Backend Developer">Backend Developer</option>
-              </Form.Select>
-            </Col>
+          <select
+    className="border p-2 rounded w-full md:w-1/3"
+    value={selectedRole}
+    onChange={(e) => setSelectedRole(e.target.value)}
+  >
+    <option value="">Select Role</option>
+    <option value="Software Developer">Software Developer</option>
+    <option value="Cyber Security">Cyber Security</option>
+    <option value="Backend Developer">Backend Developer</option>
+    <option value="Frontend Engineer">Frontend Engineer</option>
+  </select>
+        </div>
 
-            <Col md={2} className="d-flex align-items-end">
-              <Button variant="primary" className="w-100" onClick={applyFilters}>
-                Apply
-              </Button>
-            </Col>
-          </Row>
-
-          <div className="mt-4">
-            {loading ? (
-              <div className="text-center">
-                <Spinner animation="border" />
-                <p>Loading jobs...</p>
-              </div>
-            ) : error ? (
-              <Alert variant="danger">{error}</Alert>
-            ) : filteredJobs.length > 0 ? (
-              filteredJobs.map((job, index) => (
-                <Card key={index} className="mb-3 p-3" style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.2)" }}>
-                  <Row>
-                    <Col xs={2} className="text-center fs-2">📌</Col>
-                    <Col xs={7}>
-                      <h5>{job.title}</h5>
-                      <p className="text-muted">{job.jobRole}</p>
-                    </Col>
-                    <Col xs={3} className="text-end">
-                      <strong>₹{job.minSalary} - ₹{job.maxSalary}</strong>
-                      <p className="text-muted">{job.location.city}, {job.location.country}</p>
-                    </Col>
-                  </Row>
-                </Card>
-              ))
-            ) : (
-              <p className="text-muted text-center mt-5"> No jobs found!!!</p>
-            )}
-          </div>
-        </Col>
-      </Row>
-    </Container>
+        {/* Job Listings */}
+        <div>
+          {loading ? (
+            <p className="text-center">Loading jobs...</p>
+          ) : error ? (
+            <p className="text-red-500 text-center">{error}</p>
+          ) : filteredJobs.length > 0 ? (
+            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {filteredJobs.map((job, index) => (
+                <div key={index} className="p-4 border rounded-lg shadow-md flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gray-200 rounded-full">
+                    <img src={JobIcon} className="w-full h-full rounded-full" alt="Job Icon" />
+                  </div>
+                  <Link to ="/jobdescription"> 
+                  <div className="flex-1">
+                    <h2 className="font-bold text-lg">{job.title}</h2>
+                    <p className="text-gray-600">{job.jobRole}</p>
+                    <p className="text-gray-500">{job.location.city}</p>
+                    <p className="font-semibold">₹{job.minSalary} - ₹{job.maxSalary}</p>
+                  </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center">No jobs found</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,11 +1,14 @@
 import express from "express";
+
 import { 
     createJob, 
     getAllJobs, 
     getJobApplicants, 
     applyForJob, 
     deleteJob, 
-    updateJob 
+    updateJob ,
+    getJobsByUser,
+    getJobById
 } from "../controllers/jobcontroller.js";
 
 import { authenticateUser, authorizeRoles } from "../middlewares/isauthenticated.js";
@@ -53,5 +56,9 @@ router.delete("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), dele
  * @access  Private (Employers only)
  */
 router.put("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), updateJob);
+
+router.get("/jobs/id", getJobsByUser);
+
+router.get('/:id', getJobById);
 
 export default router;

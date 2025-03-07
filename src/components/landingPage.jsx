@@ -42,108 +42,156 @@ const LandingPage = () => {
     <div className="font-sans">
       {/* Navbar */}
       <nav className="shadow-sm fixed top-0 left-0 w-full bg-white z-50">
-        <div className="container-fluid flex justify-between items-center p-4 max-w-[1125px] mx-auto">
-          {/* Logo */}
-          <a href="#">
-            <img src={einfratechLogo} alt="Einfratech Logo" className="h-10" />
-          </a>
+  <div className="container-fluid flex justify-between items-center p-4 max-w-[1125px] mx-auto">
+    {/* Logo */}
+    <a href="#">
+      <img src={einfratechLogo} alt="Einfratech Logo" className="h-10" />
+    </a>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-700 focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            ☰
-          </button>
+    {/* Mobile Menu Button */}
+    <button
+      className="md:hidden text-gray-700 focus:outline-none"
+      onClick={() => setIsMenuOpen(!isMenuOpen)}
+    >
+      ☰
+    </button>
 
-          {/* Navbar Links & Buttons */}
-          <div className={`absolute md:static top-16 left-0 w-full md:w-auto md:flex items-center bg-white shadow-md md:shadow-none transition-all duration-300 ease-in-out ${isMenuOpen ? "block" : "hidden"}`}>
-            <ul className="md:flex md:space-x-6 text-center md:text-left">
-              <li><Link className="block py-2 px-4 hover:text-blue-700" to="/">Home</Link></li>
-              <li><Link className="block py-2 px-4 hover:text-blue-700" to="/jobs">Jobs</Link></li>
-              <li><Link className="block py-2 px-4 hover:text-blue-700" to="/signin">Employers</Link></li>
-            </ul>
+    {/* Navbar Links & Buttons */}
+    <div
+      className={`absolute md:static top-16 left-0 w-full md:w-auto md:flex items-center bg-white shadow-md md:shadow-none transition-all duration-300 ease-in-out ${isMenuOpen ? "block" : "hidden"}`}
+    >
+      <ul className="md:flex md:space-x-6 text-center md:text-left">
+        <li>
+          <Link className="block py-2 px-4 hover:text-blue-700" to="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link className="block py-2 px-4 hover:text-blue-700" to="/jobs">
+            Jobs
+          </Link>
+        </li>
+        <li>
+          <Link className="block py-2 px-4 hover:text-blue-700" to="/signin">
+            Employers
+          </Link>
+        </li>
+      </ul>
 
-            {/* Buttons - Stack on mobile, inline on desktop */}
-            <div className="md:flex md:space-x-3 text-center mt-2 md:mt-0">
-              <Link to="/signup" className="block md:inline-block border border-blue-900 text-blue-900 px-4 py-2 rounded-md hover:bg-blue-100">Sign Up</Link>
-              <Link to="/signin" className="block md:inline-block bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-700">Sign In</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Buttons - Stack on mobile, inline on desktop */}
+      <div className="md:flex md:space-x-3 text-center mt-2 md:mt-0">
+        <Link
+          to="/signup"
+          className="block md:inline-block border border-blue-900 text-blue-900 px-4 py-2 rounded-md hover:bg-blue-100"
+        >
+          Sign Up
+        </Link>
+        <Link
+          to="/signin"
+          className="block md:inline-block bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        >
+          Sign In
+        </Link>
+      </div>
+    </div>
+  </div>
+</nav>
 
       {/* Hero Section */}
       <section
-        className="container my-5 d-flex flex-column flex-md-row align-items-center justify-content-between text-center text-md-start"
-        style={{ maxWidth: "1125px", margin: "0 auto", paddingTop: "100px" }} // Added paddingTop to account for fixed navbar
-      >
-        <div className="m-3 w-100">
-          <h1 className="display-6 fw-bold">Your Skills Deserve the Right Job. <br /> Find It Here</h1>
-          <p className="text-muted">Thousands of jobs across leading industries are waiting for you. Start applying today!</p>
-          <div className="input-group shadow-sm m-3 mx-auto mx-md-0" style={{ maxWidth: "600px" }}>
-            <input type="text" className="form-control" placeholder="Companies / Skills / Experience" />
-            <button className="btn text-white" style={{ backgroundColor: "#1E3A8A" }}>Search</button>
+  className="container my-5 d-flex flex-column flex-md-row align-items-center justify-content-between text-center text-md-start"
+  style={{ maxWidth: "1125px", margin: "0 auto", paddingTop: "100px" }}
+>
+  {/* Text and Search Input */}
+  <div className="m-3 w-100">
+    <h1 className="display-6 fw-bold">
+      Your Skills Deserve the Right Job. <br /> Find It Here
+    </h1>
+    <p className="text-muted">
+      Thousands of jobs across leading industries are waiting for you. Start applying today!
+    </p>
+    <div
+      className="input-group shadow-sm m-3 mx-auto mx-md-0"
+      style={{ maxWidth: "600px" }}
+    >
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Companies / Skills / Experience"
+      />
+      <button className="btn text-white" style={{ backgroundColor: "#1E3A8A" }}>
+        Search
+      </button>
+    </div>
+  </div>
+
+  {/* Hero Section Image */}
+  <div className="p-3" style={{ maxWidth: "250px", marginLeft: "0" }}>
+    <img
+      src={jobSearchImage}
+      alt="Job Search"
+      className="img-fluid"
+    />
+  </div>
+</section>
+
+<section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
+  <h2 className="fw-bold display-4" style={{ fontSize: "2.5rem" }}>
+    Trending Jobs
+  </h2>
+  <div className="row mt-4">
+    {jobs.length > 0 ? (
+      jobs.slice(0, 6).map((job) => (
+        <div key={job._id.$oid} className="col-12 col-md-6 col-lg-4 mb-3">
+          <div
+            className="card p-4 shadow-sm transition"
+            style={{
+              backgroundColor: "#ffffff",
+              borderRadius: "12px",
+              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0px 4px 12px rgba(0, 0, 0, 0.1)";
+            }}
+          >
+            <h4 className="mt-3 fw-semibold">{job.title}</h4>
+            <p className="text-muted">{job.jobRole}</p>
+            <p className="text-muted">
+              Salary: ₹{job.minSalary.toLocaleString()} - ₹{job.maxSalary.toLocaleString()}
+            </p>
+            <p className="text-muted">
+              Location: {job.location.city}, {job.location.country}
+            </p>
+            <div className="d-flex justify-content-between mt-3">
+              <Link
+                to={`/jobdescription`}
+                className="btn border-primary text-primary"
+                style={{ borderRadius: "8px" }}
+              >
+                View details
+              </Link>
+              <Link
+                to={`/jobapplication`}
+                className="btn text-white"
+                style={{ backgroundColor: "#1E3A8A", borderRadius: "8px" }}
+              >
+                Apply now
+              </Link>
+            </div>
           </div>
         </div>
-        {/* Hero Section Image */}
-        <div className="p-3">
-          <img
-            src={jobSearchImage}
-            alt="Job Search"
-            className="img-fluid"
-            style={{ maxWidth: "250px", marginLeft: "-50px" }} // Adjusted margin to bring image closer
-          />
-        </div>
-      </section>
-
-      <section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
-        <h2 className="fw-bold display-4" style={{ fontSize: "2.5rem" }}>Trending Jobs</h2>
-        <div className="row mt-4">
-          {jobs.length > 0 ? (
-            jobs.slice(0, 6).map((job) => (
-              <div key={job._id.$oid} className="col-12 col-md-4 mb-3">
-                <div
-                  className="card p-4 shadow-sm transition"
-                  style={{
-                    backgroundColor: "#ffffff",
-                    borderRadius: "12px",
-                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.05)";
-                    e.currentTarget.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.15)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                    e.currentTarget.style.boxShadow = "0px 4px 12px rgba(0, 0, 0, 0.1)";
-                  }}
-                >
-                  <h4 className="mt-3 fw-semibold">{job.title}</h4>
-                  <p className="text-muted">{job.jobRole}</p>
-                  <p className="text-muted">
-                    Salary: ₹{job.minSalary.toLocaleString()} - ₹{job.maxSalary.toLocaleString()}
-                  </p>
-                  <p className="text-muted">
-                    Location: {job.location.city}, {job.location.country}
-                  </p>
-                  <div className="d-flex justify-content-between mt-3">
-                    <Link to={`/jobdescription`} className="btn border-primary text-primary" style={{ borderRadius: "8px" }}>
-                      View details
-                    </Link>
-                    <Link to={`/jobapplication`} className="btn text-white" style={{ backgroundColor: "#1E3A8A", borderRadius: "8px" }}>
-                      Apply now
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="text-muted">No jobs available at the moment.</p>
-          )}
-        </div>
-      </section>
+      ))
+    ) : (
+      <p className="text-muted">No jobs available at the moment.</p>
+    )}
+  </div>
+</section>
 
 
 
@@ -151,20 +199,26 @@ const LandingPage = () => {
 
       {/* Top Companies */}
       <section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
-        <h2 className="fw-bold">Top Companies</h2>
-        <p className="text-muted">Top companies hiring now</p>
-        <div className="d-flex flex-wrap justify-content-center gap-3 mt-3">
-          {[
-            { name: "Google", src: googleLogo },
-            { name: "Microsoft", src: microsoftLogo },
-            { name: "Flipkart", src: flipkartLogo },
-            { name: "YouTube", src: youtubeLogo },
-            { name: "IBM", src: ibmLogo },
-          ].map((company) => (
-            <img key={company.name} src={company.src} alt={company.name} className="img-fluid" style={{ height: "50px" }} />
-          ))}
-        </div>
-      </section>
+  <h2 className="fw-bold">Top Companies</h2>
+  <p className="text-muted">Top companies hiring now</p>
+  <div className="d-flex flex-wrap justify-content-center gap-3 mt-3">
+    {[
+      { name: "Google", src: googleLogo },
+      { name: "Microsoft", src: microsoftLogo },
+      { name: "Flipkart", src: flipkartLogo },
+      { name: "YouTube", src: youtubeLogo },
+      { name: "IBM", src: ibmLogo },
+    ].map((company) => (
+      <img
+        key={company.name}
+        src={company.src}
+        alt={company.name}
+        className="img-fluid"
+        style={{ height: "50px" }}
+      />
+    ))}
+  </div>
+</section>
 
       {/* How It Works */}
       <section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
@@ -271,7 +325,27 @@ const LandingPage = () => {
 
             .navbar-toggler:focus {
               box-shadow: none;
+
+
             }
+              .hero-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-section img {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
+  .job-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .company-logos {
+    justify-content: center;
           }
         `}
       </style>

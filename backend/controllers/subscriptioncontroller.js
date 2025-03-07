@@ -49,7 +49,7 @@ export const getSubscriptionById = async (req, res) => {
 // Update subscription plan
 export const updateSubscription = async (req, res) => {
     try {
-        const { id } = req.params;
+        // const { id } = req.params;
 
         // Check if the request body is empty
         if (Object.keys(req.body).length === 0) {
@@ -57,7 +57,7 @@ export const updateSubscription = async (req, res) => {
         }
 
         // Validate the existence of the subscription
-        const existingSubscription = await Subscription.findById(id);
+        // const existingSubscription = await Subscription.findById(id);
         if (!existingSubscription) {
             return res.status(404).json({ success: false, message: "Subscription not found." });
         }

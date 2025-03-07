@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
+import LandingPage from "./components/landingPage";
 import SignupForm from "./components/registration";
 import SigninForm from "./components/signIn"; 
 import JobsPage from "./components/jobBoard"; 

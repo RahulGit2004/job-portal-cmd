@@ -7,12 +7,14 @@ import Navbar from './employeenav';
 
 const Dashboard = () => {
   const [clickedIndex, setClickedIndex] = useState(null);
+  const fullName = localStorage.getItem("fullName");
+  console.log(fullName);
 
   return (
     <div>
       <Navbar />
       <div className="container mt-5" style={{ marginTop: '100px' }}>
-        <h2 style={{ fontFamily: 'Roboto, sans-serif', fontWeight: '500' }}>Hello, Owner Name</h2>
+        <h2 style={{ fontFamily: 'Roboto, sans-serif', fontWeight: '500' }}>Hello, Owner Name : ${fullName}</h2>
         <p>Here is your daily activity and applications.</p>
 
         {/* Cards for Open Jobs and Saved Candidates */}

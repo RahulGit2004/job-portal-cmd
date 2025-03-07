@@ -1,5 +1,6 @@
 import { Job } from "../models/jobmodel.js";
 import { JobApplication } from "../models/jobapplication.js";
+import mongoose from "mongoose";
 
 // Create a new job
 export const createJob = async (req, res) => {
@@ -59,12 +60,16 @@ export const applyForJob = async (req, res) => {
     const { jobId } = req.params;
     const { firstName, lastName, email, phoneNumber, employmentStatus, education, position, resume } = req.body;
 
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ message: "Unauthorized: User not authenticated" });
+    }
+
     const job = await Job.findById(jobId);
     if (!job) return res.status(404).json({ message: "Job not found" });
 
     const application = new JobApplication({
       job: jobId,
-      applicant: req.user.id, // Assuming logged-in student ID
+      applicant: req.user._id, // ✅ Matches your middleware (req.user._id)
       firstName,
       lastName,
       email,
@@ -82,9 +87,11 @@ export const applyForJob = async (req, res) => {
 
     res.status(201).json({ message: "Application submitted successfully", application });
   } catch (error) {
+    console.error("⚠️ Error submitting application:", error.message);
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // Delete a job
 export const deleteJob = async (req, res) => {
@@ -127,3 +134,44 @@ export const updateJob = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+// get jobs by user Id
+export const getJobsByUser = async (req, res) => {
+  try {
+    const { employerId } = req.query; // Get employerId from query params
+
+    if (!employerId) {
+      return res.status(400).json({ success: false, message: "Employer ID is required" });
+    }
+
+    const jobs = await Job.find({ created_by: new mongoose.Types.ObjectId(employerId) }).sort({ createdAt: -1 });
+
+    if (!jobs.length) {
+      return res.status(404).json({ success: false, message: "No jobs found for this employer" });
+    }
+
+    res.status(200).json({ success: true, jobs });
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+// get job details by jobId
+export const getJobById = async (req, res) => {
+  try {
+      const job = await Job.findById(req.params.id);
+      if (!job) {
+          return res.status(404).json({ message: 'Job not found' });
+      }
+      res.json(job);
+  } catch (error) {
+      res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+};
+
+
+
+
+

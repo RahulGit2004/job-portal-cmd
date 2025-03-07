@@ -22,7 +22,7 @@ const JobDescriptionPage = () => {
       <div className="container mt-5">
         <div className="row g-4 justify-content-center">
           {/* Left - Job Description */}
-          <div className="col-lg-8 mb-4">
+          <div className="col-lg-8 col-md-12 mb-4">
             <div className="p-4 text-center rounded-4 shadow-sm bg-light">
               <p
                 className="mb-4 text-center"
@@ -34,11 +34,12 @@ const JobDescriptionPage = () => {
               >
                 Job Position
               </p>
-              <div className="d-flex justify-center">
+              <div className="d-flex justify-content-center">
                 <img
                   src="https://img.freepik.com/premium-vector/career-concept-illustration-idea-job-progress-wealth_277904-445.jpg?semt=ais_hybrid"
                   alt="Career"
-                  className="img-fluid w-50 rounded h-50 my-3"
+                  className="img-fluid rounded my-3"
+                  style={{ maxWidth: "100%", height: "auto" }} // Responsive image
                 />
               </div>
 
@@ -62,7 +63,7 @@ const JobDescriptionPage = () => {
           </div>
 
           {/* Right - Job Information Panel */}
-          <div className="col-lg-3 pb-4">
+          <div className="col-lg-3 col-md-12 pb-4">
             <div className="card p-4 shadow-sm text-center d-flex flex-column align-items-center bg-light">
               <h4 className="fw-bold">Website Name</h4>
               <a href="#" style={{ color: "#1E3A8A" }}>
@@ -71,6 +72,7 @@ const JobDescriptionPage = () => {
 
               <hr />
 
+              {/* Job Type */}
               <div className="mb-4 d-flex align-items-center w-100 justify-content-start">
                 <PiBagBold
                   size={20}
@@ -88,6 +90,7 @@ const JobDescriptionPage = () => {
                 </div>
               </div>
 
+              {/* Location */}
               <div className="mb-4 d-flex align-items-center w-100 justify-content-start">
                 <IoLocationSharp
                   size={20}
@@ -105,6 +108,7 @@ const JobDescriptionPage = () => {
                 </div>
               </div>
 
+              {/* Salary */}
               <div className="mb-4 d-flex align-items-center w-100 justify-content-start">
                 <IoMdWallet
                   size={20}
@@ -122,6 +126,7 @@ const JobDescriptionPage = () => {
                 </div>
               </div>
 
+              {/* Posted Date */}
               <div className="mb-4 d-flex align-items-center w-100 justify-content-start">
                 <TiTime
                   size={20}
@@ -139,6 +144,7 @@ const JobDescriptionPage = () => {
                 </div>
               </div>
 
+              {/* Expire Date */}
               <div className="mb-4 d-flex align-items-center w-100 justify-content-start">
                 <IoIosNotifications
                   size={20}
@@ -156,8 +162,10 @@ const JobDescriptionPage = () => {
                 </div>
               </div>
 
-              <Link to="/jobapplication" 
-                className="btn rounded-3 w-50"
+              {/* Apply Now Button */}
+              <Link
+                to="/jobapplication"
+                className="btn rounded-3 w-100" // Full width on smaller screens
                 style={{ background: "#1E3A8A", color: "white" }}
               >
                 Apply Now
