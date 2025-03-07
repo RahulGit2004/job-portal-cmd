@@ -173,6 +173,33 @@ export const getJobById = async (req, res) => {
 };
 
 
+// get applied jobs by id for student
+export const getAppliedJobsById = async (req, res) => {
+  try {
+    const userId = req.params.id; // Get user ID from request parameters
+
+    // Find job applications where the user has applied
+    const jobApplications = await JobApplication.find({ applicant: userId })
+      .populate({
+        path: "job",
+        select: "title jobRole location minSalary maxSalary endDate createdAt",
+      }) // Populate job details
+      .sort({ createdAt: -1 }); // Sort by most recent application
+
+      console.log(jobApplications);
+
+    if (!jobApplications.length) {
+      return res.status(404).json({ message: "No applied jobs found" });
+    }
+
+    res.status(200).json({ appliedJobs: jobApplications });
+  } catch (error) {
+    console.error("Error fetching applied jobs:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
 
 
 

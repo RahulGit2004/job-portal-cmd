@@ -8,7 +8,8 @@ import {
     deleteJob, 
     updateJob ,
     getJobsByUser,
-    getJobById
+    getJobById,
+    getAppliedJobsById
 } from "../controllers/jobcontroller.js";
 
 import { authenticateUser, authorizeRoles } from "../middlewares/isauthenticated.js";
@@ -60,5 +61,9 @@ router.put("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), updateJ
 router.get("/jobs/id", getJobsByUser);
 
 router.get('/:id', getJobById);
+
+// applied job
+router.get("/applied-jobs/:userId", getAppliedJobsById);
+
 
 export default router;
