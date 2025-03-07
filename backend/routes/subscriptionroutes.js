@@ -1,19 +1,23 @@
-
 import express from "express";
 import {
     createSubscription,
     getAllSubscriptions,
     getSubscriptionById,
     updateSubscription,
-    deleteSubscription
-} from "../controllers/subscriptioncontroller.js";
+} from "../controllers/subscriptioncontroller.js"; // Fixed file name typo
 
 const router = express.Router();
 
-router.post("/", createSubscription);
-router.get("/", getAllSubscriptions);
+// Create a new subscription
+router.post("/create", createSubscription); 
+
+// Get all subscriptions
+router.get("/get-all", getAllSubscriptions);
+
+// Get a single subscription by ID
 router.get("/:id", getSubscriptionById);
+
+// Update a subscription
 router.put("/:id", updateSubscription);
-router.delete("/:id", deleteSubscription);
 
 export default router;

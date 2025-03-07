@@ -17,6 +17,23 @@ const PaidFeatures = () => {
         { name: "Advance Plan", price: 199.99, features: ["Feature 1", "Feature 2", "Feature 3", "Feature 4"], status: "Disabled" },
     ]);
 
+
+    const fetchPlans = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/api/v1/subscription/get-all");
+            console.log("API Response: ", response.data);
+
+            if (response.data && Array.isArray(response.data.data)) {
+                setPlans(response.data.data);  // Use 'response.data.data'
+            } else {
+                console.error("Invalid data format from API");
+            }
+        } catch (error) {
+            console.error("Error fetching plans:", error);
+        }
+    };
+
+
     const [showModal, setShowModal] = useState(false);
     const [isCreatingNew, setIsCreatingNew] = useState(false);
     const [selectedPlanIndex, setSelectedPlanIndex] = useState(null);

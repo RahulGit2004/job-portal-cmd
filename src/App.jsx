@@ -13,7 +13,8 @@ import CreateJobForm from './components/employer/CreateJobForm';
 import ProfileDashboard from './components/profileDash';
 import Admindashboard from './components/admindash/Dashboard';
 import Postedjobs from './components/admindash/dash21';
-import PaidFeatures from "./components/admindash/paidFeatures"
+import PaidFeatures from "./components/admindash/paidFeatures";
+import CreateSubscription from "./components/admindash/createSubscription";
 
 // import EmployersPage from "./components/EmployersPage"; // Create Employers Page
 
@@ -35,6 +36,7 @@ const App = () => {
       <Route path="/profiledashboard" element = {<ProfileDashboard />} />
       <Route path="/postedjobs" element = {<Postedjobs/>} />
       <Route path="/paidfeatures" element = {<PaidFeatures/>} />
+      <Route path="/create-subscription" element={<CreateSubscription/>}/>
     </Routes>
   );
 };

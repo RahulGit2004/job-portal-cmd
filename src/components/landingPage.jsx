@@ -1,4 +1,6 @@
-import React, { useState } from "react";  
+//import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+//import axios from "axios"; // Also ensure axios is imported if you're making API calls
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -11,7 +13,31 @@ import ibmLogo from "../assets/ibm.jpg";
 import einfratechLogo from "../assets/Einfratech.png";
 
 const LandingPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [jobs, setJobs] = useState([]); // State to store fetched jobs
+
+  // Fetch jobs from backend API
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/v1/job/jobs");
+        const data = await response.json();
+        console.log("Fetched Jobs:", data); // Debugging line
+
+        // If data is an object containing a jobs array, update accordingly
+        setJobs(data.jobs || data);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+
+
+
+
   return (
     <div className="font-sans">
       {/* Navbar */}
@@ -72,41 +98,55 @@ const LandingPage = () => {
       </section>
 
       <section className="container my-5 text-center" style={{ maxWidth: "1125px", margin: "0 auto" }}>
-        <h2 className="fw-bold">Trending Jobs</h2>
+        <h2 className="fw-bold display-4" style={{ fontSize: "2.5rem" }}>Trending Jobs</h2>
         <div className="row mt-4">
-          {[1, 2, 3].map((job) => (
-            <div key={job} className="col-12 col-md-4 mb-3">
-              <div
-                className="card p-4 shadow-sm transition"
-                style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "12px",
-                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)";
-                  e.currentTarget.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "0px 4px 12px rgba(0, 0, 0, 0.1)";
-                }}
-              >
-                <div className="bg-[#1E3A8A] text-white rounded-circle mx-auto d-flex justify-content-center align-items-center" style={{ width: "50px", height: "50px", fontSize: "1.2rem", fontWeight: "bold" }}>
-                  Job
-                </div>
-                <h4 className="mt-3 fw-semibold">Job Title</h4>
-                <p className="text-muted">Short job description goes here.</p>
-                <div className="d-flex justify-content-between mt-3">
-                  <Link to="/jobdescription" className="btn border-primary text-primary" style={{ borderRadius: "8px" }}>View details</Link>
-                  <Link to="/jobapplication" className="btn text-white" style={{ backgroundColor: "#1E3A8A", borderRadius: "8px" }}>Apply now</Link>
+          {jobs.length > 0 ? (
+            jobs.slice(0, 6).map((job) => (
+              <div key={job._id.$oid} className="col-12 col-md-4 mb-3">
+                <div
+                  className="card p-4 shadow-sm transition"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "12px",
+                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                    e.currentTarget.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                    e.currentTarget.style.boxShadow = "0px 4px 12px rgba(0, 0, 0, 0.1)";
+                  }}
+                >
+                  <h4 className="mt-3 fw-semibold">{job.title}</h4>
+                  <p className="text-muted">{job.jobRole}</p>
+                  <p className="text-muted">
+                    Salary: ₹{job.minSalary.toLocaleString()} - ₹{job.maxSalary.toLocaleString()}
+                  </p>
+                  <p className="text-muted">
+                    Location: {job.location.city}, {job.location.country}
+                  </p>
+                  <div className="d-flex justify-content-between mt-3">
+                    <Link to={`/jobdescription`} className="btn border-primary text-primary" style={{ borderRadius: "8px" }}>
+                      View details
+                    </Link>
+                    <Link to={`/jobapplication`} className="btn text-white" style={{ backgroundColor: "#1E3A8A", borderRadius: "8px" }}>
+                      Apply now
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-muted">No jobs available at the moment.</p>
+          )}
         </div>
       </section>
+
+
+
 
 
       {/* Top Companies */}
