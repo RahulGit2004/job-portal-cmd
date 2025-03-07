@@ -65,10 +65,12 @@ const SignIn = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", userId);
       localStorage.setItem("userRole", data.user.role);
+      localStorage.setItem("fullName", data.user.fullName);
   
       console.log("Token stored:", localStorage.getItem("token"));
       console.log("User ID stored:", localStorage.getItem("userId"));
       console.log("User Role stored:", localStorage.getItem("userRole"));
+      console.log("User fullName stored:", localStorage.getItem("fullName"));
   
       switch (data.user.role) {
         case "Admin":

@@ -5,18 +5,19 @@ import mongoose from "mongoose";
 // Create a new job
 export const createJob = async (req, res) => {
   try {
-    const { title, tags, jobRole, minSalary, maxSalary, vacancies, endDate, location } = req.body;
+    console.log("📌 Received Payload:", req.body); 
+    const { title, description, jobRole, minSalary, maxSalary, vacancies, endDate, location } = req.body;
 
     const newJob = new Job({
       title,
-      tags,
+      description,
       jobRole,
       minSalary,
       maxSalary,
       vacancies,
       endDate,
       location,
-      created_by: req.user.id, // Assuming `req.user.id` contains logged-in employer ID
+      created_by: req.user.id, // Assuming req.user.id contains logged-in employer ID
     });
 
     await newJob.save();
@@ -87,7 +88,7 @@ export const applyForJob = async (req, res) => {
 
     res.status(201).json({ message: "Application submitted successfully", application });
   } catch (error) {
-    console.error("⚠️ Error submitting application:", error.message);
+    console.error("Error submitting application:", error.message);
     res.status(500).json({ error: error.message });
   }
 };

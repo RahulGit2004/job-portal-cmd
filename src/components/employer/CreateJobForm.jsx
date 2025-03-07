@@ -17,19 +17,27 @@ const CreateJobForm = () => {
 
   const [showPopup, setShowPopup] = useState(false);
 
-
-
+  // Handle input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
+  // Submit form data
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
+
+      // Log formData to ensure description is captured
+      console.log("🔍 Form Data Before Submission:", formData);
+
       const payload = {
         title: formData.jobTitle,
-        tags: formData.tags ? formData.tags.split(",") : [],
+        description: formData.description.trim(), // Ensures no extra spaces
         jobRole: formData.jobRoles,
         minSalary: Number(formData.minSalary),
         maxSalary: Number(formData.maxSalary),
@@ -40,6 +48,8 @@ const CreateJobForm = () => {
           city: formData.city,
         },
       };
+
+      console.log("🚀 Payload Being Sent:", JSON.stringify(payload, null, 2)); // Log payload before sending
 
       const response = await fetch("http://localhost:8000/api/v1/job/create", {
         method: "POST",
@@ -56,6 +66,7 @@ const CreateJobForm = () => {
         console.log("✅ Job created successfully:", responseData);
         setShowPopup(true);
 
+        // Reset form
         setFormData({
           jobTitle: "",
           description: "",
