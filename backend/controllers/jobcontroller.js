@@ -71,7 +71,7 @@ export const applyForJob = async (req, res) => {
     // Create a new job application with experience
     const application = new JobApplication({
       job: jobId,
-      applicant: req.user._id,
+      applications: req.user._id,
       firstName,
       lastName,
       email,
@@ -129,27 +129,25 @@ export const getJobById = async (req, res) => {
   }
 };
 
+// get applied  job by user Id
 
-// get applied jobs by id for student
 export const getAppliedJobsByUserId = async (req, res) => {
   try {
-    const userId = req.params.userId; // Get user ID from request parameters
-
-    // Find jobs where the applications array contains the user's application
-    const appliedJobs = await Job.find({ applications: userId }) // Check if userId exists in applications
+    const userId = req.params.userId; 
+    
+    // Find job applications where the applicant ID matches the provided userId
+    const applications = await JobApplication.find({ applicant: userId })
       .populate({
-        path: "applications",
-        match: { applicant: userId }, // Ensure only this user's applications are fetched
-        select: "applicant status createdAt",
+        path: "job", // Populate job details
+        select: "title jobRole location minSalary maxSalary endDate createdAt",
       })
-      .select("title jobRole location minSalary maxSalary endDate createdAt") // Select only required job fields
-      .sort({ createdAt: -1 }); // Sort by most recent job
+      .select("status createdAt"); // Select application fields you want
 
-    if (!appliedJobs.length) {
+    if (!applications.length) {
       return res.status(404).json({ message: "No applied jobs found for this user" });
     }
 
-    res.status(200).json({ appliedJobs });
+    res.status(200).json({ appliedJobs: applications });
   } catch (error) {
     console.error("Error fetching applied jobs:", error);
     res.status(500).json({ message: "Internal server error" });
