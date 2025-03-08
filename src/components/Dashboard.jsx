@@ -3,9 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCheckCircle, faTimesCircle, faBars } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
-// import Dnavbar from "./Dnavbar";
-
-// Import images
 import imageIcon from "../assets/image1.png";
 import graphIcon from "../assets/graph.png";
 import bagIcon from "../assets/bag.png";

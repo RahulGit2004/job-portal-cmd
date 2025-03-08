@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 
 const JobApplicationForm = () => {
-  const { jobId } = useParams(); // Automatically gets jobId from URL
+  const { jobId } = useParams();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -84,7 +84,6 @@ const JobApplicationForm = () => {
       setShowPopup(true);
       setTimeout(() => setShowPopup(false), 3000);
 
-      // Reset form
       setFormData({
         firstName: "",
         lastName: "",

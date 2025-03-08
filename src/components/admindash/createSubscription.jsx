@@ -38,7 +38,7 @@ const CreateSubscription = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
+    e.preventDefault(); 
   
     try {
       const response = await fetch("http://localhost:8000/api/v1/subscription/create", {
@@ -46,14 +46,14 @@ const CreateSubscription = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData), // Convert form data to JSON string
+        body: JSON.stringify(formData),
       });
   
-      const result = await response.json(); // Parse the JSON response
+      const result = await response.json();
   
       if (response.ok) {
         alert("Subscription Created Successfully!");
-        navigate("/paidfeatures"); // Redirect to the paid features page
+        navigate("/paidfeatures"); 
       } else {
         console.error("Error:", result.message);
         alert("Failed to create subscription: " + result.message);

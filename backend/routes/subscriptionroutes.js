@@ -4,7 +4,7 @@ import {
     getAllSubscriptions,
     getSubscriptionById,
     updateSubscription,
-} from "../controllers/subscriptioncontroller.js"; // Fixed file name typo
+} from "../controllers/subscriptioncontroller.js"; 
 
 const router = express.Router();
 

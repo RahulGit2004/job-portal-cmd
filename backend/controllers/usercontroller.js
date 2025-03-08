@@ -55,17 +55,17 @@ export const loginUser = async (req, res) => {
         );
 
         res.cookie("token", token, {
-            httpOnly: true,  // 🔒 Prevents JavaScript access (XSS protection)
-            secure: false,   // 🔒 Set to `true` in production with HTTPS
-            sameSite: "Lax", // 🔒 Adjust for cross-origin requests if needed
-            maxAge: 24 * 60 * 60 * 1000, // 🔒 Expires in 1 day
+            httpOnly: true,  
+            secure: false,   
+            sameSite: "Lax", 
+            maxAge: 24 * 60 * 60 * 1000, 
         });
 
 
         res.status(200).json({ 
             message: "Login successful", 
             user, 
-            token // Send token in response for local storage
+            token 
         });
 
     } catch (error) {
@@ -87,13 +87,13 @@ export const logoutUser = (req, res) => {
 // Get User Profile
 export const getUserProfileById = async (req, res) => {
     try {
-        const userId = req.params.id; // Get user ID from request params
+        const userId = req.params.id; 
 
         if (!userId) {
             return res.status(400).json({ message: "User ID is required" });
         }
 
-        const user = await User.findById(userId).select("-password"); // Exclude password field
+        const user = await User.findById(userId).select("-password");
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
@@ -111,9 +111,8 @@ export const getUserProfileById = async (req, res) => {
 export const updateUserProfileById = async (req, res) => {
     try {
         const { id } = req.params;
-        const updates = req.body; // Only provided fields will be updated
+        const updates = req.body; 
 
-        // Ensure that required fields are not removed or set to undefined
         if (updates.role && !["Student", "Employer", "College", "Admin"].includes(updates.role)) {
             return res.status(400).json({ message: "Invalid role provided" });
         }

@@ -25,7 +25,7 @@ const PaidFeatures = () => {
             console.log("API Response: ", response.data);
 
             if (response.data && Array.isArray(response.data.data)) {
-                setPlans(response.data.data);  // Use 'response.data.data'
+                setPlans(response.data.data); 
             } else {
                 console.error("Invalid data format from API");
             }

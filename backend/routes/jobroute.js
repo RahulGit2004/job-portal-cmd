@@ -22,20 +22,6 @@ router.get("/jobs/:jobId/applicants", authenticateUser,getJobApplicants);
 
 router.post("/jobs/:jobId/apply", authenticateUser, applyForJob);
 
-/**
- * @route   DELETE /api/jobs/:jobId
- * @desc    Employers can delete a job
- * @access  Private (Employers only)
- */
-// router.delete("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), deleteJob);
-
-/**
- * @route   PUT /api/jobs/:jobId
- * @desc    Employers can update a job
- * @access  Private (Employers only)
- */
-// router.put("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), updateJob);
-
 router.get("/jobs/id", getJobsByUser);
 
 router.get('/:id', getJobById);

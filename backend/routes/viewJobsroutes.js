@@ -1,5 +1,5 @@
 import express from "express";
-import JobApplication from "../models/jobapplication.js"; // ✅ Fix path
+import JobApplication from "../models/jobapplication.js";
 
 
 const router = express.Router();
@@ -45,4 +45,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-export default router; // Ensure this export is present
+export default router;

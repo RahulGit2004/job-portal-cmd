@@ -37,7 +37,7 @@ const CreateJobForm = () => {
 
       const payload = {
         title: formData.jobTitle,
-        description: formData.description.trim(), // Ensures no extra spaces
+        description: formData.description.trim(),
         jobRole: formData.jobRoles,
         minSalary: Number(formData.minSalary),
         maxSalary: Number(formData.maxSalary),
@@ -63,7 +63,6 @@ const CreateJobForm = () => {
       const responseData = await response.json();
 
       if (response.ok) {
-        console.log("✅ Job created successfully:", responseData);
         setShowPopup(true);
 
         // Reset form

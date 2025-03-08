@@ -97,7 +97,7 @@ export const applyForJob = async (req, res) => {
 // get jobs by user Id
 export const getJobsByUser = async (req, res) => {
   try {
-    const { employerId } = req.query; // Get employerId from query params
+    const { employerId } = req.query; 
 
     if (!employerId) {
       return res.status(400).json({ success: false, message: "Employer ID is required" });
@@ -134,14 +134,14 @@ export const getJobById = async (req, res) => {
 export const getAppliedJobsByUserId = async (req, res) => {
   try {
     const userId = req.params.userId; 
-    
+
     // Find job applications where the applicant ID matches the provided userId
     const applications = await JobApplication.find({ applicant: userId })
       .populate({
-        path: "job", // Populate job details
+        path: "job", 
         select: "title jobRole location minSalary maxSalary endDate createdAt",
       })
-      .select("status createdAt"); // Select application fields you want
+      .select("status createdAt");
 
     if (!applications.length) {
       return res.status(404).json({ message: "No applied jobs found for this user" });
@@ -153,15 +153,3 @@ export const getAppliedJobsByUserId = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-

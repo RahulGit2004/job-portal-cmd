@@ -16,8 +16,6 @@ import Postedjobs from './components/admindash/dash21';
 import PaidFeatures from "./components/admindash/paidFeatures";
 import CreateSubscription from "./components/admindash/createSubscription";
 
-// import EmployersPage from "./components/EmployersPage"; // Create Employers Page
-
 const App = () => {
   return (
     <Routes>

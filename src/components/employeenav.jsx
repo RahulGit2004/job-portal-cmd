@@ -1,9 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Ensure Bootstrap JS is imported
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import EinfratechLogo from "../assets/Einfratech.png"; // Import the logo
+import EinfratechLogo from "../assets/Einfratech.png"; 
 
 
 const Navbar = () => {
@@ -11,7 +11,7 @@ const Navbar = () => {
     <nav
       className="navbar navbar-expand-lg navbar-light bg-light"
       style={{
-        boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.1)", // Drop shadow
+        boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.1)", 
         padding: "0 20px",
         margin: "0 auto",
         maxWidth: "1294px",
@@ -24,7 +24,7 @@ const Navbar = () => {
           <img
             src={EinfratechLogo}
             alt="Einfratech"
-            style={{ height: "40px" }} // Adjust the height as needed
+            style={{ height: "40px" }} 
           />
         </a>
 

@@ -1,11 +1,9 @@
 import Subscription from "../models/subscription.js";
 
-// Create a new subscription plan
 export const createSubscription = async (req, res) => {
     try {
         const { planName, price, duration, features, status } = req.body;
 
-        // Validate required fields
         if (!planName || !price || !duration || !features || !Array.isArray(features) || features.length === 0) {
             return res.status(400).json({ success: false, message: "All fields are required, and features must be an array with at least one item." });
         }
@@ -46,23 +44,17 @@ export const getSubscriptionById = async (req, res) => {
     }
 };
 
-// Update subscription plan
 export const updateSubscription = async (req, res) => {
     try {
-        // const { id } = req.params;
-
-        // Check if the request body is empty
         if (Object.keys(req.body).length === 0) {
             return res.status(400).json({ success: false, message: "No data provided for update." });
         }
 
-        // Validate the existence of the subscription
-        // const existingSubscription = await Subscription.findById(id);
         if (!existingSubscription) {
             return res.status(404).json({ success: false, message: "Subscription not found." });
         }
 
-        // Perform the update
+        
         const updatedSubscription = await Subscription.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
 
         return res.status(200).json({ success: true, message: "Subscription updated successfully!", data: updatedSubscription });

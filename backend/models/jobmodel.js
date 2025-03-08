@@ -13,8 +13,8 @@ const jobSchema = new mongoose.Schema(
       country: { type: String, required: true },
       city: { type: String, required: true },
     },
-    created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Employer who created the job
-    applications: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobApplication" }], // Linking job applications
+    created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, 
+    applications: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobApplication" }],
   },
   { timestamps: true }
 );

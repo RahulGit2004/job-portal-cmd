@@ -10,7 +10,6 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
   const [ownerName, setOwnerName] = useState("");
   const [jobCount, setJobCount] = useState(0);
-  // const [applicationCount, setApplicationCount] = useState(0);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -31,9 +30,9 @@ const Dashboard = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, // Use Authorization header instead of Cookie
+              Authorization: `Bearer ${token}`,
             },
-            credentials: "include", // Ensures cookies are sent in the request
+            credentials: "include",
           }
         );
 
@@ -55,7 +54,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const storedName = localStorage.getItem("fullName"); // Retrieve name from localStorage
+    const storedName = localStorage.getItem("fullName");
     if (storedName) {
       setOwnerName(storedName);
     }

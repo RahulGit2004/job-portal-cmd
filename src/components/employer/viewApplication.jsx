@@ -56,53 +56,6 @@ const JobApplication = () => {
 
   const displayedApplicants = filter === "applicants" ? applicants : shortlisted;
 
-
-
-  // const handleApprove = async (applicantId) => {
-  //   try {
-  //     const response = await fetch(`${API_URL}/${applicantId}/approve`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-  
-  //     if (!response.ok) {
-  //       throw new Error("Failed to approve applicant");
-  //     }
-  
-  //     const updatedApplicant = await response.json();
-  //     setShortlisted((prev) => [...prev, updatedApplicant.application]);
-  //     setApplicants((prev) => prev.filter((applicant) => applicant.id !== applicantId));
-  //   } catch (error) {
-  //     console.error("Error approving applicant:", error);
-  //   }
-  // };
-  
-  // const handleReject = async (applicantId) => {
-  //   try {
-  //     const response = await fetch(`${API_URL}/${applicantId}/reject`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-  
-  //     if (!response.ok) {
-  //       throw new Error("Failed to reject applicant");
-  //     }
-  
-  //     setApplicants((prev) => prev.filter((applicant) => applicant.id !== applicantId));
-  //   } catch (error) {
-  //     console.error("Error rejecting applicant:", error);
-  //   }
-  // };
-  
-  
-
-
-
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto">
       <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-blue-700">
