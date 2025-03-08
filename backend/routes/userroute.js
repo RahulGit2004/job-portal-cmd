@@ -4,7 +4,8 @@ import {
     loginUser, 
     logoutUser, 
     getUserProfileById, 
-    updateUserProfileById 
+    updateUserProfileById ,
+    getUnverifiedUsers
 } from "../controllers/usercontroller.js";
 
 import { authenticateUser } from "../middlewares/isauthenticated.js";
@@ -15,6 +16,7 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
+router.get("/unverified-users", getUnverifiedUsers);
 
 // ✅ Profile Routes (Requires Authentication)
 router.get("/profile/:id", authenticateUser, getUserProfileById);

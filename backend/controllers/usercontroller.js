@@ -162,3 +162,19 @@ export const authorizeRoles = (...roles) => {
         next();
     };
 };
+
+
+// Fetch unverified Admins and Employers
+export const getUnverifiedUsers = async (req, res) => {
+    try {
+      const users = await User.find({ isVerified: false, role: { $in: ["Admin", "Employer"] } });
+  
+      if (users.length === 0) {
+        return res.status(404).json({ message: "No unverified Admins or Employers found" });
+      }
+  
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error", details: error.message });
+    }
+  };

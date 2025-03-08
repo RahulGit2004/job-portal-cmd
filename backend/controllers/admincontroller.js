@@ -14,20 +14,21 @@ export const approveOrRejectUser = async (req, res) => {
 
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        // Ensure only Employers can be approved/rejected
-        if (user.role !== "Employer") {
-            return res.status(403).json({ message: "Only Employers can be approved or rejected!" });
+        // Ensure only Employers or Admins can be approved/rejected
+        if (user.role !== "Employer" && user.role !== "Admin") {
+            return res.status(403).json({ message: "Only Employers or Admins can be approved or rejected!" });
         }
 
         if (action === "approve") {
             user.isVerified = true;
             await user.save();
-            return res.json({ message: "Employer approved successfully!" });
+            return res.json({ message: "User approved successfully!" });
         }
 
         if (action === "reject") {
             user.isVerified = false;
-            return res.json({ message: "Employer rejected successfully!" });
+            await user.save();
+            return res.json({ message: "User rejected successfully!" });
         }
 
         return res.status(400).json({ message: "Invalid action. Use 'approve' or 'reject'." });
