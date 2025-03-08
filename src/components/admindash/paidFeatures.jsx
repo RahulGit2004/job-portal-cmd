@@ -236,7 +236,7 @@ const PaidFeatures = () => {
                 ))}
             </div>
             <div className="text-center mt-3 pb-3">
-                <Link to="/create-subscription" className="btn px-4 text-white"style={{ backgroundColor: "#1E3A8A" }} onClick={handleCreateNewPlan}>
+                <Link to="/create-subscription" className="btn px-4 text-white"style={{ backgroundColor: "#1E3A8A" }}>
                     Create New Plan
                 </Link>
             </div>

@@ -26,8 +26,8 @@ export const approveOrRejectUser = async (req, res) => {
         }
 
         if (action === "reject") {
-            user.isVerified = false;
-            await user.save();
+            console.log(User.findByIdAndDelete(req.params.id));
+            await User.findByIdAndDelete(req.params.id);
             return res.json({ message: "User rejected successfully!" });
         }
 

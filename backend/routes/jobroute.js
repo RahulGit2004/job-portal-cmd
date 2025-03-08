@@ -14,32 +14,14 @@ import { authenticateUser, authorizeRoles } from "../middlewares/isauthenticated
 
 const router = express.Router();
 
-/**
- * @route   POST /api/jobs
- * @desc    Employers can create jobs
- * @access  Private (Employers only)
- */
 router.post("/create", authenticateUser, createJob);
 
-/**
- * @route   GET /api/jobs
- * @desc    Public route to fetch all jobs
- * @access  Public
- */
 router.get("/jobs", getAllJobs);
 
-/**
- * @route   GET /api/jobs/:jobId/applicants
- * @desc    Employers can view applicants for a specific job
- * @access  Private (Employers only)
- */
+
 router.get("/jobs/:jobId/applicants", authenticateUser,getJobApplicants);
 
-/**
- * @route   POST /api/jobs/:jobId/apply
- * @desc    Students can apply for a job
- * @access  Private (Students only)
- */
+
 router.post("/jobs/:jobId/apply", authenticateUser, applyForJob);
 
 /**

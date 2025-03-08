@@ -1,326 +1,253 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEye,
+  faCheckCircle,
+  faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import Navbar from "../admindash/adminnavbar";
+import humanIcon from "../admindash/human.png";
+import imageIcon from "../admindash/image1.png";
+import graphIcon from "../admindash/graph.png";
+import bagIcon from "../admindash/bag.png";
 
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEye, faCheckCircle, faTimesCircle, faBars } from "@fortawesome/free-solid-svg-icons";
-// import Navbar from "../admindash/adminnavbar";
-// import humanIcon from "../admindash/human.png";
-
-// // Import images
-// import imageIcon from "../admindash/image1.png";
-// import graphIcon from "../admindash/graph.png";
-// import bagIcon from "../admindash/bag.png";
-
-// const Dashboard = () => {
-//   const [approvedUsers, setApprovedUsers] = useState([]);
-//   const [rejectedUsers, setRejectedUsers] = useState([]);
-//   const [filter, setFilter] = useState("All");
-
-//   const handleApprove = (id) => {
-//     setApprovedUsers([...approvedUsers, id]);
-//     setRejectedUsers(rejectedUsers.filter((userId) => userId !== id));
-//   };
-
-//   const handleReject = (id) => {
-//     setRejectedUsers([...rejectedUsers, id]);
-//     setApprovedUsers(approvedUsers.filter((userId) => userId !== id));
-//   };
-
-
-
-
-//   const filteredUsers = filter === "All" ? users : users.filter(user => user.type === filter);
-
-//   const cards = [
-//     { value: "999", label: "Users", color: "#C9EEC9", image: imageIcon, link: "/" },
-//     { value: "159", label: "Employers", color: "#E0D9F6", image: graphIcon, link: "/" },
-//     { value: "159", label: "Posted Jobs", color: "#D6C7E8", image: bagIcon, link: "/postedjobs" },
-//   ];
-  
-
-//   const [users, setUsers] = useState([]);
-//   const [error, setError] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchUnverifiedUsers = async () => {
-//       try {
-//         const response = await fetch("http://localhost:8000/api/v1/user/unverified-users");
-
-//         if (!response.ok) {
-//           throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
-
-//         const data = await response.json();
-//         setUsers(data);
-//       } catch (error) {
-//         setError(error.message);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchUnverifiedUsers();
-//   }, []);
-
-//   return (
-//     <div>
-//       <Navbar />
-
-//       {/* Summary Cards */}
-//       <div className="container mt-4">
-//       <div className="row text-center">
-//         {cards.map((card, index) => (
-//           <div key={index} className="col-12 col-md-6 col-lg-4 mb-3">
-//             <div className="card shadow-sm p-3 rounded text-center" style={{ backgroundColor: card.color }}>
-//               <div className="mx-auto rounded-circle bg-white p-3 shadow-sm" style={{ width: "70px", height: "70px" }}>
-//                 <img src={card.image} alt="icon" className="w-100 h-100" />
-//               </div>
-//               <h4 className="fw-bold">{card.value}</h4>
-//               <p>{card.label}</p>
-//               <Link to={card.link}
-//                className="btn btn-light mt-2">
-//                 View Details <FontAwesomeIcon icon={faEye} />
-//               </Link>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-
-//       {/* Users Section */}
-//       <h3 className="mt-4 text-center fw-bold">Users</h3>
-//       <p className="text-center text-muted">Find The People’s Journey With Us</p>
-
-//       {/* User Table */}
-//       <div className="container mt-4">
-//         <div className="table-responsive">
-//           <table className="table table-striped">
-//             <thead className="table-light">
-//               <tr>
-//                 <th>Name</th>
-//                 <th>Status</th>
-//                 <th className="d-none d-md-table-cell">
-//                   User Type
-//                   <select className="ms-2 form-select form-select-sm d-inline w-auto" value={filter} onChange={(e) => setFilter(e.target.value)}>
-//                     <option value="All">All</option>
-//                     <option value="Candidate">Candidate</option>
-//                     <option value="Employer">Employer</option>
-//                     <option value="Admin">Admin</option>
-//                   </select>
-//                 </th>
-//                 <th className="d-none d-md-table-cell">Requests</th>
-//                 <th className="d-table-cell d-md-none">Actions</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {filteredUsers.map((user) => (
-//                 <tr key={user.id}>
-//                   <td className="d-flex align-items-center">
-//                   <img src={humanIcon} alt="User" className="rounded-circle me-2" style={{ width: "40px", height: "40px" }} />
-//                     <div>
-//                       <strong>{user.name}</strong>
-//                       <br />
-//                       <small className="text-muted">{user.email}</small>
-//                     </div>
-//                   </td>
-//                   <td>
-//                     <span className={`badge ${user.status === "Active" ? "bg-success" : "bg-danger"}`}>
-//                       {user.status}
-//                     </span>
-//                   </td>
-//                   <td className="d-none d-md-table-cell">{user.type}</td>
-//                   <td className="d-none d-md-table-cell">
-//                   {approvedUsers.includes(user.id) ? (
-//                       <button className="btn btn-success btn-sm">
-//                         <FontAwesomeIcon icon={faCheckCircle} /> Approved
-//                       </button>
-//                     ) : rejectedUsers.includes(user.id) ? (
-//                       <button className="btn btn-danger btn-sm">
-//                         <FontAwesomeIcon icon={faTimesCircle} /> Rejected
-//                       </button>
-//                     ) : (
-//                       <>
-//                         <button className="btn btn-outline-success btn-sm me-2" onClick={() => handleApprove(user.id)}>
-//                           <FontAwesomeIcon icon={faCheckCircle} /> Approve
-//                         </button>
-//                         <button className="btn btn-outline-danger btn-sm" onClick={() => handleReject(user.id)}>
-//                           <FontAwesomeIcon icon={faTimesCircle} /> Reject
-//                         </button>
-//                       </>
-//                     )}
-//                   </td>
-//                   <td className="d-table-cell d-md-none">
-//                     <div className="dropdown">
-//                       <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-//                         <FontAwesomeIcon icon={faBars} />
-//                       </button>
-//                       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-//                         <li>
-//                           <select className="form-select form-select-sm" value={filter} onChange={(e) => setFilter(e.target.value)}>
-//                             <option value="All">All</option>
-//                             <option value="Candidate">Candidate</option>
-//                             <option value="Employer">Employer</option>
-//                             <option value="Admin">Admin</option>
-//                           </select>
-//                         </li>
-//                         <li>
-//                           {approvedUsers.includes(user.id) ? (
-//                             <button className="dropdown-item" disabled>
-//                               <FontAwesomeIcon icon={faCheckCircle} /> Approved
-//                             </button>
-                            
-//                           ) : (
-//                             <>
-//                               <button className="dropdown-item" onClick={() => handleApprove(user.id)}>
-//                                 <FontAwesomeIcon icon={faCheckCircle} /> Approve
-//                               </button>
-                             
-//                             </>
-//                           )}
-//                           {rejectedUsers.includes(user.id) ? (
-//                             <button className="dropdown-item" disabled>
-//                               <FontAwesomeIcon icon={faCheckCircle} /> Rejected
-//                             </button>
-                            
-//                           ) : (
-//                             <>
-                            
-//                               <button className="dropdown-item" onClick={() => handleReject(user.id)}>
-//                                 <FontAwesomeIcon icon={faTimesCircle} /> Reject
-//                               </button>
-//                             </>
-//                           )}
-//                         </li>
-//                       </ul>
-//                     </div>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
-
-
-import { useEffect, useState } from "react";
-
-const UserTable = () => {
-  const [users, setUsers] = useState([]); 
-  const [filteredUsers, setFilteredUsers] = useState([]); 
-  const [filter, setFilter] = useState("All"); 
-  const [approvedUsers, setApprovedUsers] = useState([]); 
+const Dashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filter, setFilter] = useState("All");
+  const [approvedUsers, setApprovedUsers] = useState([]);
   const [rejectedUsers, setRejectedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [jobCount, setJobCount] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/user/unverified-users");
-
+        const response = await fetch(
+          "http://localhost:8000/api/v1/user/unverified-users"
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
-        setUsers(data); // Store all users
-        setFilteredUsers(data); // Initially, show all users
+        console.log(data);
+        setUsers(data.users || data);
+        setFilteredUsers(data.users || data);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchUsers();
   }, []);
 
-  // Filter users based on selection
   useEffect(() => {
     if (filter === "All") {
       setFilteredUsers(users);
     } else {
-      setFilteredUsers(users.filter(user => user.role === filter));
+      setFilteredUsers(users.filter((user) => user.type === filter));
     }
   }, [filter, users]);
 
-  // Handle Approve
-  const handleApprove = (userId) => {
-    setApprovedUsers([...approvedUsers, userId]);
-    setRejectedUsers(rejectedUsers.filter(id => id !== userId));
+  const handleApprove = async (userId) => {
+    try {
+      console.log(userId);
+      const response = await fetch(
+        `http://localhost:8000/api/v1/admin/user/approve-reject/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "approve", role: "Admin" }), // Ensure role is passed
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+
+      if (response.ok) {
+        setApprovedUsers([...approvedUsers, userId]);
+        setRejectedUsers(rejectedUsers.filter((id) => id !== userId));
+        alert(data.message); // Show success message
+      } else {
+        alert(data.message); // Show error message
+      }
+    } catch (error) {
+      console.error("Error approving user:", error);
+    }
   };
 
-  // Handle Reject
-  const handleReject = (userId) => {
-    setRejectedUsers([...rejectedUsers, userId]);
-    setApprovedUsers(approvedUsers.filter(id => id !== userId)); 
+  const handleReject = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/v1/admin/user/approve-reject/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "reject", role: "Admin" }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setRejectedUsers([...rejectedUsers, userId]);
+        setApprovedUsers(approvedUsers.filter((id) => id !== userId));
+        alert(data.message);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error rejecting user:", error);
+    }
   };
+
+
+  async function getJobCount() {
+    try {
+        const response = await fetch("http://localhost:8000/api/v1/job/jobs");
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const jobs = await response.json();
+        setJobCount(jobs.length);
+        console.log("Total Jobs:", jobCount);
+        return jobs.length; // Return the job count
+
+    } catch (error) {
+        console.error("Failed to fetch jobs:", error);
+        return 0; // Return 0 if an error occurs
+    }
+}
+
+getJobCount();
+
+
+
+
+  const cards = [
+    {
+      value: users.length,
+      label: "Pending Users",
+      color: "bg-green-100",
+      image: imageIcon,
+      link: "/",
+    },
+    {
+      value: users.filter((user) => user.role === "Employer").length,
+      label: "Pending Employers",
+      color: "bg-purple-100",
+      image: graphIcon,
+      link: "/",
+    },
+    {
+      value: jobCount,
+      label: "Posted Jobs",
+      color: "bg-indigo-100",
+      image: bagIcon,
+      link: "/postedjobs",
+    },
+  ];
 
   return (
-    <div className="container mt-4">
+    <div>
+      <Navbar />
+      <div className="container mx-auto p-4">
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-lg shadow ${card.color} text-center`}
+            >
+              <div className="mx-auto w-16 h-16 bg-white p-2 rounded-full shadow">
+                <img src={card.image} alt="icon" className="w-full h-full" />
+              </div>
+              <h4 className="text-xl font-bold mt-2">{card.value}</h4>
+              <p className="text-gray-600">{card.label}</p>
+              <Link
+                to={card.link}
+                className="mt-2 inline-block bg-white py-1 px-3 rounded shadow"
+              >
+                View Details <FontAwesomeIcon icon={faEye} />
+              </Link>
+            </div>
+          ))}
+        </div>
 
-      
-      <h2>Unverified Users</h2>
+        {/* Users Section */}
+        <h3 className="text-center text-2xl font-bold mt-6">Users</h3>
+        <p className="text-center text-gray-500">
+          Find The People’s Journey With Us
+        </p>
 
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
-
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <thead className="table-light">
-            <tr>
-              <th>Name</th>
-              <th>Status</th>
-              <th className="d-none d-md-table-cell">
-                User Type
-                <select className="ms-2 form-select form-select-sm d-inline w-auto" value={filter} onChange={(e) => setFilter(e.target.value)}>
-                  <option value="All">All</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Admin">Admin</option>
-                </select>
-              </th>
-              <th className="d-none d-md-table-cell">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map((user) => (
-              <tr key={user._id}>
-                <td>
-                  <strong>{user.fullName}</strong>
-                  <br />
-                  <small className="text-muted">{user.email}</small>
-                </td>
-                <td>
-                  <span className="badge bg-danger">Unverified</span>
-                </td>
-                <td className="d-none d-md-table-cell">{user.role}</td>
-                <td className="d-none d-md-table-cell">
-                  {approvedUsers.includes(user._id) ? (
-                    <button className="btn btn-success btn-sm" disabled>Approved</button>
-                  ) : rejectedUsers.includes(user._id) ? (
-                    <button className="btn btn-danger btn-sm" disabled>Rejected</button>
-                  ) : (
-                    <>
-                      <button className="btn btn-outline-success btn-sm me-2" onClick={() => handleApprove(user._id)}>Approve</button>
-                      <button className="btn btn-outline-danger btn-sm" onClick={() => handleReject(user._id)}>Reject</button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {loading ? (
+          <p className="text-center">Loading users...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">Error: {error}</p>
+        ) : (
+          <div className="overflow-x-auto mt-4">
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+              <thead>
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="p-3 text-left">Name</th>
+                  <th className="p-3 text-left">Status</th>
+                  <th className="p-3 text-left hidden md:table-cell">
+                    User Type
+                  </th>
+                  <th className="p-3 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.map((user) => (
+                  <tr key={user.id} className="border-b">
+                    <td className="p-3 flex items-center">
+                      <img
+                        src={humanIcon}
+                        alt="User"
+                        className="w-10 h-10 rounded-full mr-2"
+                      />
+                      <div>
+                        <strong>{user.fullName}</strong>
+                        <br />
+                        <small className="text-gray-500">{user.email}</small>
+                      </div>
+                    </td>
+                    <td className="p-3">
+                      <span className={`px-2 py-1 rounded `}>Pending</span>
+                    </td>
+                    <td className="p-3 hidden md:table-cell">{user.role}</td>
+                    <td className="p-3 flex flex-col md:flex-row gap-2">
+                      <button
+                        className="bg-green-500 text-white px-3 py-1 rounded"
+                        onClick={() => handleApprove(user._id)}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className="bg-red-500 text-white px-3 py-1 rounded"
+                        onClick={() => handleReject(user._id)}
+                      >
+                        Reject
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default UserTable;
+export default Dashboard;

@@ -30,10 +30,10 @@ export const createJob = async (req, res) => {
 // Get a list of all jobs
 export const getAllJobs = async (req, res) => {
   try {
-    const jobs = await Job.find().populate("created_by", "name email"); // Fetch employer details
-    res.status(200).json(jobs);
+      const jobs = await Job.find(); 
+      res.status(200).json(jobs);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ message: error.message });
   }
 };
 
