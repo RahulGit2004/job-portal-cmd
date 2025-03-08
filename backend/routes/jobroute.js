@@ -9,7 +9,7 @@ import {
     updateJob ,
     getJobsByUser,
     getJobById,
-    getAppliedJobsById
+    getAppliedJobsByUserId
 } from "../controllers/jobcontroller.js";
 
 import { authenticateUser, authorizeRoles } from "../middlewares/isauthenticated.js";
@@ -63,7 +63,6 @@ router.get("/jobs/id", getJobsByUser);
 router.get('/:id', getJobById);
 
 // applied job
-router.get("/applied-jobs/:userId", getAppliedJobsById);
-
+router.get("/user-applied-jobs/:userId", getAppliedJobsByUserId);
 
 export default router;
