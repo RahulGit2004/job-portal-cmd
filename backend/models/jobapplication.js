@@ -11,14 +11,17 @@ const jobApplicationSchema = new mongoose.Schema(
     employmentStatus: { type: String },
     education: { type: String },
     position: { type: String },
-    resume: { type: String }, // File path for the uploaded resume
+    experience: { type: Number, required: true },
+    resume: { type: String }, 
     status: {
       type: String,
       enum: ["Pending", "Accepted", "Rejected"],
       default: "Pending",
     },
+    isSelected: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
 export const JobApplication = mongoose.model("JobApplication", jobApplicationSchema);
+

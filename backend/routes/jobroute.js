@@ -5,11 +5,9 @@ import {
     getAllJobs, 
     getJobApplicants, 
     applyForJob, 
-    deleteJob, 
-    updateJob ,
     getJobsByUser,
     getJobById,
-    getAppliedJobsByUserId
+    getAppliedJobsByUserId,
 } from "../controllers/jobcontroller.js";
 
 import { authenticateUser, authorizeRoles } from "../middlewares/isauthenticated.js";
@@ -49,14 +47,14 @@ router.post("/jobs/:jobId/apply", authenticateUser, applyForJob);
  * @desc    Employers can delete a job
  * @access  Private (Employers only)
  */
-router.delete("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), deleteJob);
+// router.delete("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), deleteJob);
 
 /**
  * @route   PUT /api/jobs/:jobId
  * @desc    Employers can update a job
  * @access  Private (Employers only)
  */
-router.put("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), updateJob);
+// router.put("/jobs/:jobId", authenticateUser, authorizeRoles("employer"), updateJob);
 
 router.get("/jobs/id", getJobsByUser);
 
@@ -64,5 +62,7 @@ router.get('/:id', getJobById);
 
 // applied job
 router.get("/user-applied-jobs/:userId", getAppliedJobsByUserId);
+
+
 
 export default router;

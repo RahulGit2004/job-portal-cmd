@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faPhone, faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faPhone,
+  faFilePdf,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const JobApplicationForm = () => {
@@ -14,7 +18,7 @@ const JobApplicationForm = () => {
     phoneNumber: "",
     employmentStatus: "",
     education: "",
-    position: "",
+    experience: 0,
     resume: null,
   });
 
@@ -28,12 +32,16 @@ const JobApplicationForm = () => {
   // Form Validation
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!formData.firstName.trim())
+      newErrors.firstName = "First name is required";
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email address";
-    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required";
-    else if (!/^\d{10}$/.test(formData.phoneNumber)) newErrors.phoneNumber = "Phone number must be 10 digits";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Invalid email address";
+    if (!formData.phoneNumber.trim())
+      newErrors.phoneNumber = "Phone number is required";
+    else if (!/^\d{10}$/.test(formData.phoneNumber))
+      newErrors.phoneNumber = "Phone number must be 10 digits";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -54,9 +62,10 @@ const JobApplicationForm = () => {
         phoneNumber: formData.phoneNumber,
         employmentStatus: formData.employmentStatus,
         education: formData.education,
-        position: formData.position,
+        experience: formData.experience,
         resume: formData.resume || "",
       };
+      
 
       const response = await axios.post(
         `http://localhost:8000/api/v1/job/jobs/${jobId}/apply`,
@@ -83,12 +92,15 @@ const JobApplicationForm = () => {
         phoneNumber: "",
         employmentStatus: "",
         education: "",
-        position: "",
+        experience: 0,
         resume: null,
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Failed to submit application: " + (error.response?.data?.error || error.message));
+      alert(
+        "Failed to submit application: " +
+          (error.response?.data?.error || error.message)
+      );
     }
   };
 
@@ -139,7 +151,9 @@ const JobApplicationForm = () => {
               className="form-control"
               placeholder="Enter your first name"
             />
-            {errors.firstName && <div className="text-danger">{errors.firstName}</div>}
+            {errors.firstName && (
+              <div className="text-danger">{errors.firstName}</div>
+            )}
           </div>
 
           <div className="col-md-6">
@@ -152,7 +166,9 @@ const JobApplicationForm = () => {
               onChange={handleChange}
               placeholder="Enter your last name"
             />
-            {errors.lastName && <div className="text-danger">{errors.lastName}</div>}
+            {errors.lastName && (
+              <div className="text-danger">{errors.lastName}</div>
+            )}
           </div>
         </div>
 
@@ -172,7 +188,9 @@ const JobApplicationForm = () => {
                 onChange={handleChange}
                 placeholder="Enter your email"
               />
-              {errors.email && <div className="text-danger">{errors.email}</div>}
+              {errors.email && (
+                <div className="text-danger">{errors.email}</div>
+              )}
             </div>
           </div>
 
@@ -191,7 +209,9 @@ const JobApplicationForm = () => {
                 placeholder="Enter your phone number"
               />
             </div>
-            {errors.phoneNumber && <div className="text-danger">{errors.phoneNumber}</div>}
+            {errors.phoneNumber && (
+              <div className="text-danger">{errors.phoneNumber}</div>
+            )}
           </div>
         </div>
 
@@ -211,14 +231,16 @@ const JobApplicationForm = () => {
               <option>PhD</option>
             </select>
           </div>
+
+
           <div className="col-md-6">
-            <label className="form-label">Applying for</label>
+            <label className="form-label">Experience</label>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              placeholder="Enter job title"
-              name="position"
-              value={formData.position}
+              placeholder="Enter job experience"
+              name="experience"
+              value={formData.experience}
               onChange={handleChange}
             />
           </div>
@@ -228,30 +250,37 @@ const JobApplicationForm = () => {
         <div className="mb-4">
           <label className="form-label">Employment Status</label>
           <div className="d-flex flex-wrap gap-3">
-            {["Employed", "Self-Employed", "Unemployed", "Student"].map((status, index) => (
-              <div key={index} className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value={status}
-                  checked={formData.employmentStatus === status}
-                  onChange={handleChange}
-                />
-                <label className="form-check-label">{status}</label>
-              </div>
-            ))}
+            {["Employed", "Self-Employed", "Unemployed", "Student"].map(
+              (status, index) => (
+                <div key={index} className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value={status}
+                    checked={formData.employmentStatus === status}
+                    onChange={handleChange}
+                  />
+                  <label className="form-check-label">{status}</label>
+                </div>
+              )
+            )}
           </div>
         </div>
 
         {/* Resume Upload */}
         <div className="mb-4">
           <label className="form-label">Upload Resume</label>
-          <input type="file" className="form-control" name="resume" onChange={handleChange} />
+          <input
+            type="file"
+            className="form-control"
+            name="resume"
+            onChange={handleChange}
+          />
         </div>
 
         {/* Submit Button */}
         <div className="text-center">
-        <button
+          <button
             type="submit"
             className="btn btn-primary"
             style={{

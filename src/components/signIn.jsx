@@ -57,11 +57,10 @@ const SignIn = () => {
         throw new Error(data.message || "Invalid credentials");
       }
       console.log("Full Response:", data);
-
-      console.log("Full user data:", data.user); // ✅ Debugging line
   
-      // ✅ Adjusting for correct ID key
-      const userId = data.user.id || data.user._id; // Use correct key
+      const userId = data.user.id || data.user._id; 
+      const isVerified = data.user.isVerified; 
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", userId);
       localStorage.setItem("userRole", data.user.role);
@@ -76,17 +75,26 @@ const SignIn = () => {
   
       switch (data.user.role) {
         case "Admin":
-          navigate("/admindashboard");
-          break;
+            if (isVerified) {
+                navigate("/admindashboard");
+            } else {
+                alert("Oops! You are not verified yet. Please try again after some time");
+            }
+            break;
         case "Student":
-          navigate("/candidatedash");
-          break;
+            navigate("/candidatedash");
+            break;
         case "Employer":
-          navigate("/employeedash");
-          break;
+            if (isVerified) {
+                navigate("/employeedash");
+            } else {
+                alert("Oops! You are not verified yet. Please try again after some time");
+            }
+            break;
         default:
-          navigate("/");
-      }
+            navigate("/");
+    }
+    
     } catch (err) {
       console.error("Login Error:", err.message);
       setError(err.message);

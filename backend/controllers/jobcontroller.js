@@ -59,7 +59,7 @@ export const getJobApplicants = async (req, res) => {
 export const applyForJob = async (req, res) => {
   try {
     const { jobId } = req.params;
-    const { firstName, lastName, email, phoneNumber, employmentStatus, education, position, resume } = req.body;
+    const { firstName, lastName, email, phoneNumber, employmentStatus, education, experience, resume } = req.body;
 
     if (!req.user || !req.user._id) {
       return res.status(401).json({ message: "Unauthorized: User not authenticated" });
@@ -68,16 +68,17 @@ export const applyForJob = async (req, res) => {
     const job = await Job.findById(jobId);
     if (!job) return res.status(404).json({ message: "Job not found" });
 
+    // Create a new job application with experience
     const application = new JobApplication({
       job: jobId,
-      applicant: req.user._id, // ✅ Matches your middleware (req.user._id)
+      applicant: req.user._id,
       firstName,
       lastName,
       email,
       phoneNumber,
       employmentStatus,
       education,
-      position,
+      experience, 
       resume,
     });
 
@@ -92,50 +93,6 @@ export const applyForJob = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-
-// Delete a job
-export const deleteJob = async (req, res) => {
-  try {
-    const { jobId } = req.params;
-
-    const job = await Job.findById(jobId);
-    if (!job) return res.status(404).json({ message: "Job not found" });
-
-    if (job.created_by.toString() !== req.user.id) {
-      return res.status(403).json({ message: "Unauthorized to delete this job" });
-    }
-
-    await JobApplication.deleteMany({ job: jobId }); // Delete all applications related to the job
-    await Job.findByIdAndDelete(jobId);
-
-    res.status(200).json({ message: "Job deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// Update job details
-export const updateJob = async (req, res) => {
-  try {
-    const { jobId } = req.params;
-    const updateData = req.body;
-
-    const job = await Job.findById(jobId);
-    if (!job) return res.status(404).json({ message: "Job not found" });
-
-    if (job.created_by.toString() !== req.user.id) {
-      return res.status(403).json({ message: "Unauthorized to update this job" });
-    }
-
-    const updatedJob = await Job.findByIdAndUpdate(jobId, updateData, { new: true });
-
-    res.status(200).json({ message: "Job updated successfully", job: updatedJob });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 
 // get jobs by user Id
 export const getJobsByUser = async (req, res) => {
@@ -198,6 +155,13 @@ export const getAppliedJobsByUserId = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
+
+
+
+
 
 
 

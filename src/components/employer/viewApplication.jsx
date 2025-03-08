@@ -35,7 +35,7 @@ const JobApplication = () => {
           id: applicantData._id,
           name: `${applicantData.firstName} ${applicantData.lastName}`,
           role: applicantData.position || "UI / UX Designer",
-          experience: applicantData.experience || "0+ Years",
+          experience: `${applicantData.experience} year` || "0+ Years",
           education: applicantData.education || "Not Provided",
           applied: new Date(applicantData.createdAt).toLocaleDateString(),
           image: applicantData.image || "https://via.placeholder.com/150",
@@ -55,6 +55,53 @@ const JobApplication = () => {
   }, [jobId]);
 
   const displayedApplicants = filter === "applicants" ? applicants : shortlisted;
+
+
+
+  // const handleApprove = async (applicantId) => {
+  //   try {
+  //     const response = await fetch(`${API_URL}/${applicantId}/approve`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     });
+  
+  //     if (!response.ok) {
+  //       throw new Error("Failed to approve applicant");
+  //     }
+  
+  //     const updatedApplicant = await response.json();
+  //     setShortlisted((prev) => [...prev, updatedApplicant.application]);
+  //     setApplicants((prev) => prev.filter((applicant) => applicant.id !== applicantId));
+  //   } catch (error) {
+  //     console.error("Error approving applicant:", error);
+  //   }
+  // };
+  
+  // const handleReject = async (applicantId) => {
+  //   try {
+  //     const response = await fetch(`${API_URL}/${applicantId}/reject`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     });
+  
+  //     if (!response.ok) {
+  //       throw new Error("Failed to reject applicant");
+  //     }
+  
+  //     setApplicants((prev) => prev.filter((applicant) => applicant.id !== applicantId));
+  //   } catch (error) {
+  //     console.error("Error rejecting applicant:", error);
+  //   }
+  // };
+  
+  
+
+
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto">
@@ -117,10 +164,16 @@ const JobApplication = () => {
                 </div>
 
                 <div className="mt-4 flex gap-2">
-                  <button className="px-4 py-1 bg-green-500 text-white text-sm rounded-md hover:bg-green-600 transition">
+                  <button
+                    className="px-4 py-1 bg-green-500 text-white text-sm rounded-md hover:bg-green-600 transition"
+                    
+                  >
                     Accept
                   </button>
-                  <button className="px-4 py-1 bg-red-500 text-white text-sm rounded-md hover:bg-red-600 transition">
+                  <button
+                    className="px-4 py-1 bg-red-500 text-white text-sm rounded-md hover:bg-red-600 transition"
+                  
+                  >
                     Reject
                   </button>
                 </div>
