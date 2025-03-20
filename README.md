@@ -61,11 +61,9 @@ job-portal/
 │
 │── frontend/                 # React frontend for user interfaces
 │   ├── src/
+│   │   ├── assets/           # Related Images
 │   │   ├── components/       # Reusable UI components
 │   │   └── App.js            # Main React component
-│
-│── database/                 # Database scripts and migrations
-│── public/                   # Static assets
 │── package.json              # Project dependencies
 │── .env                      # Environment variables
 │── README.md                 # Documentation
@@ -107,9 +105,7 @@ cd backend
 npm install
 ```
 ### **3️⃣ Install Frontend Dependencies**
-# Navigate to frontend directory 
-```sh
-cd frontend
+ ```sh
 npm install
 ```
 ### **5️⃣ Run Backend Server**
@@ -121,7 +117,6 @@ Node index.js
 ### **6️⃣ Run Frontend Server**
 # Run frontend server
 ```sh
-cd frontend
 npm run dev
 ```
 
