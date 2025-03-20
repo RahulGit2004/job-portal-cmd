@@ -1,13 +1,13 @@
 # 🚀Job Portal for Technical Graduates 
 
-The Job Portal for Technical Graduates is a web-based platform that connects technical graduates with internship, part-time, and permanent job opportunities. It also offers resume-building services, facilitates industrial visits, and ensures a seamless recruitment process for employers and colleges. 
+The Job Portal for Technical Graduates is a web-based platform that connects technical graduates with internship, part-time, and permanent job opportunities. It also offers resume-building services, and ensures a seamless recruitment process for employers. 
 
 ---
 
 ## 📌Core Features  
 
 🛡️**User Authentication & Management**
-- Sign-up/Login using email or phone OTP.
+- Sign-up/Login using email.
 - Secure profile creation and account management.
 
 📊**Role-Based Dashboards**
@@ -24,25 +24,19 @@ The Job Portal for Technical Graduates is a web-based platform that connects tec
 - College Dashboard:
 - Apply for internships and industrial visits.
 - Upload and manage student databases.
-- Admin Dashboard:
-- Manage candidate, employer, and college data.
-- Approve/remove job postings, internships, and industrial visits.
+
+3. **Admin Dashboard:**
+- Manage candidate,employer and another admin.
+- Approve/remove job postings and internships.
 - Set pricing and offer discounts for paid services.
-- Add promotional sales posters and upload job certifications.
 
 📄 **Resume Building Service**
 - Paid feature for candidates.
-- Multiple customizable template options.
 
 📝 **Job Posting & Application System**
-- Employers can post jobs, internships, and industrial visits.
-- Candidates and colleges can apply.
+- Employers can post jobs and internships.
+- Candidates can apply.
 - Employers can review and shortlist applications.
-
-💳 **Payments & Subscriptions**
-- Employer payments for exceeding free job post limits.
-- Resume visibility fees for employers.
-- Secure payment gateway integration.
 
 ⚙️ **Admin Control & Pricing Management**
 - Admin can set/modify pricing for services.
@@ -101,7 +95,7 @@ POST /api/apply
 
 ### **1️⃣ Clone the Repository**  
 ```sh
-git clone https://github.com/your-username/job-portal.git
+git clone https://github.com/your-username/Job-Portal-Engineering-Graduates
 cd job-portal
 
 ```
