@@ -14,24 +14,18 @@ The Job Portal for Technical Graduates is a web-based platform that connects tec
 
 1. **Employer Dashboard:**
 - Post job listings and internships.
-- Free posting for the first five job posts, then paid.
-- Paid access to candidate resumes and contact details.
-
+- Access the data of candidates.
+ 
 2. **Candidate Dashboard:**
 - Apply for jobs, internships, and industrial visits.
 - Upload and manage resumes.
-- Access paid resume-building services.
 - College Dashboard:
 - Apply for internships and industrial visits.
-- Upload and manage student databases.
 
 3. **Admin Dashboard:**
 - Manage candidate,employer and another admin.
 - Approve/remove job postings and internships.
 - Set pricing and offer discounts for paid services.
-
-📄 **Resume Building Service**
-- Paid feature for candidates.
 
 📝 **Job Posting & Application System**
 - Employers can post jobs and internships.
