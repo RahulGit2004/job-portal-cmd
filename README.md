@@ -17,10 +17,8 @@ The Job Portal for Technical Graduates is a web-based platform that connects tec
 - Access the data of candidates.
  
 2. **Candidate Dashboard:**
-- Apply for jobs, internships, and industrial visits.
+- Apply for jobs and internships.
 - Upload and manage resumes.
-- College Dashboard:
-- Apply for internships and industrial visits.
 
 3. **Admin Dashboard:**
 - Manage candidate,employer and another admin.
