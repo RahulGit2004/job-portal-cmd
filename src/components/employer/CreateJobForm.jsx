@@ -1,5 +1,6 @@
 import React, { useState } from "react"; // Import useState
 import { Link } from "react-router-dom";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const CreateJobForm = () => {
   const [formData, setFormData] = useState({
@@ -92,6 +93,14 @@ const CreateJobForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <button
+          onClick={() => window.history.back()}
+          className="flex items-center text-blue-900 hover:text-blue-700 transition-all ml-7 mt-3"
+        >
+          <span className="text-2xl mr-2">
+            <FaArrowAltCircleLeft />
+          </span>
+        </button>
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-center text-blue-900">
           Create a Job

@@ -14,9 +14,9 @@ const Navbar = () => {
   <nav className="container mx-auto flex justify-between items-center px-4 md:px-6 max-w-[1125px] py-2">
     
     {/* Logo Section - Left Side */}
-    <a href="#">
+    <Link to="/">
       <img src={EinfratechLogo} alt="Einfratech Logo" className="h-8" />
-    </a>
+    </Link>
 
     {/* Right Side - Post Job & Profile */}
     <div className="flex items-center gap-8">

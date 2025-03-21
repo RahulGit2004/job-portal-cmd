@@ -90,9 +90,9 @@ const Dashboard = () => {
         {/* Recently Posted Job Section */}
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-bold">Recently Posted Job</h3>
-          <span className="text-blue-700 font-semibold cursor-pointer">
+          {/* <span className="text-blue-700 font-semibold cursor-pointer">
             View All
-          </span>
+          </span> */}
         </div>
 
         {/* Display Error or Loading State */}
@@ -126,13 +126,9 @@ const Dashboard = () => {
                       </td>
                       <td className="py-4 px-4">
                         <div
-                          className={`px-3 py-1 rounded-md text-sm font-semibold w-max ${
-                            job.status === "Active"
-                              ? "bg-green-500 text-white"
-                              : "bg-gray-400 text-white"
-                          }`}
+                          className={`px-3 py-1 rounded-md text-sm font-semibold w-max`}
                         >
-                          {job.status}
+                         Active
                         </div>
                       </td>
                       <td className="py-4 px-4 hidden md:table-cell">

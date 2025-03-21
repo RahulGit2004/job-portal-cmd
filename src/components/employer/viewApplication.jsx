@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import profileImg from "../employer/profile.png";
 import { useParams } from "react-router-dom";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const JobApplication = () => {
   const { jobId } = useParams();
@@ -58,12 +59,26 @@ const JobApplication = () => {
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto flex flex-col items-center">
-      {/* Title */}
-      <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-blue-700">
-        Job Application
-      </h1>
+     <div className="flex items-center justify-between w-full">
+  {/* Back Button */}
+  <button
+    onClick={() => window.history.back()}
+    className="text-blue-900 hover:text-blue-700 transition-all text-2xl"
+  >
+    <FaArrowAltCircleLeft />
+  </button>
+
   
-      {/* Error Message */}
+  <h1 className="text-2xl md:text-3xl font-bold text-blue-700 text-center flex-1 mb-3">
+    Job Application
+  </h1>
+  
+  
+  <div className="w-8"></div>
+</div>
+
+  
+     
       {error && <p className="text-red-500 text-center">{error}</p>}
   
       {/* Mobile Filter */}

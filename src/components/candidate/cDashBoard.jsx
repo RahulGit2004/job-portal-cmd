@@ -40,7 +40,9 @@ const JobDescriptionPage = () => {
      <div className="relative">
       <nav className="bg-white shadow-md flex justify-between items-center px-4 py-3 relative">
         {/* Logo */}
+        <Link to="/">
         <img className="w-22 h-12" src={einfratechLogo} alt="Logo" />
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-6">

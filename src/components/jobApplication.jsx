@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -120,6 +121,7 @@ const JobApplicationForm = () => {
   };
 
   return (
+    
     <div
       className="container mt-5 p-5"
       style={{
@@ -130,6 +132,14 @@ const JobApplicationForm = () => {
         boxShadow: "0 0 15px rgba(0, 0, 0, 0.15)",
       }}
     >
+      <button
+              onClick={() => window.history.back()}
+              className="flex items-center text-blue-900 hover:text-blue-700 transition-all ml-5"
+            >
+              <span className="text-2xl mr-2">
+                <FaArrowAltCircleLeft />
+              </span>
+            </button>
       <h1
         className="mb-4 text-center"
         style={{ fontSize: "2.5rem", fontWeight: "bold", color: "#1E3A8A" }}

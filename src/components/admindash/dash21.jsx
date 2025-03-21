@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Human from "./human.png";
 import Einfratech from "./Einfratech.png";
 import { FaCheckCircle, FaTimesCircle, FaMapMarkerAlt, FaBars } from "react-icons/fa";
+import PaidNav from "./paidNav";
 
 const JobCard = ({ job }) => {
   return (
@@ -30,12 +31,7 @@ const JobCard = ({ job }) => {
 
       <div className="flex items-center gap-4 mt-4 sm:mt-0">
         <span className="bg-green-500 text-white px-4 py-1 rounded-full text-sm">Active</span>
-        <button className="flex items-center gap-1 text-green-500 hover:text-green-700 transition-colors text-lg">
-          <FaCheckCircle /> Approve
-        </button>
-        <button className="flex items-center gap-1 text-red-500 hover:text-red-700 transition-colors text-lg">
-          <FaTimesCircle /> Reject
-        </button>
+        
       </div>
     </div>
   );
@@ -84,29 +80,9 @@ const PostedJobs = () => {
     fetchJobs();
   }, []);
   return (
-    <div className="container mx-auto p-4">
-      <header className="flex justify-between items-center py-4 border-b border-gray-300 mb-6">
-        <img className="w-15 h-12" src={Einfratech} alt="Logo" />
-        <nav className="hidden md:flex space-x-8 text-gray-700 font-semibold">
-          <a href="#" className="hover:text-blue-500 transition-all"><b>Posted Jobs</b></a>
-          <Link to="/paidfeatures" className="hover:text-blue-500 transition-all">Paid Features</Link>
-          <a href="#" className="hover:text-blue-500 transition-all">Certification</a>
-          <Link to="/profiledashboard" className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
-            <img src={Human} alt="Profile" />
-          </Link>
-        </nav>
-        <button className="md:hidden text-gray-700 text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
-          <FaBars />
-        </button>
-      </header>
-
-      {menuOpen && (
-        <nav className="md:hidden flex flex-col space-y-4 text-gray-700 font-semibold p-4 bg-gray-100 rounded-lg shadow-md">
-          <a href="#" className="hover:text-blue-500 transition-all">Posted Jobs</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Paid Features</a>
-          <a href="#" className="hover:text-blue-500 transition-all">Certification</a>
-        </nav>
-      )}
+    <div className="container-fluid">
+     
+      <PaidNav/>
 
       <div className="max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-left mb-9">All Posted Jobs Are Here</h1>

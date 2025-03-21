@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const CreateSubscription = () => {
   const location = useLocation();
@@ -78,6 +79,14 @@ const CreateSubscription = () => {
       padding: "30px",
       borderRadius: "12px",
       boxShadow: "0 0 15px rgba(0, 0, 0, 0.15)", }}>
+         <button
+          onClick={() => window.history.back()}
+          className="flex items-center text-blue-900 hover:text-blue-700 transition-all ml-5"
+        >
+          <span className="text-2xl mr-2">
+            <FaArrowAltCircleLeft />
+          </span>
+        </button>
         <h2 className="text-3xl font-bold text-center text-blue-800">
           Create Subscription
         </h2>

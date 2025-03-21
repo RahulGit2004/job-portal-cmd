@@ -3,6 +3,7 @@ import Jobimg from "../assets/jobboard.png";
 import JobIcon from "../assets/job-icon.jpg";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi"; // Fixed missing import
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const JobBoard = () => {
   const [jobListings, setJobListings] = useState([]);
@@ -42,8 +43,10 @@ const JobBoard = () => {
 
   // Function to filter jobs based on search and selected criteria
   const applyFilters = () => {
-    let filtered = jobListings.filter(job => {
-      const jobCity = job?.location?.city ? job.location.city.toLowerCase().trim() : "";
+    let filtered = jobListings.filter((job) => {
+      const jobCity = job?.location?.city
+        ? job.location.city.toLowerCase().trim()
+        : "";
       const selectedCity = selectedLocation.toLowerCase().trim();
       const jobRole = job?.jobRole ? job.jobRole.toLowerCase().trim() : "";
       const selectedJobRole = selectedRole.toLowerCase().trim();
@@ -54,7 +57,8 @@ const JobBoard = () => {
       const searchMatch = query
         ? job.title.toLowerCase().includes(query) ||
           job.jobRole.toLowerCase().includes(query) ||
-          (job.tags && job.tags.some(tag => tag.toLowerCase().includes(query)))
+          (job.tags &&
+            job.tags.some((tag) => tag.toLowerCase().includes(query)))
         : true;
 
       return locationMatch && roleMatch && searchMatch;
@@ -67,13 +71,27 @@ const JobBoard = () => {
     <div className="flex flex-col md:flex-row h-screen">
       {/* Sidebar */}
       <div className="w-full md:w-1/4 bg-gray-100 p-4 flex flex-col items-center md:h-full">
-        <h2 className="text-2xl font-bold">JOB BOARD</h2>
+        <div className="flex">
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center text-blue-900 hover:text-blue-700 transition-all ml-5"
+          >
+            <span className="text-2xl mr-2">
+              <FaArrowAltCircleLeft />
+            </span>
+          </button>
+          <h2 className="text-2xl font-bold ml-4">JOB BOARD</h2>
+        </div>
 
         {/* Hide image on mobile */}
         <div className="hidden md:block w-24 h-24 bg-gray-300 rounded-full my-4">
-          <img src={Jobimg} alt="Job Board Logo" className="w-full h-full rounded-full" />
+          <img
+            src={Jobimg}
+            alt="Job Board Logo"
+            className="w-full h-full rounded-full"
+          />
         </div>
-        
+
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden w-full text-left">
           <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">
@@ -82,8 +100,12 @@ const JobBoard = () => {
           {menuOpen && (
             <nav className="mt-2 bg-white shadow-md rounded p-2">
               <ul className="space-y-2">
-                <Link to="/"><li className="hover:underline cursor-pointer">Home</li></Link>
-                <li className="hover:underline cursor-pointer font-bold">Job Board</li>
+                <Link to="/">
+                  <li className="hover:underline cursor-pointer">Home</li>
+                </Link>
+                <li className="hover:underline cursor-pointer font-bold">
+                  Job Board
+                </li>
               </ul>
             </nav>
           )}
@@ -92,8 +114,12 @@ const JobBoard = () => {
         {/* Normal Navigation for Large Screens */}
         <nav className="hidden md:block w-full text-center">
           <ul className="space-y-2">
-            <Link to="/"><li className="hover:underline cursor-pointer p-4">Home</li></Link>
-            <li className="hover:underline cursor-pointer font-bold">Job Board</li>
+            <Link to="/">
+              <li className="hover:underline cursor-pointer p-4">Home</li>
+            </Link>
+            <li className="hover:underline cursor-pointer font-bold">
+              Job Board
+            </li>
           </ul>
         </nav>
       </div>
@@ -109,7 +135,10 @@ const JobBoard = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button className="bg-blue-900 text-white px-4 py-2 rounded w-full md:w-auto" onClick={applyFilters}>
+          <button
+            className="bg-blue-900 text-white px-4 py-2 rounded w-full md:w-auto"
+            onClick={applyFilters}
+          >
             Search
           </button>
         </div>
@@ -150,16 +179,25 @@ const JobBoard = () => {
           ) : filteredJobs.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {filteredJobs.map((job, index) => (
-                <div key={index} className="p-4 border rounded-lg shadow-md flex items-center gap-4">
+                <div
+                  key={index}
+                  className="p-4 border rounded-lg shadow-md flex items-center gap-4"
+                >
                   <div className="w-12 h-12 bg-gray-200 rounded-full">
-                    <img src={JobIcon} className="w-full h-full rounded-full" alt="Job Icon" />
+                    <img
+                      src={JobIcon}
+                      className="w-full h-full rounded-full"
+                      alt="Job Icon"
+                    />
                   </div>
-                  <Link to={`/job/${job._id}`}> 
+                  <Link to={`/job/${job._id}`}>
                     <div className="flex-1">
                       <h2 className="font-bold text-lg">{job.title}</h2>
                       <p className="text-gray-600">{job.jobRole}</p>
                       <p className="text-gray-500">{job.location.city}</p>
-                      <p className="font-semibold">₹{job.minSalary} - ₹{job.maxSalary}</p>
+                      <p className="font-semibold">
+                        ₹{job.minSalary} - ₹{job.maxSalary}
+                      </p>
                     </div>
                   </Link>
                 </div>
@@ -175,5 +213,3 @@ const JobBoard = () => {
 };
 
 export default JobBoard;
-
-

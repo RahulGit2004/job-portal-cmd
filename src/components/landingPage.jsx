@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import jobSearchImage from "../assets/image.png";
+import jobSearchImage from "../assets/hero1.svg";
 import googleLogo from "../assets/google.jpg";
 import microsoftLogo from "../assets/microsoft.webp";
 import flipkartLogo from "../assets/flipkart.png";
@@ -64,7 +64,7 @@ const LandingPage = () => {
           {/* Navbar Links & Buttons */}
           <div
             className={`absolute md:static top-16 left-0 w-full md:w-auto md:flex items-center bg-white shadow-md md:shadow-none transition-all duration-300 ease-in-out ${
-              isMenuOpen ? "block" : "hidden"
+              isMenuOpen ? "block p-3" : "hidden"
             }`}
           >
             <ul className="md:flex md:space-x-6 text-center md:text-left">
