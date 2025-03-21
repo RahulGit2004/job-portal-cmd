@@ -82,8 +82,7 @@ const JobBoard = () => {
           {menuOpen && (
             <nav className="mt-2 bg-white shadow-md rounded p-2">
               <ul className="space-y-2">
-                <Link to="/candidatedash"><li className="hover:underline cursor-pointer">Dashboard</li></Link>
-                <Link to="/landingPage"><li className="hover:underline cursor-pointer">Home</li></Link>
+                <Link to="/"><li className="hover:underline cursor-pointer">Home</li></Link>
                 <li className="hover:underline cursor-pointer font-bold">Job Board</li>
               </ul>
             </nav>
@@ -93,8 +92,7 @@ const JobBoard = () => {
         {/* Normal Navigation for Large Screens */}
         <nav className="hidden md:block w-full text-center">
           <ul className="space-y-2">
-            <Link to="/candidatedash"><li className="hover:underline cursor-pointer">Dashboard</li></Link>
-            <Link to="/landingPage"><li className="hover:underline cursor-pointer">Home</li></Link>
+            <Link to="/"><li className="hover:underline cursor-pointer p-4">Home</li></Link>
             <li className="hover:underline cursor-pointer font-bold">Job Board</li>
           </ul>
         </nav>

@@ -127,6 +127,7 @@
 
 import React, { useState, useEffect } from "react";
 import { FaUser, FaCog, FaBell, FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import humanIcon from "../assets/profile.png";
 import profiledash from "../assets/profileDash.png";
 
@@ -134,6 +135,7 @@ const ProfileDashboard = () => {
   const userId = localStorage.getItem("userId");
   const localName = localStorage.getItem("fullName");
   const localEmail = localStorage.getItem("email");
+  const navigate = useNavigate();
 
   console.log(userId);
 
@@ -237,7 +239,7 @@ const ProfileDashboard = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen relative p-4">
-      <button onClick={() => window.location.href = "/"} className="absolute top-4 left-4 text-gray-600">
+      <button onClick={() => navigate(-1)} className="absolute top-4 left-4 text-gray-600">
         <FaTimes size={24} />
       </button>
       <div className="w-full max-w-3xl flex flex-col md:flex-row shadow-lg rounded-lg overflow-hidden bg-white">

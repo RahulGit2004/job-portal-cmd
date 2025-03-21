@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FaBriefcase, FaHeart } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import einfratechLogo from "../candidate/Einfratech.png";
 
 const JobDescriptionPage = () => {
@@ -36,26 +36,37 @@ const JobDescriptionPage = () => {
 
   return (
     <div className="max-w-[1440px] mx-auto p-4">
-      {/* Navbar */}
-      <nav className="bg-white shadow-md flex justify-between items-center">
+     {/* Navbar */}
+     <div className="relative">
+      <nav className="bg-white shadow-md flex justify-between items-center px-4 py-3 relative">
+        {/* Logo */}
         <img className="w-22 h-12" src={einfratechLogo} alt="Logo" />
-        <div className="items-center space-x-6 hidden md:block">
-          <Link
-            to="/dashboard"
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center space-x-6">
+          <a
             className="text-gray-700 font-semibold hover:text-blue-900"
           >
             Dashboard
-          </Link>
+          </a>
           <Link to="/jobs" className="text-gray-700 hover:text-blue-900">
             Jobs
           </Link>
         </div>
+
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden ml-auto"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <FiMenu className="text-2xl text-gray-700" />
+          {isMenuOpen ? (
+            <FiX className="text-2xl text-gray-700" />
+          ) : (
+            <FiMenu className="text-2xl text-gray-700" />
+          )}
         </button>
+
+        {/* Profile Icon for Desktop */}
         <Link to="/profiledashboard" className="hidden md:block">
           <img
             src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
@@ -64,6 +75,35 @@ const JobDescriptionPage = () => {
           />
         </Link>
       </nav>
+
+      {/* Mobile Menu (Ensuring it doesn't overlap) */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md md:hidden z-50">
+          <a
+            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Dashboard
+          </a>
+          <Link
+            to="/jobs"
+            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Jobs
+          </Link>
+          <Link
+            to="/profiledashboard"
+            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Profile
+          </Link>
+        </div>
+      )}
+    </div>
+
+
 
       {/* Candidate Dashboard */}
       <div className="mt-6 px-4 md:px-12">
@@ -151,7 +191,7 @@ const JobDescriptionPage = () => {
 
                 {/* View Button */}
                 <Link
-                  to="/jobdescription"
+                  to={`/job/${jobApp.job._id}`}
                   className="border border-blue-700 text-blue-700 px-6 py-2 text-sm rounded-md hover:bg-blue-900 hover:text-white w-full md:w-auto text-center"
                 >
                   View

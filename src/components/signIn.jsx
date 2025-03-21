@@ -11,22 +11,54 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md p-2 flex justify-between items-center w-full relative">
-      <a href="#">
-        <img src={Einfralogo} alt="Company Logo" className="h-10" />
-      </a>
-      <button className="md:hidden text-3xl" onClick={toggleMenu}>
-        {menuOpen ? "✖" : "☰"}
-      </button>
-      <div
-        className={`${menuOpen ? "flex" : "hidden"} md:flex flex-col md:flex-row items-center md:space-x-6 absolute md:static top-16 left-0 w-full bg-white md:w-auto p-4 md:p-0 shadow-md md:shadow-none text-center z-50 text-lg md:text-base`}
-      >
-        <Link to="/" className="block py-2 text-gray-700 hover:text-blue-900 transition-all text-xl md:text-lg" onClick={toggleMenu}><b>Home</b></Link>
-        <Link to="/jobs" className="block py-2 text-gray-700 hover:text-blue-900 transition-all text-xl md:text-lg" onClick={toggleMenu}><b>Jobs</b></Link>
-        <Link to="/signin" className="block py-2 text-gray-700 hover:text-blue-900 transition-all text-xl md:text-lg" onClick={toggleMenu}><b>Employers</b></Link>
-        <Link to="/signup" className="block py-2 border border-blue-900 px-6 rounded text-blue-900 hover:bg-blue-900 hover:text-white transition-all text-lg md:text-base" onClick={toggleMenu}>Sign Up</Link>
-      </div>
-    </nav>
+<nav className="bg-white shadow-md px-3 py-2 md:py-0 flex justify-between items-center w-full relative" style={{ height: "80px" }}>
+  {/* Logo */}
+  <a href="#" className="flex items-center">
+    <img src={Einfralogo} alt="Company Logo" className="h-10" />
+  </a>
+
+  {/* Mobile Menu Button */}
+  <button className="md:hidden text-3xl text-gray-700 p-2" onClick={toggleMenu}>
+    {menuOpen ? "✖" : "☰"}
+  </button>
+
+  {/* Navigation Links */}
+  <div
+    className={`${menuOpen ? "flex" : "hidden"} md:flex flex-col md:flex-row items-center md:space-x-8 absolute md:static top-16 left-0 w-full bg-white md:w-auto md:p-0 shadow-md md:shadow-none text-center z-50`}
+  >
+    <Link
+      to="/"
+      className="block px-4 text-gray-700 hover:text-blue-900 transition-all tracking-wide text-lg md:text-base"
+      onClick={toggleMenu}
+    >
+      Home
+    </Link>
+    <Link
+      to="/jobs"
+      className="block py-3 px-4 text-gray-700 hover:text-blue-900 transition-all tracking-wide text-lg md:text-base"
+      onClick={toggleMenu}
+    >
+      Jobs
+    </Link>
+    <Link
+      to="/signin"
+      className="block py-3 px-4 text-gray-700 hover:text-blue-900 transition-all tracking-wide text-lg md:text-base"
+      onClick={toggleMenu}
+    >
+      Employers
+    </Link>
+    <Link
+      to="/signup"
+      className="block py-3 px-6 border border-blue-900 rounded-lg text-blue-900 hover:bg-blue-900 hover:text-white transition-all tracking-wide text-lg md:text-base"
+      onClick={toggleMenu}
+    >
+      Sign Up
+    </Link>
+  </div>
+</nav>
+
+
+
   );
 };
 
