@@ -7,7 +7,7 @@ import PaidNav from "./paidNav";
 
 const JobCard = ({ job }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-5 flex flex-col sm:flex-row justify-between items-center border border-gray-200 transition-transform hover:scale-105 duration-300">
+    <div className="bg-white shadow-lg rounded-lg p-5 flex flex-col sm:flex-row justify-between items-center border border-gray-200 transition-transform hover:scale-105 duration-300 mb-5">
       <div className="w-full sm:w-2/3 text-left">
         <h2 className="text-lg font-semibold">{job.title}</h2>
         

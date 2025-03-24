@@ -258,12 +258,12 @@ const JobApplicationForm = () => {
         {/* Employment Status */}
         <div className="mb-4">
           <label className="form-label">Employment Status</label>
-          <div className="d-flex flex-wrap gap-3">
+          <div className="d-flex flex-wrap gap-3 ">
             {["Employed", "Self-Employed", "Unemployed", "Student"].map(
               (status, index) => (
                 <div key={index} className="form-check">
                   <input
-                    className="form-check-input"
+                    className="form-check-input border border-black"
                     type="checkbox"
                     value={status}
                     checked={formData.employmentStatus === status}

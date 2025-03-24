@@ -82,7 +82,7 @@ const JobApplication = () => {
       {error && <p className="text-red-500 text-center">{error}</p>}
   
       {/* Mobile Filter */}
-      <div className="md:hidden flex justify-center mb-4 w-full">
+      {/* <div className="md:hidden flex justify-center mb-4 w-full">
         <select
           className="p-2 border rounded-lg"
           value={filter}
@@ -91,54 +91,58 @@ const JobApplication = () => {
           <option value="applicants">All Applicants</option>
           <option value="shortlisted">Shortlisted</option>
         </select>
-      </div>
+      </div> */}
   
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full justify-center">
-        {/* Applications Section */}
-        <div className="bg-[#F8F9FA] rounded-lg shadow-lg p-4 md:p-6 md:col-span-2 w-full">
-          <h2 className="text-lg font-bold mb-4 text-center">
-            {filter === "applicants" ? "All Applications" : "Shortlisted Candidates"}
-            <span className="text-gray-500"> {displayedApplicants.length}</span>
-          </h2>
-  
-          {/* Applicants Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full justify-center">
-            {displayedApplicants.map((applicant) => (
-              <div
-                key={applicant.id}
-                className="bg-white shadow-md rounded-lg p-5 border flex flex-col transition hover:shadow-lg items-center text-center w-full"
-              >
-                {/* Profile Image & Name */}
-                <div className="flex flex-col items-center">
-                  <img
-                    src={profileImg}
-                    alt={applicant.name}
-                    className="h-14 w-14 rounded-full border"
-                  />
-                  <div className="mt-2">
-                    <h3 className="font-semibold text-lg">{applicant.name}</h3>
-                    <p className="text-sm text-gray-500">{applicant.role}</p>
-                  </div>
-                </div>
-  
-                {/* Applicant Details */}
-                <div className="mt-4 text-sm text-gray-600 w-full">
-                  <p className="flex items-center justify-center gap-1">
-                    📚 <span>Education: {applicant.education}</span>
-                  </p>
-                  <p className="flex items-center justify-center gap-1">
-                    💼 <span>Experience: {applicant.experience}</span>
-                  </p>
-                  <p className="flex items-center justify-center gap-1">
-                    📅 <span>Applied: {applicant.applied}</span>
-                  </p>
-                </div>
+      
+      <div className="flex justify-center items-center w-full">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+    {/* Applications Section */}
+    <div className="bg-[#F8F9FA] rounded-lg shadow-lg p-4 md:p-6 md:col-span-3 w-full">
+      <h2 className="text-lg font-bold mb-4 text-center">
+        {filter === "applicants" ? "All Applications" : "Shortlisted Candidates"}
+        <span className="text-gray-500"> {displayedApplicants.length}</span>
+      </h2>
+
+      {/* Applicants Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full justify-center">
+        {displayedApplicants.map((applicant) => (
+          <div
+            key={applicant.id}
+            className="bg-white shadow-md rounded-lg p-5 border flex flex-col transition hover:shadow-lg items-center text-center w-full"
+          >
+            {/* Profile Image & Name */}
+            <div className="flex flex-col items-center">
+              <img
+                src={profileImg}
+                alt={applicant.name}
+                className="h-14 w-14 rounded-full border"
+              />
+              <div className="mt-2">
+                <h3 className="font-semibold text-lg">{applicant.name}</h3>
+                <p className="text-sm text-gray-500">{applicant.role}</p>
               </div>
-            ))}
+            </div>
+
+            {/* Applicant Details */}
+            <div className="mt-4 text-sm text-gray-600 w-full">
+              <p className="flex items-center justify-center gap-1">
+                📚 <span>Education: {applicant.education}</span>
+              </p>
+              <p className="flex items-center justify-center gap-1">
+                💼 <span>Experience: {applicant.experience}</span>
+              </p>
+              <p className="flex items-center justify-center gap-1">
+                📅 <span>Applied: {applicant.applied}</span>
+              </p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
+    </div>
+  </div>
+</div>
+
     </div>
   );
   

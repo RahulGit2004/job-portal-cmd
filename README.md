@@ -34,6 +34,10 @@ The Job Portal for Technical Graduates is a web-based platform that connects tec
 - Admin can set/modify pricing for services.
 - Admin can add/remove user data.
 
+**Note**
+- New Employer and Admin has to verified by the Main Admin.
+- Once Verified the Employer or Admin can access the data.
+
 ---
 
 ## 📂 Project Structure  

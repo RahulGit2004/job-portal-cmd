@@ -134,7 +134,7 @@ const SignupForm = () => {
               <label className="block text-sm font-medium mb-1">
                 You are registering as:<span className="text-red-500">*</span>
               </label>
-              <div className="grid grid-cols-2 gap-4 md:flex md:space-x-4">
+              <div className="grid grid-cols-2 gap-4 md:flex md:space-x-4 ">
                 {["Student", "Employer", "Admin"].map((role) => (
                   <label key={role} className="flex items-center space-x-2">
                     <input
@@ -143,7 +143,7 @@ const SignupForm = () => {
                       value={role}
                       checked={formData.role === role}
                       onChange={handleChange}
-                      className="form-radio"
+                      className="form-radio border border-gray-400"
                       required
                     />
                     <span>{role}</span>
