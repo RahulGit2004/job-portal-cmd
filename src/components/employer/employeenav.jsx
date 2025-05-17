@@ -15,7 +15,7 @@ const Navbar = () => {
     
     {/* Logo Section - Left Side */}
     <Link to="/">
-      <img src={EinfratechLogo} alt="Einfratech Logo" className="h-8" />
+      <a href=""><b>HireHub</b></a>
     </Link>
 
     {/* Right Side - Post Job & Profile */}

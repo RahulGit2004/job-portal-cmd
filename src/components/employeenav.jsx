@@ -21,11 +21,7 @@ const Navbar = () => {
       <div className="container-fluid" style={{ padding: "0" }}>
         {/* Logo */}
         <a className="navbar-brand" href="#">
-          <img
-            src={EinfratechLogo}
-            alt="Einfratech"
-            style={{ height: "40px" }} 
-          />
+         LOGO
         </a>
 
         {/* Toggle Button for Mobile */}

@@ -15,7 +15,7 @@ const PaidNav = () => {
       <header className="flex justify-between items-center py-4 px-6 border-b border-gray-300 mb-6">
         {/* Logo */}
         <Link to="/">
-        <img className="w-22 h-14" src={EinfratechLogo} alt="Logo" />
+        <a href="">LOGO</a>
         </Link>
 
         {/* Desktop Navigation */}

@@ -50,7 +50,7 @@ const LandingPage = () => {
         <div className="container-fluid flex justify-between items-center p-4 max-w-[1125px] mx-auto">
           {/* Logo */}
           <a href="#">
-            <img src={einfratechLogo} alt="Einfratech Logo" className="h-10" />
+            HireHub
           </a>
 
           {/* Mobile Menu Button */}
@@ -276,7 +276,7 @@ const LandingPage = () => {
           <div className="row text-center text-md-start">
             {/* Company Info */}
             <div className="col-12 col-md-3 mb-4">
-              <h5 className="fw-bold text-dark">Einfratech Systems</h5>
+              <h5 className="fw-bold text-dark">Web Nam</h5>
               <p className="mb-1 text-secondary">
                 <strong>Call now:</strong> +91 000000
               </p>

@@ -110,8 +110,10 @@ const SignupForm = () => {
                 className="w-full p-2 border rounded"
                 placeholder="Minimum 6 characters"
                 required
+                minLength={6}
               />
             </div>
+
 
             {/* Mobile Number */}
             <div className="mb-4">
@@ -119,14 +121,23 @@ const SignupForm = () => {
                 Mobile number<span className="text-red-500">*</span>
               </label>
               <input
-                type="tel"
+                type="text"
                 name="mobileNumber"
                 value={formData.mobileNumber}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow only numbers and max 10 digits
+                  if (/^\d{0,10}$/.test(value)) {
+                    handleChange(e);
+                  }
+                }}
                 className="w-full p-2 border rounded"
-                placeholder="Enter your mobile number"
+                placeholder="Enter your 10-digit mobile number"
+                inputMode="numeric"
                 required
               />
+
+
             </div>
 
             {/* User Role Selection */}
@@ -136,14 +147,14 @@ const SignupForm = () => {
               </label>
               <div className="grid grid-cols-2 gap-4 md:flex md:space-x-4">
                 {["Student", "Employer", "Admin"].map((role) => (
-                  <label key={role} className="flex items-center space-x-2">
+                  <label key={role} className="flex items-center space-x-2 hover:cursor-pointer">
                     <input
                       type="radio"
                       name="role"
                       value={role}
                       checked={formData.role === role}
                       onChange={handleChange}
-                      className="form-radio"
+                      className="form-radio border border-gray-400"
                       required
                     />
                     <span>{role}</span>

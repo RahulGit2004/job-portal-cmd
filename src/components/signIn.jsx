@@ -14,7 +14,7 @@ const Navbar = () => {
 <nav className="bg-white shadow-md px-3 py-2 md:py-0 flex justify-between items-center w-full relative" style={{ height: "80px" }}>
   {/* Logo */}
   <a href="#" className="flex items-center">
-    <img src={Einfralogo} alt="Company Logo" className="h-10" />
+    LOGO
   </a>
 
   {/* Mobile Menu Button */}

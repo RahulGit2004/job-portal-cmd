@@ -1,5 +1,4 @@
 import React, { useState } from "react"; // Import useState
-import { Link } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const CreateJobForm = () => {
@@ -91,16 +90,22 @@ const CreateJobForm = () => {
     }
   };
 
+  // Component for required field star
+  const RequiredStar = () => (
+    <span className="text-red-600 ml-1" title="Required">*</span>
+  );
+
   return (
     <form onSubmit={handleSubmit}>
       <button
-          onClick={() => window.history.back()}
-          className="flex items-center text-blue-900 hover:text-blue-700 transition-all ml-7 mt-3"
-        >
-          <span className="text-2xl mr-2">
-            <FaArrowAltCircleLeft />
-          </span>
-        </button>
+        onClick={() => window.history.back()}
+        className="flex items-center text-blue-900 hover:text-blue-700 transition-all ml-7 mt-3"
+        type="button"
+      >
+        <span className="text-2xl mr-2">
+          <FaArrowAltCircleLeft />
+        </span>
+      </button>
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-center text-blue-900">
           Create a Job
@@ -111,7 +116,9 @@ const CreateJobForm = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="col-span-2">
-            <label className="block font-semibold">Job Title</label>
+            <label className="block font-semibold">
+              Job Title<RequiredStar />
+            </label>
             <input
               type="text"
               name="jobTitle"
@@ -124,7 +131,9 @@ const CreateJobForm = () => {
           </div>
 
           <div className="col-span-2">
-            <label className="block font-semibold">Description</label>
+            <label className="block font-semibold">
+              Description<RequiredStar />
+            </label>
             <textarea
               name="description"
               value={formData.description}
@@ -143,7 +152,9 @@ const CreateJobForm = () => {
           </div>
 
           <div className="col-span-2 md:col-span-1">
-            <label className="block font-semibold">Job Roles</label>
+            <label className="block font-semibold">
+              Job Roles<RequiredStar />
+            </label>
             <input
               type="text"
               name="jobRoles"
@@ -156,7 +167,9 @@ const CreateJobForm = () => {
           </div>
 
           <div>
-            <label className="block font-semibold">Job Type</label>
+            <label className="block font-semibold">
+              Job Type<RequiredStar />
+            </label>
             <select
               name="jobType"
               value={formData.jobType}
@@ -164,7 +177,7 @@ const CreateJobForm = () => {
               className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
               required
             >
-              <option>Select Job Type</option>
+              <option value="">Select Job Type</option>
               <option>Full-time</option>
               <option>Part-time</option>
               <option>Remote</option>
@@ -173,44 +186,56 @@ const CreateJobForm = () => {
           </div>
 
           <div className="col-span-2">
-            <h5 className="font-bold text-lg mb-3">Salary</h5>
+            <h5 className="font-bold text-lg mb-3">
+              Salary<RequiredStar />
+            </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold">Min Salary</label>
+                <label className="block font-semibold">
+                  Min Salary<RequiredStar />
+                </label>
                 <div className="flex border border-gray-300 rounded-md">
-                <input
-                  type="number"
-                  name="minSalary"
-                  value={formData.minSalary}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
-                  placeholder="Min Salary..."
-                  required
-                />
-                <span className="px-4 bg-gray-200 flex items-center rounded-r-md">INR</span>
+                  <input
+                    type="number"
+                    name="minSalary"
+                    value={formData.minSalary}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+                    placeholder="Min Salary..."
+                    required
+                  />
+                  <span className="px-4 bg-gray-200 flex items-center rounded-r-md">
+                    INR
+                  </span>
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold">Max Salary</label>
+                <label className="block font-semibold">
+                  Max Salary<RequiredStar />
+                </label>
                 <div className="flex border border-gray-300 rounded-md">
-                <input
-                  type="number"
-                  name="maxSalary"
-                  value={formData.maxSalary}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
-                  placeholder="Max Salary..."
-                  required
-                />
-                <span className="px-4 bg-gray-200 flex items-center rounded-r-md">INR</span>
+                  <input
+                    type="number"
+                    name="maxSalary"
+                    value={formData.maxSalary}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+                    placeholder="Max Salary..."
+                    required
+                  />
+                  <span className="px-4 bg-gray-200 flex items-center rounded-r-md">
+                    INR
+                  </span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="col-span-2 md:col-span-1">
-            <label className="block font-semibold">Vacancies</label>
+            <label className="block font-semibold">
+              Vacancies<RequiredStar />
+            </label>
             <input
               type="number"
               name="vacancies"
@@ -223,7 +248,9 @@ const CreateJobForm = () => {
           </div>
 
           <div className="col-span-2 md:col-span-1">
-            <label className="block font-semibold">End Date</label>
+            <label className="block font-semibold">
+              End Date<RequiredStar />
+            </label>
             <input
               type="date"
               name="endDate"
@@ -235,8 +262,12 @@ const CreateJobForm = () => {
           </div>
 
           <div className="col-span-2">
-            <h5 className="font-bold text-lg mb-3">Location</h5>
-            <label className="block font-semibold">Country</label>
+            <h5 className="font-bold text-lg mb-3">
+              Location
+            </h5>
+            <label className="block font-semibold">
+              Country<RequiredStar />
+            </label>
             <input
               type="text"
               name="country"
@@ -246,7 +277,9 @@ const CreateJobForm = () => {
               className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
               required
             />
-             <label className="block font-semibold mt-4">City</label>
+            <label className="block font-semibold mt-4">
+              City<RequiredStar />
+            </label>
             <input
               type="text"
               name="city"
@@ -269,9 +302,9 @@ const CreateJobForm = () => {
         </div>
 
         {showPopup && (
-          <div className="fixed bottom-10 right-10 p-4 rounded-md shadow-lg bg-green-500  text-white">
-          Job created successfully!
-        </div>
+          <div className="fixed bottom-10 right-10 p-4 rounded-md shadow-lg bg-green-500 text-white">
+            Job created successfully!
+          </div>
         )}
       </div>
     </form>

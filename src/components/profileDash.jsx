@@ -165,15 +165,33 @@ const ProfileDashboard = () => {
               </div>
               <div className="space-y-4 text-sm">
                 {Object.entries(profile).map(([key, value]) => (
-                  <div key={key} className="flex justify-between border-b pb-2 text-center sm:text-left flex-col sm:flex-row">
-                    <span className="text-gray-600 capitalize">{key}</span>
-                    {isEditing ? (
-                      <input type="text" name={key} value={value} onChange={handleChange} className="border px-2 py-1 rounded w-full sm:w-auto" />
-                    ) : (
-                      <span className="font-medium">{value}</span>
-                    )}
-                  </div>
-                ))}
+  <div key={key} className="flex justify-between border-b pb-2 text-center sm:text-left flex-col sm:flex-row">
+    <span className="text-gray-600 capitalize">{key}</span>
+    {isEditing ? (
+      key === "mobile" ? (
+        // Make mobile number read-only
+        <input
+          type="text"
+          name={key}
+          value={value}
+          readOnly
+          className="border px-2 py-1 rounded w-full sm:w-auto bg-gray-100 cursor-not-allowed"
+        />
+      ) : (
+        <input
+          type="text"
+          name={key}
+          value={value}
+          onChange={handleChange}
+          className="border px-2 py-1 rounded w-full sm:w-auto"
+        />
+      )
+    ) : (
+      <span className="font-medium">{value}</span>
+    )}
+  </div>
+))}
+
               </div>
               <button
                 onClick={isEditing ? updateProfile : () => setIsEditing(true)}
@@ -203,7 +221,7 @@ const ProfileDashboard = () => {
 
           {/* Default Dashboard Image */}
           {!activeSection && (
-            <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center items-center w-full pt-16">
               <img src={profiledash} alt="Dashboard Placeholder" className="max-w-full h-auto md:max-h-[300px]" />
             </div>
           )}
