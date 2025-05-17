@@ -33,13 +33,16 @@ const SignupForm = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/v1/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
@@ -114,7 +117,6 @@ const SignupForm = () => {
               />
             </div>
 
-
             {/* Mobile Number */}
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
@@ -131,13 +133,18 @@ const SignupForm = () => {
                     handleChange(e);
                   }
                 }}
+                onBlur={(e) => {
+                  const value = e.target.value;
+                  if (value.length !== 10) {
+                    alert("Mobile number must be exactly 10 digits.");
+                    // Optionally reset or mark field as invalid
+                  }
+                }}
                 className="w-full p-2 border rounded"
                 placeholder="Enter your 10-digit mobile number"
                 inputMode="numeric"
                 required
               />
-
-
             </div>
 
             {/* User Role Selection */}
@@ -147,7 +154,10 @@ const SignupForm = () => {
               </label>
               <div className="grid grid-cols-2 gap-4 md:flex md:space-x-4">
                 {["Student", "Employer", "Admin"].map((role) => (
-                  <label key={role} className="flex items-center space-x-2 hover:cursor-pointer">
+                  <label
+                    key={role}
+                    className="flex items-center space-x-2 hover:cursor-pointer"
+                  >
                     <input
                       type="radio"
                       name="role"
@@ -175,7 +185,9 @@ const SignupForm = () => {
           {/* Already have an account? */}
           <p className="text-sm text-center mt-4">
             Already have an account?{" "}
-            <Link to="/signin" className="text-blue-600">Log in</Link>
+            <Link to="/signin" className="text-blue-600">
+              Log in
+            </Link>
           </p>
         </div>
       </div>
