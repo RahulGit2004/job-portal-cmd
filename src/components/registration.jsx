@@ -15,15 +15,29 @@ const SignupForm = () => {
   });
 
   const [error, setError] = useState(null);
+  const [emailError, setEmailError] = useState("");
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate(); // For redirecting after signup
 
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   // Handle input changes
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    if (name === "email") {
+      if (!validateEmail(value)) {
+        setEmailError("Please enter a valid email address");
+      } else {
+        setEmailError("");
+      }
+    }
   };
 
   // Handle form submission
@@ -31,6 +45,11 @@ const SignupForm = () => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
+
+    if (!validateEmail(formData.email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -85,20 +104,23 @@ const SignupForm = () => {
             </div>
 
             {/* Email */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">
-                Email ID<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
+             <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">
+          Email ID<span className="text-red-500">*</span>
+        </label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className={`w-full p-2 border rounded ${
+            emailError ? "border-red-500" : "border-gray-300"
+          }`}
+          placeholder="Enter your email"
+          required
+        />
+        {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+      </div>
 
             {/* Password */}
             <div className="mb-4">
@@ -118,37 +140,36 @@ const SignupForm = () => {
             </div>
 
             {/* Mobile Number */}
-           <div className="mb-4">
-  <label className="block text-sm font-medium mb-1">
-    Mobile number<span className="text-red-500">*</span>
-  </label>
-  <input
-    type="text"
-    name="mobileNumber"
-    value={formData.mobileNumber}
-    onChange={(e) => {
-      const value = e.target.value;
-      // Allow only numbers and max 10 digits
-      if (/^\d{0,10}$/.test(value)) {
-        handleChange(e);
-      }
-    }}
-    onBlur={(e) => {
-      const value = e.target.value;
-      if (value.length !== 10) {
-        alert("Mobile number must be exactly 10 digits.");
-        // You can also set an error state here if using form validation
-      }
-    }}
-    className="w-full p-2 border rounded"
-    placeholder="Enter your 10-digit mobile number"
-    inputMode="numeric"
-    required
-    pattern="\d{10}"
-    maxLength={10}
-  />
-</div>
-
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">
+                Mobile number<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="mobileNumber"
+                value={formData.mobileNumber}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow only numbers and max 10 digits
+                  if (/^\d{0,10}$/.test(value)) {
+                    handleChange(e);
+                  }
+                }}
+                onBlur={(e) => {
+                  const value = e.target.value;
+                  if (value.length !== 10) {
+                    alert("Mobile number must be exactly 10 digits.");
+                    // You can also set an error state here if using form validation
+                  }
+                }}
+                className="w-full p-2 border rounded"
+                placeholder="Enter your 10-digit mobile number"
+                inputMode="numeric"
+                required
+                pattern="\d{10}"
+                maxLength={10}
+              />
+            </div>
 
             {/* User Role Selection */}
             <div className="mb-4">
