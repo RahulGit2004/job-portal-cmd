@@ -17,12 +17,16 @@ const SignupForm = () => {
   const [error, setError] = useState(null);
   const [emailError, setEmailError] = useState("");
   const [success, setSuccess] = useState(null);
-  const navigate = useNavigate(); // For redirecting after signup
+  const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+ const validateEmail = (email) => {
+  if (!email) return false;
+
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  return regex.test(email);
+};
+
 
   // Handle input changes
   const handleChange = (e) => {
